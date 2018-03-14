@@ -5,10 +5,15 @@
  */
 package co.edu.udea.edatos.laboratorio1.modelo.dao;
 
+import co.edu.udea.edatos.laboratorio1.modelo.Turno;
+
 /**
  *
  * @author Carolina
  */
-public class TurnoDAO {
+public interface TurnoDAO {
+    
+    public Turno consultarTurno(String codigo);
+    public void registrarTurno(Turno turno);
     
 }

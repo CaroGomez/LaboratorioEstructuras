@@ -14,5 +14,6 @@ import co.edu.udea.edatos.laboratorio1.modelo.Taxi;
 public interface TaxiDAO {
     
     public Taxi consultarTaxi(String numero_Taxi);
+    public void registrarTaxi(Taxi taxi);
     
 }

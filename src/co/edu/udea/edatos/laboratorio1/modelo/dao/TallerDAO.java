@@ -5,10 +5,15 @@
  */
 package co.edu.udea.edatos.laboratorio1.modelo.dao;
 
+import co.edu.udea.edatos.laboratorio1.modelo.Taller;
+
 /**
  *
  * @author Carolina
  */
-public class TallerDAO {
+public interface TallerDAO {
+    
+    public Taller consultarTaller(String codigo);
+    public void registrarTaller(Taller taller);
     
 }

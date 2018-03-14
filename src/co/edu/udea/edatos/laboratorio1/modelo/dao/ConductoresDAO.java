@@ -14,5 +14,6 @@ import co.edu.udea.edatos.laboratorio1.modelo.Conductor;
 public interface ConductoresDAO {
     
     public Conductor consultarConductor(String id);
+    public void registrarConductor(Conductor conductor);
     
 }

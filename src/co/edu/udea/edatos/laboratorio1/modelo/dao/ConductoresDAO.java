@@ -6,6 +6,7 @@
 package co.edu.udea.edatos.laboratorio1.modelo.dao;
 
 import co.edu.udea.edatos.laboratorio1.modelo.Conductor;
+import java.util.List;
 
 /**
  *
@@ -13,6 +14,7 @@ import co.edu.udea.edatos.laboratorio1.modelo.Conductor;
  */
 public interface ConductoresDAO {
     
+    public List<Conductor> listarConductores();
     public Conductor consultarConductor(String id);
     public void registrarConductor(Conductor conductor);
     

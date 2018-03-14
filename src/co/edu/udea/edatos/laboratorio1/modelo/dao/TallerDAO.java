@@ -6,6 +6,7 @@
 package co.edu.udea.edatos.laboratorio1.modelo.dao;
 
 import co.edu.udea.edatos.laboratorio1.modelo.Taller;
+import java.util.List;
 
 /**
  *
@@ -13,6 +14,7 @@ import co.edu.udea.edatos.laboratorio1.modelo.Taller;
  */
 public interface TallerDAO {
     
+    public List<Taller> listarTalleres();
     public Taller consultarTaller(String codigo);
     public void registrarTaller(Taller taller);
     

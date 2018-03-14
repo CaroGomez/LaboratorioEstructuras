@@ -6,6 +6,7 @@
 package co.edu.udea.edatos.laboratorio1.modelo.dao;
 
 import co.edu.udea.edatos.laboratorio1.modelo.Taxi;
+import java.util.List;
 
 /**
  *
@@ -13,6 +14,7 @@ import co.edu.udea.edatos.laboratorio1.modelo.Taxi;
  */
 public interface TaxiDAO {
     
+    public List<Taxi> listarTaxis();
     public Taxi consultarTaxi(String numero_Taxi);
     public void registrarTaxi(Taxi taxi);
     

@@ -12,10 +12,10 @@ import java.util.List;
  *
  * @author Andres
  */
-public interface PropietariosDAO {
+public interface PropietarioDAO {
     
     public List<Propietario> listarPropietarios();
-    public Propietario consultarPropietarioxId(String identificacion);
+    public Propietario consultarPropietario(String identificacion);
     public void guardarPropietario(Propietario propietario) throws LlaveDuplicadaException;
     public void eliminarPropietario(String identificacion);
 

@@ -23,9 +23,9 @@ import static java.nio.file.StandardOpenOption.APPEND;
  *
  * @author Andres
  */
-public class FileConductoresDAO implements ConductoresDAO {
+public class FilePropietarioDAO implements ConductoresDAO {
 
-    private static final String NOMBRE_ARCHIVO="Conductor";
+    private static final String NOMBRE_ARCHIVO="Propietario";
     private static final int LONGITUD_REGISTRO=81;
     private static final int IDENTIFICACION_LONGITUD=10;
     private static final int NOMBRES_LONGITUD=20;

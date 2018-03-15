@@ -5,6 +5,7 @@
  */
 package co.edu.udea.edatos.laboratorio1.modelo.dao;
 
+import co.edu.udea.edatos.laboratorio1.dao.exceptions.LlaveDuplicadaException;
 import co.edu.udea.edatos.laboratorio1.modelo.Taxi;
 import java.util.List;
 
@@ -16,6 +17,6 @@ public interface TaxiDAO {
     
     public List<Taxi> listarTaxis();
     public Taxi consultarTaxi(String numero_Taxi);
-    public void registrarTaxi(Taxi taxi);
+    public void guardarTaxi(Taxi taxi) throws LlaveDuplicadaException;
     
 }

@@ -17,25 +17,19 @@ public class Taxi {
     private String numero_taxi;
     private String Marca;
     private String Modelo;
-    private Conductor idConductor;
-    private Propietario idPropietario;
-    private Turno codigoTurno;
-    private Taller codigoTaller;
+    private String idPropietario;
     
     private List<Taxi> taxis;
 
     public Taxi() {
     }
 
-    public Taxi(String Placa, String numero_taxi, String Marca, String Modelo, Conductor idConductor, Propietario idPropietario, Turno codigoTurno, Taller codigoTaller, List<Taxi> taxis) {
+    public Taxi(String Placa, String numero_taxi, String Marca, String Modelo, String idPropietario, List<Taxi> taxis) {
         this.Placa = Placa;
         this.numero_taxi = numero_taxi;
         this.Marca = Marca;
         this.Modelo = Modelo;
-        this.idConductor = idConductor;
         this.idPropietario = idPropietario;
-        this.codigoTurno = codigoTurno;
-        this.codigoTaller = codigoTaller;
         this.taxis = taxis;
     }
 
@@ -71,36 +65,12 @@ public class Taxi {
         this.Modelo = Modelo;
     }
 
-    public Conductor getIdConductor() {
-        return idConductor;
-    }
-
-    public void setIdConductor(Conductor idConductor) {
-        this.idConductor = idConductor;
-    }
-
-    public Propietario getIdPropietario() {
+    public String getIdPropietario() {
         return idPropietario;
     }
 
-    public void setIdPropietario(Propietario idPropietario) {
+    public void setIdPropietario(String idPropietario) {
         this.idPropietario = idPropietario;
-    }
-
-    public Turno getCodigoTurno() {
-        return codigoTurno;
-    }
-
-    public void setCodigoTurno(Turno codigoTurno) {
-        this.codigoTurno = codigoTurno;
-    }
-
-    public Taller getCodigoTaller() {
-        return codigoTaller;
-    }
-
-    public void setCodigoTaller(Taller codigoTaller) {
-        this.codigoTaller = codigoTaller;
     }
 
     public List<Taxi> getTaxis() {
@@ -113,7 +83,7 @@ public class Taxi {
 
     @Override
     public String toString() {
-        return "Taxi{" + "Placa=" + Placa + ", numero_taxi=" + numero_taxi + ", Marca=" + Marca + ", Modelo=" + Modelo + ", idConductor=" + idConductor + ", idPropietario=" + idPropietario + ", codigoTurno=" + codigoTurno + ", codigoTaller=" + codigoTaller + ", taxis=" + taxis + '}';
+        return "Taxi{" + "Placa=" + Placa + ", numero_taxi=" + numero_taxi + ", Marca=" + Marca + ", Modelo=" + Modelo + ", idPropietario=" + idPropietario + ", taxis=" + taxis + '}';
     }
 
       

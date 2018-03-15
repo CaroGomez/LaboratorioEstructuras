@@ -1,7 +1,7 @@
 package co.edu.udea.edatos.laboratorio1.modelo.dao;
 
 import co.edu.udea.edatos.laboratorio1.dao.exceptions.LlaveDuplicadaException;
-import co.edu.udea.edatos.laboratorio1.archivos.dao.impl.FileConductoresDAO;
+import co.edu.udea.edatos.laboratorio1.modelo.dao.impl.FileConductoresDAO;
 import co.edu.udea.edatos.laboratorio1.modelo.Conductor;
 
 import java.util.List;

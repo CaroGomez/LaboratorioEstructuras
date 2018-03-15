@@ -16,18 +16,21 @@ public class Turno {
     private String codigo;
     private String horario;
     private String horas;
+    private String numTaxi;
 
     private List<Turno> turnos;
 
     public Turno() {
     }
 
-    public Turno(String codigo, String horario, String horas, List<Turno> turnos) {
+    public Turno(String codigo, String horario, String horas, String numTaxi, List<Turno> turnos) {
         this.codigo = codigo;
         this.horario = horario;
         this.horas = horas;
+        this.numTaxi = numTaxi;
         this.turnos = turnos;
     }
+
 
     public String getCodigo() {
         return codigo;
@@ -59,6 +62,14 @@ public class Turno {
 
     public void setTurnos(List<Turno> turnos) {
         this.turnos = turnos;
+    }
+
+    public String getNumTaxi() {
+        return numTaxi;
+    }
+
+    public void setNumTaxi(String numTaxi) {
+        this.numTaxi = numTaxi;
     }
 
     @Override

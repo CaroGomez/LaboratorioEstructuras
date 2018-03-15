@@ -5,6 +5,7 @@
  */
 package co.edu.udea.edatos.laboratorio1.modelo.dao;
 
+import co.edu.udea.edatos.laboratorio1.dao.exceptions.LlaveDuplicadaException;
 import co.edu.udea.edatos.laboratorio1.modelo.Taller;
 import java.util.List;
 
@@ -16,6 +17,6 @@ public interface TallerDAO {
     
     public List<Taller> listarTalleres();
     public Taller consultarTaller(String codigo);
-    public void registrarTaller(Taller taller);
+    public void guardarTaller(Taller taller) throws LlaveDuplicadaException;
     
 }

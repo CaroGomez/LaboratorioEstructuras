@@ -39,6 +39,24 @@ public class FilePropietarioDAO implements PropietarioDAO {
 
     private static final Map<String, Propietario> CACHE_PROPIETARIO = new HashMap<>();
 
+        @Override
+    public List<Propietario> listarPropietarios() {
+        List<Propietario> propietarios=new ArrayList<>();
+        try (SeekableByteChannel sbc = Files.newByteChannel(archivo)){
+            ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
+            while(sbc.read(buf)>0){
+                buf.rewind();
+                CharBuffer registro= Charset.forName(ENCODING_WINDOWS).decode(buf);
+                Propietario propietario = parsePropietario(registro);
+                propietarios.add(propietario);
+                buf.flip();
+            }
+        }catch (IOException ioe){
+            ioe.printStackTrace();
+        }
+        return propietarios;
+    }
+    
     @Override
     public Propietario consultarPropietario(String identificacion) {
         Propietario propietario=CACHE_PROPIETARIO.get(identificacion);
@@ -79,24 +97,6 @@ public class FilePropietarioDAO implements PropietarioDAO {
         }catch (IOException ioe){
             ioe.printStackTrace();
         }
-    }
-    
-    @Override
-    public List<Propietario> listarPropietarios() {
-        List<Propietario> propietarios=new ArrayList<>();
-        try (SeekableByteChannel sbc = Files.newByteChannel(archivo)){
-            ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
-            while(sbc.read(buf)>0){
-                buf.rewind();
-                CharBuffer registro= Charset.forName(ENCODING_WINDOWS).decode(buf);
-                Propietario propietario = parsePropietario(registro);
-                propietarios.add(propietario);
-                buf.flip();
-            }
-        }catch (IOException ioe){
-            ioe.printStackTrace();
-        }
-        return propietarios;
     }
     
         private String parsePropietarioString(Propietario propietario) {

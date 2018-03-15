@@ -19,19 +19,21 @@ public class Conductor {
     private char genero;
     private String edad;
     private String telefono;
+    private String codTurno;
     
     private List<Conductor> conductores;
 
     public Conductor() {
     }
 
-    public Conductor(String id, String nombres, String apellidos, char genero, String edad, String telefono) {
+    public Conductor(String id, String nombres, String apellidos, char genero, String edad, String telefono, String codTurno) {
         this.id = id;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.genero = genero;
         this.edad = edad;
         this.telefono = telefono;
+        this.codTurno = codTurno;
     }
 
     public String getId() {
@@ -82,17 +84,19 @@ public class Conductor {
         this.telefono = telefono;
     }
 
+    public String getCodTurno() {
+        return codTurno;
+    }
+
+    public void setCodTurno(String codTurno) {
+        this.codTurno = codTurno;
+    }
+
     @Override
     public String toString() {
-        return "Conductor{" + "id=" + id + ", nombres=" + nombres + ", apellidos=" + apellidos + ", genero=" + genero + ", edad=" + edad + ", telefono=" + telefono + '}';
+        return "Conductor{" + "id=" + id + ", nombres=" + nombres + ", apellidos=" + apellidos + ", genero=" + genero + ", edad=" + edad + ", telefono=" + telefono + ", codTurno=" + codTurno + '}';
     }
 
-    public String getIdentificacion() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void setIdentificacion(String identificacion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
 }

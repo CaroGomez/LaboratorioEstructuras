@@ -1,6 +1,6 @@
 package co.edu.udea.edatos.laboratorio1.modelo.dao.impl;
 
-import co.edu.udea.edatos.laboratorio1.modelo.dao.ConductoresDAO;
+import co.edu.udea.edatos.laboratorio1.modelo.dao.ConductorDAO;
 import co.edu.udea.edatos.laboratorio1.dao.exceptions.LlaveDuplicadaException;
 import co.edu.udea.edatos.laboratorio1.modelo.Conductor;
 
@@ -20,7 +20,7 @@ import java.util.Map;
 
 import static java.nio.file.StandardOpenOption.APPEND;
 
-public class FileConductoresDAO implements ConductoresDAO {
+public class FileConductorDAO implements ConductorDAO {
 
     private static final String NOMBRE_ARCHIVO="Conductor";
     private static final int LONGITUD_REGISTRO=81;

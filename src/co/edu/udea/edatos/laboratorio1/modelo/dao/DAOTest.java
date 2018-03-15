@@ -1,7 +1,7 @@
 package co.edu.udea.edatos.laboratorio1.modelo.dao;
 
 import co.edu.udea.edatos.laboratorio1.dao.exceptions.LlaveDuplicadaException;
-import co.edu.udea.edatos.laboratorio1.modelo.dao.impl.FileConductoresDAO;
+import co.edu.udea.edatos.laboratorio1.modelo.dao.impl.FileConductorDAO;
 import co.edu.udea.edatos.laboratorio1.modelo.Conductor;
 
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
 public class DAOTest {
 
     public static void main(String []args) {
-        ConductoresDAO conductoresDAO =new FileConductoresDAO();
+        ConductorDAO conductoresDAO =new FileConductorDAO();
         Conductor c = new Conductor("123", "jose", "lopez", 'M', "35", "312891512");
 
         /*try{

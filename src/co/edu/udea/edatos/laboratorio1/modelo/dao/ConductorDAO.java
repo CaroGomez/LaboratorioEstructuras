@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author Carolina
  */
-public interface ConductoresDAO {
+public interface ConductorDAO {
     
     public List<Conductor> listarConductores();
     public Conductor consultarConductorxId(String identificacion);

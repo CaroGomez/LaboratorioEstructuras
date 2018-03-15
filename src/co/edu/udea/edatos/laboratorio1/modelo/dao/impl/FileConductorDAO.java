@@ -49,7 +49,6 @@ public class FileConductorDAO implements ConductorDAO {
         try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
             ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
             while (sbc.read(buf) > 0) {
-                //devolver el apuntador al principio del buffer
                 buf.rewind();
                 CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
                 String id = registro.subSequence(0, IDENTIFICACION_LONGITUD).toString().trim();
@@ -79,9 +78,27 @@ public class FileConductorDAO implements ConductorDAO {
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
-
     }
 
+     @Override
+    public List<Conductor> listarConductores() {
+        List<Conductor> conductores = new ArrayList<>();
+        try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
+            ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
+            while (sbc.read(buf) > 0) {
+                //devolver el apuntador al principio del buffer
+                buf.rewind();
+                CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
+                Conductor conductor = parseConductor(registro);
+                conductores.add(conductor);
+                buf.flip();
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return conductores;
+    }
+    
     private String parseConductorString(Conductor conductor) {
         StringBuilder registro = new StringBuilder();
         registro.append(rellenarCampo(conductor.getId(), IDENTIFICACION_LONGITUD));
@@ -100,30 +117,6 @@ public class FileConductorDAO implements ConductorDAO {
             return campo.substring(0, tamanio);
         }
         return String.format("%1$-" + tamanio + "s", campo);
-    }
-
-    @Override
-    public List<Conductor> listarConductores() {
-        List<Conductor> conductores = new ArrayList<>();
-        try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
-            ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
-            while (sbc.read(buf) > 0) {
-                //devolver el apuntador al principio del buffer
-                buf.rewind();
-                CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
-                Conductor conductor = parseConductor(registro);
-                conductores.add(conductor);
-                buf.flip();
-            }
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-        return conductores;
-    }
-
-    @Override
-    public void eliminarConductor(String identificacion) {
-
     }
 
     /**

@@ -2,7 +2,6 @@ package co.edu.udea.edatos.laboratorio1.modelo.dao.impl;
 
 import co.edu.udea.edatos.laboratorio1.modelo.dao.PropietarioDAO;
 import co.edu.udea.edatos.laboratorio1.dao.exceptions.LlaveDuplicadaException;
-import co.edu.udea.edatos.laboratorio1.modelo.Conductor;
 import co.edu.udea.edatos.laboratorio1.modelo.Propietario;
 
 import java.io.IOException;
@@ -39,63 +38,6 @@ public class FilePropietarioDAO implements PropietarioDAO {
     public static final String ENCODING_WINDOWS = "Cp1252";
 
     private static final Map<String, Propietario> CACHE_PROPIETARIO = new HashMap<>();
-
-    private String rellenarCampo(String campo, int tamanio){
-        if(campo.length()>tamanio){
-            return campo.substring(0, tamanio);
-        }
-        return String.format("%1$-"+tamanio+"s", campo);
-    }
-    
-    private String parsePropietarioString(Propietario propietario) {
-        StringBuilder registro = new StringBuilder();
-        registro.append(rellenarCampo(propietario.getId(), IDENTIFICACION_LONGITUD));
-        registro.append(rellenarCampo(propietario.getNombres(), NOMBRES_LONGITUD));
-        registro.append(rellenarCampo(propietario.getApellidos(), APELLIDOS_LONGITUD));
-        registro.append(propietario.getGenero());
-        return registro.toString();
-    }
-    
-    private Propietario parsePropietario(CharBuffer registro){
-        Propietario p = new Propietario();
-        String identificacion = registro.subSequence(0, IDENTIFICACION_LONGITUD).toString().trim();
-        registro.position(IDENTIFICACION_LONGITUD);
-        registro=registro.slice();
-        p.setId(identificacion);
-
-        String nombres = registro.subSequence(0, NOMBRES_LONGITUD).toString().trim();
-        registro.position(NOMBRES_LONGITUD);
-        registro=registro.slice();
-        p.setNombres(nombres);
-
-        String apellidos = registro.subSequence(0, APELLIDOS_LONGITUD).toString().trim();
-        registro.position(APELLIDOS_LONGITUD);
-        registro=registro.slice();
-        p.setApellidos(apellidos);
-
-        char genero = registro.charAt(0);
-        p.setGenero(genero);
-
-        return p;
-    }
-    
-    @Override
-    public List<Propietario> listarPropietarios() {
-        List<Propietario> propietarios=new ArrayList<>();
-        try (SeekableByteChannel sbc = Files.newByteChannel(archivo)){
-            ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
-            while(sbc.read(buf)>0){
-                buf.rewind();
-                CharBuffer registro= Charset.forName(ENCODING_WINDOWS).decode(buf);
-                Propietario propietario = parsePropietario(registro);
-                propietarios.add(propietario);
-                buf.flip();
-            }
-        }catch (IOException ioe){
-            ioe.printStackTrace();
-        }
-        return propietarios;
-    }
 
     @Override
     public Propietario consultarPropietario(String identificacion) {
@@ -138,14 +80,83 @@ public class FilePropietarioDAO implements PropietarioDAO {
             ioe.printStackTrace();
         }
     }
-
-    @Override
-    public void eliminarPropietario(String identificacion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-
- 
-
     
+    @Override
+    public List<Propietario> listarPropietarios() {
+        List<Propietario> propietarios=new ArrayList<>();
+        try (SeekableByteChannel sbc = Files.newByteChannel(archivo)){
+            ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
+            while(sbc.read(buf)>0){
+                buf.rewind();
+                CharBuffer registro= Charset.forName(ENCODING_WINDOWS).decode(buf);
+                Propietario propietario = parsePropietario(registro);
+                propietarios.add(propietario);
+                buf.flip();
+            }
+        }catch (IOException ioe){
+            ioe.printStackTrace();
+        }
+        return propietarios;
+    }
+    
+        private String parsePropietarioString(Propietario propietario) {
+        StringBuilder registro = new StringBuilder();
+        registro.append(rellenarCampo(propietario.getId(), IDENTIFICACION_LONGITUD));
+        registro.append(rellenarCampo(propietario.getNombres(), NOMBRES_LONGITUD));
+        registro.append(rellenarCampo(propietario.getApellidos(), APELLIDOS_LONGITUD));
+        registro.append(rellenarCampo(Character.toString(propietario.getGenero()), GENERO_LONGITUD));
+        registro.append(rellenarCampo(propietario.getEdad(), EDAD_LONGITUD));
+        registro.append(rellenarCampo(propietario.getTelefono(), TELEFONO_LONGITUD));
+        return registro.toString();
+    }
+        
+    private String rellenarCampo(String campo, int tamanio){
+        if(campo.length()>tamanio){
+            return campo.substring(0, tamanio);
+        }
+        return String.format("%1$-"+tamanio+"s", campo);
+    }
+    
+    /**
+     * Convierte un registro almacenado en un CharBuffer a un Objeto de Persona
+     *
+     * @param registro
+     * @return
+     */
+    private Propietario parsePropietario(CharBuffer registro){
+        Propietario p = new Propietario();
+        String identificacion = registro.subSequence(0, IDENTIFICACION_LONGITUD).toString().trim();
+        registro.position(IDENTIFICACION_LONGITUD);
+        registro=registro.slice();
+        p.setId(identificacion);
+
+        String nombres = registro.subSequence(0, NOMBRES_LONGITUD).toString().trim();
+        registro.position(NOMBRES_LONGITUD);
+        registro=registro.slice();
+        p.setNombres(nombres);
+
+        String apellidos = registro.subSequence(0, APELLIDOS_LONGITUD).toString().trim();
+        registro.position(APELLIDOS_LONGITUD);
+        registro=registro.slice();
+        p.setApellidos(apellidos);
+
+        char genero = registro.subSequence(0, GENERO_LONGITUD).toString().trim().charAt(0);
+        registro.position(GENERO_LONGITUD);
+        registro = registro.slice();
+        p.setGenero(genero);
+
+        String edad = registro.subSequence(0, EDAD_LONGITUD).toString().trim();
+        registro.position(EDAD_LONGITUD);
+        registro = registro.slice();
+        p.setEdad(edad);
+
+        String telefono = registro.subSequence(0, TELEFONO_LONGITUD).toString().trim();
+        registro.position(TELEFONO_LONGITUD);
+        registro = registro.slice();
+        p.setTelefono(telefono);
+
+        return p;
+    }
+    
+        
 }

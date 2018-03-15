@@ -9,7 +9,7 @@ import java.util.List;
 public class DAOTest {
 
     public static void main(String []args) {
-        ConductorDAO conductoresDAO =new FileConductorDAO();
+        ConductorDAO conductorDAO =new FileConductorDAO();
         Conductor c = new Conductor("123", "jose", "lopez", 'M', "35", "312891512");
 
         /*try{
@@ -22,10 +22,10 @@ public class DAOTest {
         personas.forEach(System.out::println);
         personas.forEach(System.out::println);*/
 
-        c=conductoresDAO.consultarConductorxId("123");
+        c=conductorDAO.consultarConductorxId("1125412540");
         System.out.println(c);
 
-        c=conductoresDAO.consultarConductorxId("123");
+        c=conductorDAO.consultarConductorxId("123");
         System.out.println(c);
 
     }

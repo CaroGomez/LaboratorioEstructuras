@@ -24,7 +24,7 @@ import static java.nio.file.StandardOpenOption.APPEND;
 public class FileConductorDAO implements ConductorDAO {
 
 
-    private static final String NOMBRE_ARCHIVO="Conductor";
+    private static final String NOMBRE_ARCHIVO="Conductor.txt";
     private static final int LONGITUD_REGISTRO=81;
     private static final int IDENTIFICACION_LONGITUD=10;
     private static final int NOMBRES_LONGITUD=20;

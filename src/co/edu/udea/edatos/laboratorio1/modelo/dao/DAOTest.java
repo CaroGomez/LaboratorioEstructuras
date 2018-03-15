@@ -11,7 +11,7 @@ public class DAOTest {
 
     public static void main(String []args) {
         ConductorDAO conductorDAO =new FileConductorDAO();
-        Conductor c = new Conductor("124578", "Maria", "lopez", 'F', "50", "3128915125","000045");
+        Conductor c = new Conductor("15987", "Juana", "Carlos", 'F', "50", "3128915125","000045");
 
         try{
             conductorDAO.guardarConductor(c);

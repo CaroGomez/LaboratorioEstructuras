@@ -6,8 +6,11 @@
 package co.edu.udea.edatos.laboratorio1.modelo.dao.impl;
 
 import co.edu.udea.edatos.laboratorio1.dao.exceptions.LlaveDuplicadaException;
+import co.edu.udea.edatos.laboratorio1.modelo.Conductor;
+import co.edu.udea.edatos.laboratorio1.modelo.Propietario;
 import co.edu.udea.edatos.laboratorio1.modelo.Taller;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.TallerDAO;
+import static co.edu.udea.edatos.laboratorio1.modelo.dao.impl.FileConductorDAO.ENCODING_WINDOWS;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -63,8 +66,10 @@ public class FileTallerDAO implements TallerDAO{
     public Taller consultarTaller(String codigo) {
         Taller taller = CACHE_TALLER.get(codigo);
         if (taller != null) {
+            System.out.println("no fui al archivo, lo tomé de la caché");
             return taller;
         }
+        System.out.println("tocó ir al archivo");
         try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
             ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
             while (sbc.read(buf) > 0) {

@@ -6,8 +6,10 @@
 package co.edu.udea.edatos.laboratorio1.modelo.dao.impl;
 
 import co.edu.udea.edatos.laboratorio1.dao.exceptions.LlaveDuplicadaException;
+import co.edu.udea.edatos.laboratorio1.modelo.Conductor;
 import co.edu.udea.edatos.laboratorio1.modelo.Taxi;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.TaxiDAO;
+import static co.edu.udea.edatos.laboratorio1.modelo.dao.impl.FileConductorDAO.ENCODING_WINDOWS;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -27,16 +29,15 @@ import java.util.Map;
  *
  * @author Carolina
  */
-public class FileTaxiDAO implements TaxiDAO{
-    
-    private static final String NOMBRE_ARCHIVO = "Conductor.txt";
+public class FileTaxiDAO implements TaxiDAO {
+
+    private static final String NOMBRE_ARCHIVO = "Taxi.txt";
     private static final int LONGITUD_REGISTRO = 50;
     private static final int PLACA_LONGITUD = 6;
     private static final int NUMERO_LONGITUD = 4;
     private static final int MARCA_LONGITUD = 20;
     private static final int MODELO_LONGITUD = 10;
     private static final int IDPROPIETARIO_LONGITUD = 10;
-
 
     private static final Path archivo = Paths.get(NOMBRE_ARCHIVO);
     public static final String ENCODING_WINDOWS = "Cp1252";
@@ -65,8 +66,10 @@ public class FileTaxiDAO implements TaxiDAO{
     public Taxi consultarTaxi(String numero_Taxi) {
         Taxi taxi = CACHE_TAXI.get(numero_Taxi);
         if (taxi != null) {
+            System.out.println("no fui al archivo, lo tomé de la caché");
             return taxi;
         }
+        System.out.println("tocó ir al archivo");
         try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
             ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
             while (sbc.read(buf) > 0) {
@@ -100,25 +103,25 @@ public class FileTaxiDAO implements TaxiDAO{
             ioe.printStackTrace();
         }
     }
-    
-     private String parseTaxiString(Taxi taxi) {
+
+    private String parseTaxiString(Taxi taxi) {
         StringBuilder registro = new StringBuilder();
-        registro.append(rellenarCampo(taxi.getMarca(), MARCA_LONGITUD));
+        registro.append(rellenarCampo(taxi.getPlaca(), PLACA_LONGITUD));
         registro.append(rellenarCampo(taxi.getNumero_taxi(), NUMERO_LONGITUD));
         registro.append(rellenarCampo(taxi.getMarca(), MARCA_LONGITUD));
         registro.append(rellenarCampo(taxi.getModelo(), MODELO_LONGITUD));
         registro.append(taxi.getIdPropietario());
-       
+
         return registro.toString();
     }
-     
+
     private String rellenarCampo(String campo, int tamanio) {
         if (campo.length() > tamanio) {
             return campo.substring(0, tamanio);
         }
         return String.format("%1$-" + tamanio + "s", campo);
     }
-    
+
     /**
      * Convierte un registro almacenado en un CharBuffer a un Objeto de Persona
      *
@@ -152,5 +155,5 @@ public class FileTaxiDAO implements TaxiDAO{
 
         return t;
     }
-    
+
 }

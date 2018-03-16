@@ -4,30 +4,28 @@
  * and open the template in the editor.
  */
 package co.edu.udea.edatos.laboratorio1.modelo;
-import java.util.List;
 
+import java.util.List;
 
 /**
  *
  * @author Telecentro
  */
 public class Propietario {
-    
+
     //Datos: identificación, nombres, apellidos, género, edad, teléfono.
-    
     private String Id;
     private String nombres;
     private String apellidos;
     private char genero;
     private String edad;
     private String telefono;
-    
+
     private List<Propietario> propietarios;
 
     public Propietario() {
     }
-    
-    
+
     public Propietario(String Id, String nombres, String apellidos, char genero, String edad, String telefono) {
         this.Id = Id;
         this.nombres = nombres;
@@ -35,7 +33,7 @@ public class Propietario {
         this.genero = genero;
         this.edad = edad;
         this.telefono = telefono;
-        
+
     }
 
     public String getId() {
@@ -94,11 +92,14 @@ public class Propietario {
         this.propietarios = propietarios;
     }
 
-    @Override
-    public String toString() {
-        return "Propietario{" + "Id=" + Id + ", nombres=" + nombres + ", apellidos=" + apellidos + ", genero=" + genero + ", edad=" + edad + ", telefono=" + telefono + ", propietarios=" + propietarios + '}';
+   // @Override
+    /*public String toString() {
+        return "Propietario{" + "Id=" + Id + ", nombres=" + nombres + ", apellidos=" + apellidos + ", genero=" + genero + ", edad=" + edad + ", telefono=" + telefono + '}';
     }
-    
-    
-    
+*/
+    @Override
+    public String toString(){
+        return nombres + " " + apellidos + " " + Id ;
+    }
+
 }

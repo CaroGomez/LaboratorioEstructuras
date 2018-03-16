@@ -5,7 +5,7 @@
  */
 package co.edu.udea.edatos.laboratorio1.vista;
 
-import co.edu.udea.edatos.laboratorio1.controller.IngresoController;
+import co.edu.udea.edatos.laboratorio1.controller.IngresoTaxiController;
 import co.edu.udea.edatos.laboratorio1.controller.IngresoPropietarioController;
 import co.edu.udea.edatos.laboratorio1.controller.LaboratiorioController;
 import java.io.IOException;
@@ -47,14 +47,14 @@ public class Main extends Application {
 
     public void mostrarVentanaSecundaria() {
         try {
-            FXMLLoader loader = new FXMLLoader(Main.class.getResource("Ingreso.fxml"));
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("IngresoTaxi.fxml"));
             AnchorPane ventanaDos = (AnchorPane) loader.load();
             Stage ventana = new Stage();
             ventana.setTitle("Venta Dos");
             ventana.initOwner(stagePrincipal);
             Scene scene = new Scene(ventanaDos);
             ventana.setScene(scene);
-            IngresoController controller = loader.getController();
+        IngresoTaxiController controller = loader.getController();
             controller.setStagePrincipal(ventana);
             ventana.show();
 

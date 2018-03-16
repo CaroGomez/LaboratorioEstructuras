@@ -61,10 +61,8 @@ public class FilePropietarioDAO implements PropietarioDAO {
     public Propietario consultarPropietario(String identificacion) {
         Propietario propietario=CACHE_PROPIETARIO.get(identificacion);
         if(propietario!=null){
-            System.out.println("no fui al archivo, lo tomé de la caché");
             return propietario;
         }
-        System.out.println("tocó ir al archivo");
         try (SeekableByteChannel sbc = Files.newByteChannel(archivo)){
             ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
             while(sbc.read(buf)>0){

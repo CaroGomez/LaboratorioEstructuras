@@ -6,10 +6,8 @@
 package co.edu.udea.edatos.laboratorio1.modelo.dao.impl;
 
 import co.edu.udea.edatos.laboratorio1.dao.exceptions.LlaveDuplicadaException;
-import co.edu.udea.edatos.laboratorio1.modelo.Conductor;
 import co.edu.udea.edatos.laboratorio1.modelo.Turno;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.TurnoDAO;
-import static co.edu.udea.edatos.laboratorio1.modelo.dao.impl.FileConductorDAO.ENCODING_WINDOWS;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -67,10 +65,8 @@ public class FileTurnoDAO implements TurnoDAO {
     public Turno consultarTurno(String codigo) {
         Turno turno = CACHE_TURNO.get(codigo);
         if (turno != null) {
-            System.out.println("no fui al archivo, lo tomé de la caché");
             return turno;
         }
-        System.out.println("tocó ir al archivo");
         try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
             ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
             while (sbc.read(buf) > 0) {

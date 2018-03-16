@@ -6,10 +6,8 @@
 package co.edu.udea.edatos.laboratorio1.modelo.dao.impl;
 
 import co.edu.udea.edatos.laboratorio1.dao.exceptions.LlaveDuplicadaException;
-import co.edu.udea.edatos.laboratorio1.modelo.Conductor;
 import co.edu.udea.edatos.laboratorio1.modelo.Taxi;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.TaxiDAO;
-import static co.edu.udea.edatos.laboratorio1.modelo.dao.impl.FileConductorDAO.ENCODING_WINDOWS;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -66,10 +64,8 @@ public class FileTaxiDAO implements TaxiDAO {
     public Taxi consultarTaxi(String numero_Taxi) {
         Taxi taxi = CACHE_TAXI.get(numero_Taxi);
         if (taxi != null) {
-            System.out.println("no fui al archivo, lo tomé de la caché");
             return taxi;
         }
-        System.out.println("tocó ir al archivo");
         try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
             ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
             while (sbc.read(buf) > 0) {

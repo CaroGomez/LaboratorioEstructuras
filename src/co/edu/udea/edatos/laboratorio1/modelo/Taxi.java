@@ -24,14 +24,15 @@ public class Taxi {
     public Taxi() {
     }
 
-    public Taxi(String Placa, String numero_taxi, String Marca, String Modelo, String idPropietario, List<Taxi> taxis) {
+    public Taxi(String Placa, String numero_taxi, String Marca, String Modelo, String idPropietario) {
         this.Placa = Placa;
         this.numero_taxi = numero_taxi;
         this.Marca = Marca;
         this.Modelo = Modelo;
         this.idPropietario = idPropietario;
-        this.taxis = taxis;
     }
+
+    
 
     public String getPlaca() {
         return Placa;

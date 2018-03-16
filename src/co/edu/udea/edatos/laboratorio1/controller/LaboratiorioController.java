@@ -68,7 +68,9 @@ public class LaboratiorioController {
                
             }
         } else {
+            
             ProgramaPrincipal.mostrarVentanaSecundaria();
+            
         }
     }
     
@@ -81,6 +83,11 @@ public class LaboratiorioController {
     public void setProgramaPrincipal(Main ProgramaPrincipal) {
         this.ProgramaPrincipal = ProgramaPrincipal;
     }
+    
+    
+    /*void mostrar(String mensaje){
+        txtResult.appendText(mensaje + " ");
+    }*/
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {

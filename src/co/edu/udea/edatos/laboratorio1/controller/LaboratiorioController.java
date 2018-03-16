@@ -45,6 +45,15 @@ public class LaboratiorioController {
     
     @FXML // fx:id="btnPropietario"
     private Button btnPropietario; // Value injected by FXMLLoader
+    
+    @FXML // fx:id="btnTurno"
+    private Button btnTurno; // Value injected by FXMLLoader
+
+    @FXML // fx:id="btnTaller"
+    private Button btnTaller; // Value injected by FXMLLoader
+    
+    @FXML // fx:id="btnConductor"
+    private Button btnConductor; // Value injected by FXMLLoader
 
     @FXML
     void Ingresar(ActionEvent event) {
@@ -78,6 +87,21 @@ public class LaboratiorioController {
 
     }
 
+    @FXML
+    void doIngresarTaller(ActionEvent event) {
+
+    }
+
+    @FXML
+    void doIngresarTurno(ActionEvent event) {
+
+    }
+    
+    @FXML
+    void doIngresarCond(ActionEvent event) {
+
+    }
+    
     public void setProgramaPrincipal(Main ProgramaPrincipal) {
         this.ProgramaPrincipal = ProgramaPrincipal;
     }
@@ -88,5 +112,8 @@ public class LaboratiorioController {
         assert label != null : "fx:id=\"label\" was not injected: check your FXML file 'Laboratiorio.fxml'.";
         assert txtResult != null : "fx:id=\"txtResult\" was not injected: check your FXML file 'Laboratiorio.fxml'.";
         assert btnPropietario != null : "fx:id=\"btnPropietario\" was not injected: check your FXML file 'Laboratiorio.fxml'.";
+        assert btnTurno != null : "fx:id=\"btnTurno\" was not injected: check your FXML file 'Laboratiorio.fxml'.";
+        assert btnTaller != null : "fx:id=\"btnTaller\" was not injected: check your FXML file 'Laboratiorio.fxml'.";
+        assert btnConductor != null : "fx:id=\"btnConductor\" was not injected: check your FXML file 'Laboratiorio.fxml'.";
     }
 }

@@ -32,11 +32,13 @@ import java.util.Map;
 public class FileTurnoDAO implements TurnoDAO {
     
     private static final String NOMBRE_ARCHIVO = "Conductor.txt";
-    private static final int LONGITUD_REGISTRO = 23;
+    private static final int LONGITUD_REGISTRO = 25;
     private static final int CODIGO_LONGITUD = 6;
     private static final int HORARIO_LONGITUD = 10;
     private static final int HORAS_LONGITUD = 3;
-    private static final int NUMTAXI_LONGITUD = 4;
+    private static final int PLACATAXI_LONGITUD = 6;
+    
+    
 
     private static final Path archivo = Paths.get(NOMBRE_ARCHIVO);
     public static final String ENCODING_WINDOWS = "Cp1252";
@@ -108,7 +110,7 @@ public class FileTurnoDAO implements TurnoDAO {
         registro.append(rellenarCampo(turno.getCodigo(), CODIGO_LONGITUD));
         registro.append(rellenarCampo(turno.getHorario(), HORARIO_LONGITUD));
         registro.append(rellenarCampo(turno.getHoras(), HORAS_LONGITUD));
-        registro.append(turno.getNumTaxi());
+        registro.append(turno.getPlacaTaxi());
        
         return registro.toString();
     }
@@ -143,8 +145,8 @@ public class FileTurnoDAO implements TurnoDAO {
         registro = registro.slice();
         t.setHoras(horas);
 
-        String numTaxi = registro.toString().trim();
-        t.setNumTaxi(numTaxi);
+        String placaTaxi = registro.toString().trim();
+        t.setPlacaTaxi(placaTaxi);
 
         return t;
     }

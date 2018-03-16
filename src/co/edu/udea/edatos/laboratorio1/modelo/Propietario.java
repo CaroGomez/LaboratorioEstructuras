@@ -28,14 +28,14 @@ public class Propietario {
     }
     
     
-    public Propietario(String Id, String nombres, String apellidos, char genero, String edad, String telefono, List<Propietario> propietarios) {
+    public Propietario(String Id, String nombres, String apellidos, char genero, String edad, String telefono) {
         this.Id = Id;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.genero = genero;
         this.edad = edad;
         this.telefono = telefono;
-        this.propietarios = propietarios;
+        
     }
 
     public String getId() {

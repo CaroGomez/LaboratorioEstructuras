@@ -92,6 +92,16 @@ public class Conductor {
         this.codTurno = codTurno;
     }
 
+    public List<Conductor> getConductores() {
+        return conductores;
+    }
+
+    public void setConductores(List<Conductor> conductores) {
+        this.conductores = conductores;
+    }
+    
+    
+
     @Override
     public String toString() {
         return "Conductor{" + "id=" + id + ", nombres=" + nombres + ", apellidos=" + apellidos + ", genero=" + genero + ", edad=" + edad + ", telefono=" + telefono + ", codTurno=" + codTurno + '}';

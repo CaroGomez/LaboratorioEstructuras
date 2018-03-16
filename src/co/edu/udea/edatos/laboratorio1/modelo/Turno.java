@@ -16,21 +16,20 @@ public class Turno {
     private String codigo;
     private String horario;
     private String horas;
-    private String numTaxi;
+    private String placaTaxi;
 
     private List<Turno> turnos;
 
     public Turno() {
     }
 
-    public Turno(String codigo, String horario, String horas, String numTaxi, List<Turno> turnos) {
+    public Turno(String codigo, String horario, String horas, String placaTaxi, List<Turno> turnos) {
         this.codigo = codigo;
         this.horario = horario;
         this.horas = horas;
-        this.numTaxi = numTaxi;
+        this.placaTaxi = placaTaxi;
         this.turnos = turnos;
     }
-
 
     public String getCodigo() {
         return codigo;
@@ -56,6 +55,14 @@ public class Turno {
         this.horas = horas;
     }
 
+    public String getPlacaTaxi() {
+        return placaTaxi;
+    }
+
+    public void setPlacaTaxi(String placaTaxi) {
+        this.placaTaxi = placaTaxi;
+    }
+
     public List<Turno> getTurnos() {
         return turnos;
     }
@@ -64,17 +71,10 @@ public class Turno {
         this.turnos = turnos;
     }
 
-    public String getNumTaxi() {
-        return numTaxi;
-    }
-
-    public void setNumTaxi(String numTaxi) {
-        this.numTaxi = numTaxi;
-    }
-
     @Override
     public String toString() {
-        return "Turno{" + "codigo=" + codigo + ", horario=" + horario + ", horas=" + horas + ", turnos=" + turnos + '}';
+        return "Turno{" + "codigo=" + codigo + ", horario=" + horario + ", horas=" + horas + ", placaTaxi=" + placaTaxi + ", turnos=" + turnos + '}';
     }
 
+    
 }

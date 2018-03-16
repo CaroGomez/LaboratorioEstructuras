@@ -3,16 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Carolina/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/modelo/dao/ConductorDAO.java</file>
-            <file>file:/C:/Users/Carolina/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/modelo/dao/TallerDAO.java</file>
             <file>file:/C:/Users/Carolina/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/controller/LaboratiorioController.java</file>
             <file>file:/C:/Users/Carolina/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/modelo/dao/TurnoDAO.java</file>
-            <file>file:/C:/Users/Carolina/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/modelo/Conductor.java</file>
             <file>file:/C:/Users/Carolina/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/modelo/dao/impl/FileConductorDAO.java</file>
+            <file>file:/C:/Users/Carolina/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/modelo/dao/impl/FileTaxiDAO.java</file>
             <file>file:/C:/Users/Carolina/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/modelo/Taxi.java</file>
-            <file>file:/C:/Users/Carolina/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/archivos/Conductor.txt</file>
             <file>file:/C:/Users/Carolina/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/modelo/dao/TaxiDAO.java</file>
-            <file>file:/C:/Users/Carolina/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/modelo/dao/DAOTest.java</file>
         </group>
     </open-files>
 </project-private>

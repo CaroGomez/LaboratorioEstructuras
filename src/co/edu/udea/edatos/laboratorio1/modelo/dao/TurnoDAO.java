@@ -17,6 +17,6 @@ public interface TurnoDAO {
     
     public List<Turno> listarTurnos();
     public Turno consultarTurno(String codigo);
-    public void guardarTurno(Turno turno) throws LlaveDuplicadaException;
+    public boolean guardarTurno(Turno turno);// throws LlaveDuplicadaException;
     
 }

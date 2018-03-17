@@ -87,9 +87,10 @@ public class FileTurnoDAO implements TurnoDAO {
     }
 
     @Override
-    public void guardarTurno(Turno turno) throws LlaveDuplicadaException {
+    public boolean guardarTurno(Turno turno) {//throws LlaveDuplicadaException {
         if (consultarTurno(turno.getCodigo()) != null) {
-            throw new LlaveDuplicadaException();
+            //throw new LlaveDuplicadaException();
+            return false;
         }
         String registro = parseTurnoString(turno);
         byte[] datos = registro.getBytes();
@@ -99,6 +100,7 @@ public class FileTurnoDAO implements TurnoDAO {
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
+        return true;
     }
     
     private String parseTurnoString(Turno turno) {

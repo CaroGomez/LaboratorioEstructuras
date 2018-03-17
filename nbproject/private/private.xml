@@ -4,7 +4,24 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Jefry/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/vista/Main.java</file>
+            <file>file:/C:/Users/Jefry/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/controller/IngresoTallerController.java</file>
+            <file>file:/C:/Users/Jefry/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/modelo/Conductor.java</file>
+            <file>file:/C:/Users/Jefry/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/modelo/dao/impl/FileTallerDAO.java</file>
+            <file>file:/C:/Users/Jefry/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/modelo/dao/impl/FileTaxiDAO.java</file>
+            <file>file:/C:/Users/Jefry/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/controller/IngresoConductorController.java</file>
+            <file>file:/C:/Users/Jefry/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/modelo/Taller.java</file>
+            <file>file:/C:/Users/Jefry/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/modelo/dao/TallerDAO.java</file>
+            <file>file:/C:/Users/Jefry/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/modelo/dao/impl/FileTurnoDAO.java</file>
+            <file>file:/C:/Users/Jefry/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/modelo/dao/impl/FilePropietarioDAO.java</file>
+            <file>file:/C:/Users/Jefry/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/dao/exceptions/LlaveDuplicadaException.java</file>
+            <file>file:/C:/Users/Jefry/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/controller/IngresoTaxiController.java</file>
+            <file>file:/C:/Users/Jefry/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/modelo/Taxi.java</file>
+            <file>file:/C:/Users/Jefry/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/controller/LaboratiorioController.java</file>
+            <file>file:/C:/Users/Jefry/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/modelo/dao/TaxiDAO.java</file>
+            <file>file:/C:/Users/Jefry/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/modelo/Propietario.java</file>
+            <file>file:/C:/Users/Jefry/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/modelo/dao/impl/FileConductorDAO.java</file>
             <file>file:/C:/Users/Jefry/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/controller/IngresoPropietarioController.java</file>
+            <file>file:/C:/Users/Jefry/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/modelo/dao/PropietarioDAO.java</file>
         </group>
     </open-files>
 </project-private>

@@ -5,7 +5,10 @@ package co.edu.udea.edatos.laboratorio1.controller;
 
 import co.edu.udea.edatos.laboratorio1.modelo.Propietario;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.PropietarioDAO;
+import co.edu.udea.edatos.laboratorio1.modelo.dao.TaxiDAO;
+import co.edu.udea.edatos.laboratorio1.modelo.Taxi;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.impl.FilePropietarioDAO;
+import co.edu.udea.edatos.laboratorio1.modelo.dao.impl.FileTaxiDAO;
 import co.edu.udea.edatos.laboratorio1.vista.Main;
 import java.net.URL;
 import java.util.List;
@@ -24,6 +27,7 @@ public class LaboratiorioController {
 
     private Main ProgramaPrincipal;
     PropietarioDAO propietarioDAO = new FilePropietarioDAO();
+    TaxiDAO taxiDAO = new FileTaxiDAO();
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -32,34 +36,34 @@ public class LaboratiorioController {
     private URL location;
 
     @FXML // fx:id="btnIngresar"
-    private Button btnIngresar; // Value injected by FXMLLoader
+    private Button btnIngresarTaxi; // Value injected by FXMLLoader
 
     @FXML // fx:id="label"
     private Label label; // Value injected by FXMLLoader
 
     @FXML // fx:id="txtResult"
     private TextArea txtResult; // Value injected by FXMLLoader
-    
+
     @FXML // fx:id="btnPropietario"
     private Button btnPropietario; // Value injected by FXMLLoader
-    
+
     @FXML // fx:id="btnTurno"
     private Button btnTurno; // Value injected by FXMLLoader
 
     @FXML // fx:id="btnTaller"
     private Button btnTaller; // Value injected by FXMLLoader
-    
+
     @FXML // fx:id="btnConductor"
     private Button btnConductor; // Value injected by FXMLLoader
 
     @FXML
-    void Ingresar(ActionEvent event) {
-        
+    void IngresarTaxi(ActionEvent event) {
+
         List<Propietario> propietarios = propietarioDAO.listarPropietarios();
-        
+
         if (propietarios.isEmpty()) {
             txtResult.appendText("No existen propietarios\n");
-            
+
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("No existen Propietarios");
             alert.setHeaderText("Aún no existen propietarios");
@@ -67,19 +71,17 @@ public class LaboratiorioController {
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
-                
+
                 ProgramaPrincipal.mostrarIngresoPropietario();
-                
-            } else {
-               
-            }
+
+            } 
         } else {
-            
+
             ProgramaPrincipal.mostrarIngresoTaxi();
-            
+
         }
     }
-    
+
     @FXML
     void doIngresarPro(ActionEvent event) {
         ProgramaPrincipal.mostrarIngresoPropietario();
@@ -93,26 +95,46 @@ public class LaboratiorioController {
 
     @FXML
     void doIngresarTurno(ActionEvent event) {
+        List<Taxi> taxis = taxiDAO.listarTaxis();
 
+        
+        
+        if (taxis.isEmpty()) {
+            txtResult.appendText("No existen Taxis\n");
+
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("No existen Taxis");
+            alert.setHeaderText("Aún no existen Taxis");
+            alert.setContentText("¿Desea agregar un Taxi?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+
+                ProgramaPrincipal.mostrarIngresoTaxi();
+
+            } 
+        } else {
+
+            ProgramaPrincipal.mostrarIngresoTurno();
+
+        }
     }
-    
+
     @FXML
     void doIngresarCond(ActionEvent event) {
 
     }
-    
+
     public void setProgramaPrincipal(Main ProgramaPrincipal) {
         this.ProgramaPrincipal = ProgramaPrincipal;
     }
-    
-    
+
     /*void mostrar(String mensaje){
         txtResult.appendText(mensaje + " ");
     }*/
-
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
-        assert btnIngresar != null : "fx:id=\"btnIngresar\" was not injected: check your FXML file 'Laboratiorio.fxml'.";
+        assert btnIngresarTaxi != null : "fx:id=\"btnIngresar\" was not injected: check your FXML file 'Laboratiorio.fxml'.";
         assert label != null : "fx:id=\"label\" was not injected: check your FXML file 'Laboratiorio.fxml'.";
         assert txtResult != null : "fx:id=\"txtResult\" was not injected: check your FXML file 'Laboratiorio.fxml'.";
         assert btnPropietario != null : "fx:id=\"btnPropietario\" was not injected: check your FXML file 'Laboratiorio.fxml'.";

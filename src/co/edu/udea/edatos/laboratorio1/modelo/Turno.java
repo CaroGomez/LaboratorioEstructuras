@@ -23,12 +23,12 @@ public class Turno {
     public Turno() {
     }
 
-    public Turno(String codigo, String horario, String horas, String placaTaxi, List<Turno> turnos) {
+    public Turno(String codigo, String horario, String horas, String placaTaxi) {
         this.codigo = codigo;
         this.horario = horario;
         this.horas = horas;
         this.placaTaxi = placaTaxi;
-        this.turnos = turnos;
+        
     }
 
     public String getCodigo() {

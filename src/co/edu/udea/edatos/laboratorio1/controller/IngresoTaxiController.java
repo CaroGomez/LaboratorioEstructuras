@@ -10,7 +10,6 @@ import co.edu.udea.edatos.laboratorio1.modelo.dao.PropietarioDAO;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.TaxiDAO;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.impl.FilePropietarioDAO;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.impl.FileTaxiDAO;
-import co.edu.udea.edatos.laboratorio1.controller.LaboratiorioController;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -22,7 +21,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -81,7 +79,7 @@ public class IngresoTaxiController {
         String modelo = txtModelo.getText();
         Propietario pro = listView.getValue();
 
-        if ((placa.equals("")) || (numTaxi.equals("")) || (marca.equals("")) || (modelo.equals("")) || (pro.equals(""))) {
+        if ((placa.equals("")) || (numTaxi.equals("")) || (marca.equals("")) || (modelo.equals("")) || (pro == null)) {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Error");
             alert.setHeaderText(null);
@@ -92,8 +90,18 @@ public class IngresoTaxiController {
 
             Taxi taxi = new Taxi(placa, numTaxi, marca, modelo, pro.getId());
 
-            taxiDAO.guardarTaxi(taxi);
-            stagePrincipal.close();
+            if (taxiDAO.guardarTaxi(taxi)) {
+                stagePrincipal.close();
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("La placa que intenta ingresar ya existe");
+
+                alert.showAndWait();
+
+            }
         }
 
         // controllerLab.mostrar("Taxi agregado correctamente");

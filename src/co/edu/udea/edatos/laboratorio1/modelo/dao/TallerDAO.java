@@ -17,6 +17,6 @@ public interface TallerDAO {
     
     public List<Taller> listarTalleres();
     public Taller consultarTaller(String codigo);
-    public void guardarTaller(Taller taller) throws LlaveDuplicadaException;
+    public boolean guardarTaller(Taller taller) throws LlaveDuplicadaException;
     
 }

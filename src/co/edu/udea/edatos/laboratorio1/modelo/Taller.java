@@ -26,12 +26,12 @@ private List<Taller> talleres;
 
 
 
-    public Taller(String codigo, String nombre, String telefono, String direccion, List<Taller> talleres) {
+    public Taller(String codigo, String nombre, String telefono, String direccion) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.telefono = telefono;
         this.direccion = direccion;
-        this.talleres = talleres;
+       
     }
 
     public String getCodigo() {

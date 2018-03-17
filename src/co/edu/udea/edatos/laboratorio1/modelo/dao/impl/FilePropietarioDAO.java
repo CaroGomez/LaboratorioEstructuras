@@ -1,9 +1,7 @@
 package co.edu.udea.edatos.laboratorio1.modelo.dao.impl;
 
 import co.edu.udea.edatos.laboratorio1.modelo.dao.PropietarioDAO;
-import co.edu.udea.edatos.laboratorio1.dao.exceptions.LlaveDuplicadaException;
 import co.edu.udea.edatos.laboratorio1.modelo.Propietario;
-
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -83,9 +81,10 @@ public class FilePropietarioDAO implements PropietarioDAO {
     }
 
     @Override
-    public void guardarPropietario(Propietario propietario) throws LlaveDuplicadaException {
+    public boolean guardarPropietario(Propietario propietario) {//throws LlaveDuplicadaException {
         if(consultarPropietario(propietario.getId())!=null){
-            throw new LlaveDuplicadaException();
+            //throw new LlaveDuplicadaException();
+            return false;
         }
         String registro= parsePropietarioString(propietario);
         byte[] datos = registro.getBytes();
@@ -95,6 +94,7 @@ public class FilePropietarioDAO implements PropietarioDAO {
         }catch (IOException ioe){
             ioe.printStackTrace();
         }
+        return true;
     }
     
         private String parsePropietarioString(Propietario propietario) {

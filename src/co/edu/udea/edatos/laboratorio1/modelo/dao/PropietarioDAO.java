@@ -16,7 +16,7 @@ public interface PropietarioDAO {
     
     public List<Propietario> listarPropietarios();
     public Propietario consultarPropietario(String identificacion);
-    public void guardarPropietario(Propietario propietario) throws LlaveDuplicadaException;
+    public boolean guardarPropietario(Propietario propietario) ;//throws LlaveDuplicadaException;
 
     
 }

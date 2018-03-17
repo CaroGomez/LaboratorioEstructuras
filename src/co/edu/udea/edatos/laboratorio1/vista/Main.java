@@ -7,6 +7,7 @@ package co.edu.udea.edatos.laboratorio1.vista;
 
 import co.edu.udea.edatos.laboratorio1.controller.IngresoTaxiController;
 import co.edu.udea.edatos.laboratorio1.controller.IngresoPropietarioController;
+import co.edu.udea.edatos.laboratorio1.controller.IngresoTallerController;
 import co.edu.udea.edatos.laboratorio1.controller.LaboratiorioController;
 import java.io.IOException;
 import javafx.application.Application;
@@ -45,12 +46,12 @@ public class Main extends Application {
         }
     }
 
-    public void mostrarVentanaSecundaria() {
+    public void mostrarIngresoTaxi() {
         try {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("IngresoTaxi.fxml"));
             AnchorPane ventanaDos = (AnchorPane) loader.load();
             Stage ventana = new Stage();
-            ventana.setTitle("Venta Dos");
+            ventana.setTitle("Nuevo Taxi");
             ventana.initOwner(stagePrincipal);
             Scene scene = new Scene(ventanaDos);
             ventana.setScene(scene);
@@ -72,6 +73,23 @@ public class Main extends Application {
             Scene scene = new Scene(ventanaDos);
             ventana.setScene(scene);
             IngresoPropietarioController controller = loader.getController();
+            controller.setStagePrincipal(ventana);
+            ventana.show();
+
+        } catch (Exception e) {
+        }
+    }
+    
+    public void mostrarIngresoTaller() {
+        try {
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("IngresoTaller.fxml"));
+            AnchorPane ventanaDos = (AnchorPane) loader.load();
+            Stage ventana = new Stage();
+            ventana.setTitle("Nuevo Taller");
+            ventana.initOwner(stagePrincipal);
+            Scene scene = new Scene(ventanaDos);
+            ventana.setScene(scene);
+            IngresoTallerController controller = loader.getController();
             controller.setStagePrincipal(ventana);
             ventana.show();
 

@@ -5,7 +5,6 @@
  */
 package co.edu.udea.edatos.laboratorio1.modelo.dao.impl;
 
-import co.edu.udea.edatos.laboratorio1.dao.exceptions.LlaveDuplicadaException;
 import co.edu.udea.edatos.laboratorio1.modelo.Taxi;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.TaxiDAO;
 import java.io.IOException;
@@ -86,9 +85,10 @@ public class FileTaxiDAO implements TaxiDAO {
     }
 
     @Override
-    public void guardarTaxi(Taxi taxi) throws LlaveDuplicadaException {
+    public boolean guardarTaxi(Taxi taxi) {//throws LlaveDuplicadaException {
         if (consultarTaxi(taxi.getPlaca()) != null) {
-            throw new LlaveDuplicadaException();
+            //throw new LlaveDuplicadaException();
+            return false;
         }
         String registro = parseTaxiString(taxi);
         byte[] datos = registro.getBytes();
@@ -98,6 +98,7 @@ public class FileTaxiDAO implements TaxiDAO {
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
+        return true;
     }
 
     private String parseTaxiString(Taxi taxi) {

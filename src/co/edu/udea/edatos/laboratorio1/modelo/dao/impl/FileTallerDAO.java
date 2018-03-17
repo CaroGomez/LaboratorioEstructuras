@@ -5,7 +5,6 @@
  */
 package co.edu.udea.edatos.laboratorio1.modelo.dao.impl;
 
-import co.edu.udea.edatos.laboratorio1.dao.exceptions.LlaveDuplicadaException;
 import co.edu.udea.edatos.laboratorio1.modelo.Taller;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.TallerDAO;
 import java.io.IOException;
@@ -27,14 +26,14 @@ import java.util.Map;
  *
  * @author Carolina
  */
-public class FileTallerDAO implements TallerDAO{
-    
-    private static final String NOMBRE_ARCHIVO="Taller.txt";
-    private static final int LONGITUD_REGISTRO=60;
-    private static final int CODIGO_LONGITUD=10;
-    private static final int NOMBRE_LONGITUD=20;
-    private static final int TELEFONO_LONGITUD=10;
-    private static final int DIRECCION_LONGITUD=20;
+public class FileTallerDAO implements TallerDAO {
+
+    private static final String NOMBRE_ARCHIVO = "Taller.txt";
+    private static final int LONGITUD_REGISTRO = 60;
+    private static final int CODIGO_LONGITUD = 10;
+    private static final int NOMBRE_LONGITUD = 20;
+    private static final int TELEFONO_LONGITUD = 10;
+    private static final int DIRECCION_LONGITUD = 20;
 
     private static final Path archivo = Paths.get(NOMBRE_ARCHIVO);
     public static final String ENCODING_WINDOWS = "Cp1252";
@@ -85,37 +84,41 @@ public class FileTallerDAO implements TallerDAO{
     }
 
     @Override
-    public void guardarTaller(Taller taller) throws LlaveDuplicadaException {
-        if(consultarTaller(taller.getCodigo())!=null){
-            throw new LlaveDuplicadaException();
+    public boolean guardarTaller(Taller taller) {//throws LlaveDuplicadaException {
+        if (consultarTaller(taller.getCodigo()) != null) {
+           // throw new LlaveDuplicadaException();
+           return false;
+
         }
-        String registro= parseTallerString(taller);
+        String registro = parseTallerString(taller);
         byte[] datos = registro.getBytes();
-        ByteBuffer buffer=ByteBuffer.wrap(datos);
-        try(FileChannel fc=(FileChannel.open(archivo, APPEND))){
+        ByteBuffer buffer = ByteBuffer.wrap(datos);
+        try (FileChannel fc = (FileChannel.open(archivo, APPEND))) {
             fc.write(buffer);
-        }catch (IOException ioe){
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
+        return true;
+
     }
-    
+
     private String parseTallerString(Taller taller) {
         StringBuilder registro = new StringBuilder();
         registro.append(rellenarCampo(taller.getCodigo(), CODIGO_LONGITUD));
         registro.append(rellenarCampo(taller.getNombre(), NOMBRE_LONGITUD));
         registro.append(rellenarCampo(taller.getTelefono(), TELEFONO_LONGITUD));
         registro.append(rellenarCampo(taller.getDireccion(), DIRECCION_LONGITUD));
-       
+
         return registro.toString();
     }
-    
+
     private String rellenarCampo(String campo, int tamanio) {
         if (campo.length() > tamanio) {
             return campo.substring(0, tamanio);
         }
         return String.format("%1$-" + tamanio + "s", campo);
     }
-    
+
     /**
      * Convierte un registro almacenado en un CharBuffer a un Objeto de Persona
      *
@@ -138,7 +141,7 @@ public class FileTallerDAO implements TallerDAO{
         registro.position(TELEFONO_LONGITUD);
         registro = registro.slice();
         t.setTelefono(telefono);
-        
+
         String direccion = registro.subSequence(0, DIRECCION_LONGITUD).toString().trim();
         registro.position(DIRECCION_LONGITUD);
         registro = registro.slice();
@@ -146,5 +149,5 @@ public class FileTallerDAO implements TallerDAO{
 
         return t;
     }
-    
+
 }

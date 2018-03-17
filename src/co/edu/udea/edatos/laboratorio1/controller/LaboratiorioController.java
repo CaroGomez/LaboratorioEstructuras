@@ -3,11 +3,8 @@
  */
 package co.edu.udea.edatos.laboratorio1.controller;
 
-import co.edu.udea.edatos.laboratorio1.modelo.Conductor;
 import co.edu.udea.edatos.laboratorio1.modelo.Propietario;
-import co.edu.udea.edatos.laboratorio1.modelo.dao.ConductorDAO;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.PropietarioDAO;
-import co.edu.udea.edatos.laboratorio1.modelo.dao.impl.FileConductorDAO;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.impl.FilePropietarioDAO;
 import co.edu.udea.edatos.laboratorio1.vista.Main;
 import java.net.URL;
@@ -78,7 +75,7 @@ public class LaboratiorioController {
             }
         } else {
             
-            ProgramaPrincipal.mostrarVentanaSecundaria();
+            ProgramaPrincipal.mostrarIngresoTaxi();
             
         }
     }
@@ -91,7 +88,7 @@ public class LaboratiorioController {
 
     @FXML
     void doIngresarTaller(ActionEvent event) {
-
+        ProgramaPrincipal.mostrarIngresoTaller();
     }
 
     @FXML

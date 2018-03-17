@@ -73,7 +73,7 @@ public class IngresoPropietarioController {
             genero = chsBox.getValue().toString().charAt(0);
         }
 
-        if ((id.equals(""))|| (nombre.equals(""))|| (apellido.equals("")) || (edad.equals(""))|| (telefono.equals(""))|| (genero == ' ') ) {
+        if ((id.equals("")) || (nombre.equals("")) || (apellido.equals("")) || (edad.equals("")) || (telefono.equals("")) || (genero == ' ')) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Error");
             alert.setHeaderText(null);
@@ -84,9 +84,18 @@ public class IngresoPropietarioController {
 
             propietario = new Propietario(id, nombre, apellido, genero, edad, telefono);
 
-            propietarioDAO.guardarPropietario(propietario);
+            if (propietarioDAO.guardarPropietario(propietario)) {
+                stagePrincipal.close();
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("El Id que intenta ingresar ya existe");
 
-            stagePrincipal.close();
+                alert.showAndWait();
+
+            }
         }
 
     }

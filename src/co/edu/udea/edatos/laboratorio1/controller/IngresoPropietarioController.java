@@ -13,6 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
@@ -67,18 +68,32 @@ public class IngresoPropietarioController {
         String id = txtId.getText();
         String edad = txtEdad.getText();
         String telefono = txtTelefono.getText();
-        char genero = chsBox.getValue().toString().charAt(0);
+        char genero = ' ';
+        if (chsBox.getValue() != null) {
+            genero = chsBox.getValue().toString().charAt(0);
+        }
 
-        propietario = new Propietario(id, nombre, apellido, genero, edad, telefono);
+        if ((id.equals(""))|| (nombre.equals(""))|| (apellido.equals("")) || (edad.equals(""))|| (telefono.equals(""))|| (genero == ' ') ) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("No puede quedar ningun campo el blanco");
 
-        propietarioDAO.guardarPropietario(propietario);
-        
-        stagePrincipal.close();
+            alert.showAndWait();
+        } else {
+
+            propietario = new Propietario(id, nombre, apellido, genero, edad, telefono);
+
+            propietarioDAO.guardarPropietario(propietario);
+
+            stagePrincipal.close();
+        }
 
     }
 
     @FXML
     void DoCancelar(ActionEvent event) {
+        stagePrincipal.close();
 
     }
 

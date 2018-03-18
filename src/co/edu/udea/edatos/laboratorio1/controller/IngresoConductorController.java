@@ -31,13 +31,6 @@ public class IngresoConductorController {
         this.stagePrincipal = stagePrincipal;
     }
     
-<<<<<<< HEAD
-=======
-    /**
-     * Initializes the controller class.
-     */
->>>>>>> 75e5bb63a0496b8cbcddae44a29f882c27be5d08
-    @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
 
     @FXML // URL location of the FXML file that was given to the FXMLLoader

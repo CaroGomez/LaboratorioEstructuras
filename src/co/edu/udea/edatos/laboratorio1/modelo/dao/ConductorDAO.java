@@ -19,6 +19,6 @@ public interface ConductorDAO {
 
     public Conductor consultarConductorxId(String identificacion);
 
-    public void guardarConductor(Conductor conductor) throws LlaveDuplicadaException;
+    public void guardarConductor(Conductor conductor); // throws LlaveDuplicadaException;
 
 }

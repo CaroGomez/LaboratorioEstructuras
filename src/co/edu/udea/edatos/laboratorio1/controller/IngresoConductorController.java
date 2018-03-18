@@ -5,12 +5,20 @@
  */
 package co.edu.udea.edatos.laboratorio1.controller;
 
+import co.edu.udea.edatos.laboratorio1.modelo.Conductor;
+import co.edu.udea.edatos.laboratorio1.modelo.Turno;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.ConductorDAO;
+import co.edu.udea.edatos.laboratorio1.modelo.dao.TurnoDAO;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.impl.FileConductorDAO;
+import co.edu.udea.edatos.laboratorio1.modelo.dao.impl.FileTurnoDAO;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
@@ -23,9 +31,16 @@ import javafx.stage.Stage;
  */
 public class IngresoConductorController {
     
-    private Stage stagePrincipal;
+    Conductor conductor; 
     
     ConductorDAO conductorDAO = new FileConductorDAO();
+    TurnoDAO turnoDAO = new FileTurnoDAO();
+    
+    List<Turno> turnos = turnoDAO.listarTurnos();
+    ObservableList<Turno> taxiList = FXCollections.observableList(turnos);
+    ObservableList<String> generoList = FXCollections.observableArrayList("Masculino", "Femenino");
+    
+    private Stage stagePrincipal; 
 
     public void setStagePrincipal(Stage stagePrincipal) {
         this.stagePrincipal = stagePrincipal;
@@ -65,6 +80,42 @@ public class IngresoConductorController {
 
     @FXML
     void doAgregar(ActionEvent event) {
+
+        String nombre = txtNombre.getText();
+        String apellido = txtApellidos.getText();
+        String id = txtId.getText();
+        String edad = txtEdad.getText();
+        String telefono = txtTel.getText();
+        char genero = ' ';
+        Turno turno = (Turno) choTurno.getValue();
+        
+        if (choGenero.getValue() != null) {
+            genero = choGenero.getValue().toString().charAt(0);
+        }
+
+        if ((id.equals("")) || (nombre.equals("")) || (apellido.equals("")) || (edad.equals("")) || (telefono.equals("")) || (genero == ' ') || (turno==null)) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("No puede quedar ningun campo el blanco");
+
+            alert.showAndWait();
+        } else {
+
+            conductor = new Conductor(id, nombre, apellido, genero, edad, telefono, turno.getCodigo());
+            if(conductorDAO.guardarConductor(conductor)){
+                stagePrincipal.close();
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("El Id que intenta ingresar ya existe");
+
+                alert.showAndWait();
+
+            }
+        }
 
     }
 

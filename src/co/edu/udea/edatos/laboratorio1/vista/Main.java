@@ -5,6 +5,7 @@
  */
 package co.edu.udea.edatos.laboratorio1.vista;
 
+import co.edu.udea.edatos.laboratorio1.controller.IngresoConductorController;
 import co.edu.udea.edatos.laboratorio1.controller.IngresoTaxiController;
 import co.edu.udea.edatos.laboratorio1.controller.IngresoPropietarioController;
 import co.edu.udea.edatos.laboratorio1.controller.IngresoTallerController;
@@ -108,6 +109,22 @@ public class Main extends Application {
             Scene scene = new Scene(ventanaDos);
             ventana.setScene(scene);
             IngresoTurnoController controller = loader.getController();
+            controller.setStagePrincipal(ventana);
+            ventana.show();
+
+        } catch (Exception e) {
+    }
+}
+    public void mostrarIngresoConductor() {
+        try {
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("IngresoConductor.fxml"));
+            AnchorPane ventanaDos = (AnchorPane) loader.load();
+            Stage ventana = new Stage();
+            ventana.setTitle("Nuevo Conductor");
+            ventana.initOwner(stagePrincipal);
+            Scene scene = new Scene(ventanaDos);
+            ventana.setScene(scene);
+            IngresoConductorController controller = loader.getController();
             controller.setStagePrincipal(ventana);
             ventana.show();
 

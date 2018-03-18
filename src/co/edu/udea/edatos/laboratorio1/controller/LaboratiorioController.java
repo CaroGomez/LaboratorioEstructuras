@@ -123,6 +123,7 @@ public class LaboratiorioController {
     @FXML
     void doIngresarCond(ActionEvent event) {
         
+        ProgramaPrincipal.mostrarIngresoConductor();
     }
 
     public void setProgramaPrincipal(Main ProgramaPrincipal) {

@@ -31,10 +31,7 @@ public class IngresoConductorController {
         this.stagePrincipal = stagePrincipal;
     }
     
-    /**
-     * Initializes the controller class.
-     */
-      @FXML // ResourceBundle that was given to the FXMLLoader
+    @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
 
     @FXML // URL location of the FXML file that was given to the FXMLLoader
@@ -74,7 +71,7 @@ public class IngresoConductorController {
 
     @FXML
     void doCancelar(ActionEvent event) {
-
+        stagePrincipal.close();
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete

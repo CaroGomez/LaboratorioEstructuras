@@ -28,7 +28,7 @@ public class IngresoTaxiController {
 
     private Stage stagePrincipal;
     private LaboratiorioController controllerLab;
-
+    
     public void setStagePrincipal(Stage stagePrincipal) {
         this.stagePrincipal = stagePrincipal;
     }
@@ -117,6 +117,6 @@ public class IngresoTaxiController {
         assert txtModelo != null : "fx:id=\"txtModelo\" was not injected: check your FXML file 'IngresoTaxi.fxml'.";
         assert btnIngresar != null : "fx:id=\"btnIngresar\" was not injected: check your FXML file 'IngresoTaxi.fxml'.";
         assert btnCancelar != null : "fx:id=\"btnCancelar\" was not injected: check your FXML file 'IngresoTaxi.fxml'.";
-
+       
     }
 }

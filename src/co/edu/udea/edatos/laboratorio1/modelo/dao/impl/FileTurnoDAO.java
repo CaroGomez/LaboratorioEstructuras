@@ -28,7 +28,7 @@ import java.util.Map;
  */
 public class FileTurnoDAO implements TurnoDAO {
     
-    private static final String NOMBRE_ARCHIVO = "Conductor.txt";
+    private static final String NOMBRE_ARCHIVO = "Turno.txt";
     private static final int LONGITUD_REGISTRO = 25;
     private static final int CODIGO_LONGITUD = 6;
     private static final int HORARIO_LONGITUD = 10;

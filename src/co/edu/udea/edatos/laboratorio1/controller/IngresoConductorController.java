@@ -37,7 +37,7 @@ public class IngresoConductorController {
     TurnoDAO turnoDAO = new FileTurnoDAO();
     
     List<Turno> turnos = turnoDAO.listarTurnos();
-    ObservableList<Turno> taxiList = FXCollections.observableList(turnos);
+    ObservableList<Turno> turnoList = FXCollections.observableList(turnos);
     ObservableList<String> generoList = FXCollections.observableArrayList("Masculino", "Femenino");
     
     private Stage stagePrincipal; 
@@ -55,13 +55,13 @@ public class IngresoConductorController {
     private TextField txtNombre; // Value injected by FXMLLoader
 
     @FXML // fx:id="txtApellidos"
-    private TextField txtApellidos; // Value injected by FXMLLoader
+    private TextField txtApellido; // Value injected by FXMLLoader
 
     @FXML // fx:id="txtId"
     private TextField txtId; // Value injected by FXMLLoader
 
     @FXML // fx:id="choGenero"
-    private ChoiceBox<?> choGenero; // Value injected by FXMLLoader
+    private ChoiceBox choGenero; // Value injected by FXMLLoader
 
     @FXML // fx:id="txtEdad"
     private TextField txtEdad; // Value injected by FXMLLoader
@@ -70,7 +70,7 @@ public class IngresoConductorController {
     private TextField txtTel; // Value injected by FXMLLoader
 
     @FXML // fx:id="choTurno"
-    private ChoiceBox<?> choTurno; // Value injected by FXMLLoader
+    private ChoiceBox<Turno> choTurno; // Value injected by FXMLLoader
 
     @FXML // fx:id="btnAgregar"
     private Button btnAgregar; // Value injected by FXMLLoader
@@ -82,12 +82,12 @@ public class IngresoConductorController {
     void doAgregar(ActionEvent event) {
 
         String nombre = txtNombre.getText();
-        String apellido = txtApellidos.getText();
+        String apellido = txtApellido.getText();
         String id = txtId.getText();
         String edad = txtEdad.getText();
         String telefono = txtTel.getText();
         char genero = ' ';
-        Turno turno = (Turno) choTurno.getValue();
+        Turno turno = choTurno.getValue();
         
         if (choGenero.getValue() != null) {
             genero = choGenero.getValue().toString().charAt(0);
@@ -126,8 +126,11 @@ public class IngresoConductorController {
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
+        choGenero.setItems(generoList);
+        choTurno.setItems(turnoList);
+        
         assert txtNombre != null : "fx:id=\"txtNombre\" was not injected: check your FXML file 'IngresoConductor.fxml'.";
-        assert txtApellidos != null : "fx:id=\"txtApellidos\" was not injected: check your FXML file 'IngresoConductor.fxml'.";
+        assert txtApellido != null : "fx:id=\"txtApellidos\" was not injected: check your FXML file 'IngresoConductor.fxml'.";
         assert txtId != null : "fx:id=\"txtId\" was not injected: check your FXML file 'IngresoConductor.fxml'.";
         assert choGenero != null : "fx:id=\"choGenero\" was not injected: check your FXML file 'IngresoConductor.fxml'.";
         assert txtEdad != null : "fx:id=\"txtEdad\" was not injected: check your FXML file 'IngresoConductor.fxml'.";

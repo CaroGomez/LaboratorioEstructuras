@@ -80,9 +80,10 @@ public class FileConductorDAO implements ConductorDAO {
     }
 
     @Override
-    public void guardarConductor(Conductor conductor){// throws LlaveDuplicadaException {
+    public boolean guardarConductor(Conductor conductor){// throws LlaveDuplicadaException {
         if (consultarConductorxId(conductor.getId()) != null) {
             //throw new LlaveDuplicadaException();
+            return false;
         }
         String registro = parseConductorString(conductor);
         byte[] datos = registro.getBytes();
@@ -92,6 +93,7 @@ public class FileConductorDAO implements ConductorDAO {
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
+        return true;
     }
     
     private String parseConductorString(Conductor conductor) {

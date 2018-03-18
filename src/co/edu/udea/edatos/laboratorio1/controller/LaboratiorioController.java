@@ -74,7 +74,7 @@ public class LaboratiorioController {
 
                 ProgramaPrincipal.mostrarIngresoPropietario();
 
-            } 
+            }
         } else {
 
             ProgramaPrincipal.mostrarIngresoTaxi();
@@ -112,7 +112,7 @@ public class LaboratiorioController {
 
                 ProgramaPrincipal.mostrarIngresoTaxi();
 
-            } 
+            }
         } else {
 
             ProgramaPrincipal.mostrarIngresoTurno();
@@ -122,7 +122,7 @@ public class LaboratiorioController {
 
     @FXML
     void doIngresarCond(ActionEvent event) {
-        
+
         ProgramaPrincipal.mostrarIngresoConductor();
     }
 

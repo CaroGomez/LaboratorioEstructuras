@@ -44,8 +44,8 @@ public class Main extends Application {
             controller.setProgramaPrincipal(this);
             stagePrincipal.show();
         } catch (IOException e) {
-        }
     }
+}
 
     public void mostrarIngresoTaxi() {
         try {
@@ -56,13 +56,13 @@ public class Main extends Application {
             ventana.initOwner(stagePrincipal);
             Scene scene = new Scene(ventanaDos);
             ventana.setScene(scene);
-        IngresoTaxiController controller = loader.getController();
+            IngresoTaxiController controller = loader.getController();
             controller.setStagePrincipal(ventana);
             ventana.show();
 
         } catch (Exception e) {
-        }
     }
+}
     
     public void mostrarIngresoPropietario() {
         try {
@@ -78,8 +78,8 @@ public class Main extends Application {
             ventana.show();
 
         } catch (Exception e) {
-        }
     }
+}
     
     public void mostrarIngresoTaller() {
         try {
@@ -95,8 +95,8 @@ public class Main extends Application {
             ventana.show();
 
         } catch (Exception e) {
-        }
     }
+}
     
     public void mostrarIngresoTurno() {
         try {
@@ -112,8 +112,8 @@ public class Main extends Application {
             ventana.show();
 
         } catch (Exception e) {
-        }
     }
+}
 
     public static void main(String[] args) {
         launch(args);

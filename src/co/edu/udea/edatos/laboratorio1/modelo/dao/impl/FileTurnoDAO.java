@@ -5,7 +5,6 @@
  */
 package co.edu.udea.edatos.laboratorio1.modelo.dao.impl;
 
-import co.edu.udea.edatos.laboratorio1.dao.exceptions.LlaveDuplicadaException;
 import co.edu.udea.edatos.laboratorio1.modelo.Turno;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.TurnoDAO;
 import java.io.IOException;

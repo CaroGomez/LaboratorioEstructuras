@@ -122,7 +122,7 @@ public class LaboratiorioController {
 
     @FXML
     void doIngresarCond(ActionEvent event) {
-
+        
     }
 
     public void setProgramaPrincipal(Main ProgramaPrincipal) {

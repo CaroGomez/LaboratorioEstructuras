@@ -38,7 +38,7 @@ public class IngresoTaxiController {
 
     List<Propietario> propietarios = propietarioDAO.listarPropietarios();
     ObservableList<Propietario> generoList = FXCollections.observableList(propietarios);
-
+    
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
 

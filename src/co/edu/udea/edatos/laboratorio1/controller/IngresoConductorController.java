@@ -24,7 +24,7 @@ import javafx.stage.Stage;
 public class IngresoConductorController {
     
     private Stage stagePrincipal;
-    private LaboratiorioController controllerLab;
+    
     ConductorDAO conductorDAO = new FileConductorDAO();
 
     public void setStagePrincipal(Stage stagePrincipal) {
@@ -34,7 +34,7 @@ public class IngresoConductorController {
     /**
      * Initializes the controller class.
      */
-      @FXML // ResourceBundle that was given to the FXMLLoader
+    @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
 
     @FXML // URL location of the FXML file that was given to the FXMLLoader

@@ -12,12 +12,12 @@
       <TextField fx:id="txtPlaca" layoutX="116.0" layoutY="78.0" />
       <Label layoutX="41.0" layoutY="121.0" text="Número Taxi" />
       <TextField fx:id="txtNumTaxi" layoutX="116.0" layoutY="115.0" />
-      <Label layoutX="41.0" layoutY="267.0" text="Propietario" />
-      <ChoiceBox fx:id="listView" layoutX="116.0" layoutY="263.0" prefWidth="150.0" />
       <Label layoutX="41.0" layoutY="169.0" text="Marca" />
       <TextField fx:id="txtMarca" layoutX="116.0" layoutY="163.0" />
       <Label layoutX="41.0" layoutY="221.0" text="Modelo" />
       <TextField fx:id="txtModelo" layoutX="116.0" layoutY="215.0" />
+      <Label layoutX="41.0" layoutY="267.0" text="Propietario" />
+      <ChoiceBox fx:id="listView" layoutX="116.0" layoutY="263.0" prefWidth="150.0" />
       <Button fx:id="btnIngresar" layoutX="382.0" layoutY="318.0" mnemonicParsing="false" onAction="#doIngresar" text="Ingresar" />
       <Button fx:id="btnCancelar" layoutX="468.0" layoutY="318.0" mnemonicParsing="false" onAction="#DoCancelar" text="Cancelar" />
    </children>

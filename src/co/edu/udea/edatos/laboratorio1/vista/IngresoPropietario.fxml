@@ -6,21 +6,21 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="471.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.udea.edatos.laboratorio1.controller.IngresoPropietarioController">
+<AnchorPane id="AnchorPane" prefHeight="471.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.udea.edatos.laboratorio1.controller.IngresoPropietarioController">
    <children>
-      <Label layoutX="32.0" layoutY="171.0" text="Nombre:" />
-      <TextField fx:id="txtApellido" layoutX="134.0" layoutY="209.0" />
-      <Label layoutX="32.0" layoutY="213.0" text="Apellido:" />
-      <TextField fx:id="txtNombre" layoutX="134.0" layoutY="167.0" />
       <Label layoutX="216.0" layoutY="6.0" text="Ingrese los datos del propietario" />
       <Label layoutX="32.0" layoutY="130.0" text="Identificación:" />
       <TextField fx:id="txtId" layoutX="134.0" layoutY="126.0" />
+      <Label layoutX="32.0" layoutY="171.0" text="Nombre:" />
+      <TextField fx:id="txtNombre" layoutX="134.0" layoutY="167.0" />
+      <Label layoutX="32.0" layoutY="213.0" text="Apellido:" />
+      <TextField fx:id="txtApellido" layoutX="134.0" layoutY="209.0" />
       <Label layoutX="32.0" layoutY="263.0" text="Género:" />
       <ChoiceBox fx:id="chsBox" layoutX="134.0" layoutY="259.0" prefWidth="150.0" />
-      <TextField fx:id="txtEdad" layoutX="134.0" layoutY="309.0" />
       <Label layoutX="32.0" layoutY="313.0" text="Edad:" />
-      <TextField fx:id="txtTelefono" layoutX="142.0" layoutY="373.0" />
+      <TextField fx:id="txtEdad" layoutX="134.0" layoutY="309.0" />
       <Label layoutX="32.0" layoutY="377.0" text="Teléfono:" />
+      <TextField fx:id="txtTelefono" layoutX="134.0" layoutY="373.0" />
       <Button fx:id="btnAgregar" layoutX="342.0" layoutY="415.0" mnemonicParsing="false" onAction="#DoAgregar" text="Agregar" />
       <Button fx:id="btnCancealr" layoutX="423.0" layoutY="415.0" mnemonicParsing="false" onAction="#DoCancelar" text="Cancelar" />
    </children>

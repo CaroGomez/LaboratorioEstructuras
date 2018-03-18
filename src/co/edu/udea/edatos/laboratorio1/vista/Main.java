@@ -11,6 +11,7 @@ import co.edu.udea.edatos.laboratorio1.controller.IngresoPropietarioController;
 import co.edu.udea.edatos.laboratorio1.controller.IngresoTallerController;
 import co.edu.udea.edatos.laboratorio1.controller.IngresoTurnoController;
 import co.edu.udea.edatos.laboratorio1.controller.LaboratiorioController;
+import co.edu.udea.edatos.laboratorio1.controller.ReportesController;
 import java.io.IOException;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -125,6 +126,23 @@ public class Main extends Application {
             Scene scene = new Scene(ventanaDos);
             ventana.setScene(scene);
             IngresoConductorController controller = loader.getController();
+            controller.setStagePrincipal(ventana);
+            ventana.show();
+
+        } catch (Exception e) {
+    }
+}
+    
+    public void mostrarReportes() {
+        try {
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("Reportes.fxml"));
+            AnchorPane ventanaDos = (AnchorPane) loader.load();
+            Stage ventana = new Stage();
+            ventana.setTitle("Nuevo Conductor");
+            ventana.initOwner(stagePrincipal);
+            Scene scene = new Scene(ventanaDos);
+            ventana.setScene(scene);
+            ReportesController controller = loader.getController();
             controller.setStagePrincipal(ventana);
             ventana.show();
 

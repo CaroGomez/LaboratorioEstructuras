@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1" fx:controller="co.edu.udea.edatos.laboratorio1.vista.TabPropietariosController">
+   <children>
+      <TableView fx:id="table" layoutX="6.0" layoutY="7.0" prefHeight="392.0" prefWidth="594.0">
+        <columns>
+          <TableColumn fx:id="columNom" prefWidth="75.0" text="Nombres" />
+          <TableColumn fx:id="columApe" prefWidth="75.0" text="Apellidos" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

@@ -102,7 +102,7 @@ public class FileConductorDAO implements ConductorDAO {
         registro.append(rellenarCampo(Character.toString(conductor.getGenero()), GENERO_LONGITUD));
         registro.append(rellenarCampo(conductor.getEdad(), EDAD_LONGITUD));
         registro.append(rellenarCampo(conductor.getTelefono(), TELEFONO_LONGITUD));
-        registro.append(conductor.getCodTurno());
+        registro.append(rellenarCampo(conductor.getCodTurno(), CODTURNO_LONGITUD));
        
         return registro.toString();
     }

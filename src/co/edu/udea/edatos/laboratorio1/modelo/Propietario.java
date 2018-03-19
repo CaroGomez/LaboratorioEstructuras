@@ -33,7 +33,6 @@ public class Propietario {
         this.genero = genero;
         this.edad = edad;
         this.telefono = telefono;
-
     }
 
     public String getId() {

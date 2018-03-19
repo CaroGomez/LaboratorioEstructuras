@@ -107,7 +107,7 @@ public class FileTurnoDAO implements TurnoDAO {
         registro.append(rellenarCampo(turno.getCodigo(), CODIGO_LONGITUD));
         registro.append(rellenarCampo(turno.getHorario(), HORARIO_LONGITUD));
         registro.append(rellenarCampo(turno.getHoras(), HORAS_LONGITUD));
-        registro.append(turno.getPlacaTaxi());
+        registro.append(rellenarCampo(turno.getPlacaTaxi(), PLACATAXI_LONGITUD));
        
         return registro.toString();
     }

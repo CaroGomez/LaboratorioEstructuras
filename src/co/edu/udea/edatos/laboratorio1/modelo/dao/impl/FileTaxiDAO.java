@@ -70,7 +70,7 @@ public class FileTaxiDAO implements TaxiDAO {
             while (sbc.read(buf) > 0) {
                 buf.rewind();
                 CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
-                String id = registro.subSequence(0, PLACA_LONGITUD).toString().trim();
+                String id = registro.subSequence(6, (6+NUMERO_LONGITUD)).toString().trim();
                 if (id.equals(numero_Taxi)) {
                     taxi = parseTaxi(registro);
                     CACHE_TAXI.put(numero_Taxi, taxi);
@@ -83,10 +83,39 @@ public class FileTaxiDAO implements TaxiDAO {
         }
         return null;
     }
+    
+    @Override
+    public Taxi consultarTaxixPlaca(String placa_taxi) {
+        Taxi taxi = CACHE_TAXI.get(placa_taxi);
+        if (taxi != null) {
+            return taxi;
+        }
+        try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
+            ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
+            while (sbc.read(buf) > 0) {
+                buf.rewind();
+                CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
+                String id = registro.subSequence(0, PLACA_LONGITUD).toString().trim();
+                if (id.equals(placa_taxi)) {
+                    taxi = parseTaxi(registro);
+                    CACHE_TAXI.put(placa_taxi, taxi);
+                    return taxi;
+                }
+                buf.flip();
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return null;
+    }
 
     @Override
     public boolean guardarTaxi(Taxi taxi) {//throws LlaveDuplicadaException {
-        if (consultarTaxi(taxi.getPlaca()) != null) {
+        if (consultarTaxixPlaca(taxi.getPlaca()) != null) {
+            //throw new LlaveDuplicadaException();
+            return false;
+        }
+        if (consultarTaxi(taxi.getNumero_taxi()) != null) {
             //throw new LlaveDuplicadaException();
             return false;
         }

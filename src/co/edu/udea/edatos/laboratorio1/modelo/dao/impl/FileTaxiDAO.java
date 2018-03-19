@@ -107,7 +107,7 @@ public class FileTaxiDAO implements TaxiDAO {
         registro.append(rellenarCampo(taxi.getNumero_taxi(), NUMERO_LONGITUD));
         registro.append(rellenarCampo(taxi.getMarca(), MARCA_LONGITUD));
         registro.append(rellenarCampo(taxi.getModelo(), MODELO_LONGITUD));
-        registro.append(taxi.getIdPropietario());
+        registro.append(rellenarCampo(taxi.getIdPropietario(), IDPROPIETARIO_LONGITUD));
 
         return registro.toString();
     }

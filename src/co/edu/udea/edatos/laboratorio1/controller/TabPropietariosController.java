@@ -40,6 +40,15 @@ public class TabPropietariosController {
 
     @FXML // fx:id="columId"
     private TableColumn<Propietario, String> columId; // Value injected by FXMLLoader
+    
+     @FXML // fx:id="columGen"
+    private TableColumn<Propietario, String> columGen; // Value injected by FXMLLoader
+
+    @FXML // fx:id="columEdad"
+    private TableColumn<Propietario, String> columEdad; // Value injected by FXMLLoader
+
+    @FXML // fx:id="columTel"
+    private TableColumn<Propietario, String> columTel; // Value injected by FXMLLoader
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
@@ -47,10 +56,15 @@ public class TabPropietariosController {
         columNom.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombres()));
         columApe.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getApellidos()));
         columId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
+        columEdad.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEdad()));
+        columTel.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTelefono()));
+        columGen.setCellValueFactory(cellData -> new SimpleStringProperty(Character.toString(cellData.getValue().getGenero())));
         assert table != null : "fx:id=\"table\" was not injected: check your FXML file 'tabPropietarios.fxml'.";
         assert columNom != null : "fx:id=\"columNom\" was not injected: check your FXML file 'tabPropietarios.fxml'.";
         assert columApe != null : "fx:id=\"columApe\" was not injected: check your FXML file 'tabPropietarios.fxml'.";
         assert columId != null : "fx:id=\"columId\" was not injected: check your FXML file 'tabPropietarios.fxml'.";
-
+        assert columGen != null : "fx:id=\"columGen\" was not injected: check your FXML file 'tabPropietarios.fxml'.";
+        assert columEdad != null : "fx:id=\"columEdad\" was not injected: check your FXML file 'tabPropietarios.fxml'.";
+        assert columTel != null : "fx:id=\"columTel\" was not injected: check your FXML file 'tabPropietarios.fxml'.";
     }
 }

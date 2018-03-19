@@ -84,7 +84,7 @@ public class Taxi {
 
     @Override
     public String toString() {
-        return "Taxi{" + "Placa=" + Placa + ", numero_taxi=" + numero_taxi + ", Marca=" + Marca + ", Modelo=" + Modelo + ", idPropietario=" + idPropietario + ", taxis=" + taxis + '}';
+        return Placa + " " + numero_taxi + " " + Marca + " " + Modelo + " " + idPropietario;
     }
 
       

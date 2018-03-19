@@ -104,7 +104,7 @@ public class Conductor {
 
     @Override
     public String toString() {
-        return "Conductor{" + "id=" + id + ", nombres=" + nombres + ", apellidos=" + apellidos + ", genero=" + genero + ", edad=" + edad + ", telefono=" + telefono + ", codTurno=" + codTurno + '}';
+        return id + " " + nombres + " " + apellidos + " " + genero + " " + edad + " " + telefono + " " + codTurno;
     }
 
     

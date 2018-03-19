@@ -76,7 +76,7 @@ private List<Taller> talleres;
 
     @Override
     public String toString() {
-        return "Taller{" + "codigo=" + codigo + ", nombre=" + nombre + ", telefono=" + telefono + ", direccion=" + direccion + ", talleres=" + talleres + '}';
+        return codigo + " " + nombre + " " + telefono + " " + direccion ;
     }
     
     

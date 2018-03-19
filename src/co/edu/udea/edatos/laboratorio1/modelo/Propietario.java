@@ -92,14 +92,11 @@ public class Propietario {
         this.propietarios = propietarios;
     }
 
-   // @Override
-    /*public String toString() {
-        return "Propietario{" + "Id=" + Id + ", nombres=" + nombres + ", apellidos=" + apellidos + ", genero=" + genero + ", edad=" + edad + ", telefono=" + telefono + '}';
+   @Override
+    public String toString() {
+        return Id + " " + nombres + " " + apellidos + " " + genero + " " + edad + " " + telefono;
     }
-*/
-    @Override
-    public String toString(){
-        return nombres + " " + apellidos + " " + Id ;
-    }
+
+   
 
 }

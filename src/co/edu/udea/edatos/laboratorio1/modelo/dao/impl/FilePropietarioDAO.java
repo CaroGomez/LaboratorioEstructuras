@@ -81,9 +81,8 @@ public class FilePropietarioDAO implements PropietarioDAO {
     }
 
     @Override
-    public boolean guardarPropietario(Propietario propietario) {//throws LlaveDuplicadaException {
+    public boolean guardarPropietario(Propietario propietario) {
         if(consultarPropietario(propietario.getId())!=null){
-            //throw new LlaveDuplicadaException();
             return false;
         }
         String registro= parsePropietarioString(propietario);

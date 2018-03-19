@@ -79,9 +79,8 @@ public class FileConductorDAO implements ConductorDAO {
     }
 
     @Override
-    public boolean guardarConductor(Conductor conductor){// throws LlaveDuplicadaException {
+    public boolean guardarConductor(Conductor conductor){
         if (consultarConductorxId(conductor.getId()) != null) {
-            //throw new LlaveDuplicadaException();
             return false;
         }
         String registro = parseConductorString(conductor);

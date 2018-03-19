@@ -3,7 +3,6 @@
  */
 package co.edu.udea.edatos.laboratorio1.controller;
 
-import co.edu.udea.edatos.laboratorio1.dao.exceptions.LlaveDuplicadaException;
 import co.edu.udea.edatos.laboratorio1.modelo.Propietario;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.PropietarioDAO;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.impl.FilePropietarioDAO;
@@ -62,7 +61,7 @@ public class IngresoPropietarioController {
     private Button btnCancealr; // Value injected by FXMLLoader
 
     @FXML
-    void DoAgregar(ActionEvent event) throws LlaveDuplicadaException {
+    void DoAgregar(ActionEvent event){
         String nombre = txtNombre.getText();
         String apellido = txtApellido.getText();
         String id = txtId.getText();

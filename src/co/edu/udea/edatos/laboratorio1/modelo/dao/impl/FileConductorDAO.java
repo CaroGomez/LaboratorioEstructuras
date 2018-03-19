@@ -1,7 +1,6 @@
 package co.edu.udea.edatos.laboratorio1.modelo.dao.impl;
 
 import co.edu.udea.edatos.laboratorio1.modelo.dao.ConductorDAO;
-import co.edu.udea.edatos.laboratorio1.dao.exceptions.LlaveDuplicadaException;
 import co.edu.udea.edatos.laboratorio1.modelo.Conductor;
 import java.io.IOException;
 import java.nio.ByteBuffer;

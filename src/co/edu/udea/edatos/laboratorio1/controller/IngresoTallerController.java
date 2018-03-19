@@ -3,7 +3,6 @@
  */
 package co.edu.udea.edatos.laboratorio1.controller;
 
-import co.edu.udea.edatos.laboratorio1.dao.exceptions.LlaveDuplicadaException;
 import co.edu.udea.edatos.laboratorio1.modelo.Taller;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.TallerDAO;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.impl.FileTallerDAO;
@@ -49,7 +48,7 @@ public class IngresoTallerController {
     }
 
     @FXML
-    void DoIngresar(ActionEvent event) throws LlaveDuplicadaException {
+    void DoIngresar(ActionEvent event){
         String codigo = txtCod.getText();
         String nombre = txtNombre.getText();
         String direccion = txtDir.getText();

@@ -5,7 +5,6 @@
  */
 package co.edu.udea.edatos.laboratorio1.modelo.dao;
 
-import co.edu.udea.edatos.laboratorio1.dao.exceptions.LlaveDuplicadaException;
 import co.edu.udea.edatos.laboratorio1.modelo.Conductor;
 import java.util.List;
 
@@ -19,6 +18,6 @@ public interface ConductorDAO {
 
     public Conductor consultarConductorxId(String identificacion);
 
-    public boolean guardarConductor(Conductor conductor); // throws LlaveDuplicadaException;
+    public boolean guardarConductor(Conductor conductor); 
 
 }

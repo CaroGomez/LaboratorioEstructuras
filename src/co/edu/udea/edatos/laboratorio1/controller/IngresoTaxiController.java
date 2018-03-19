@@ -3,7 +3,6 @@
  */
 package co.edu.udea.edatos.laboratorio1.controller;
 
-import co.edu.udea.edatos.laboratorio1.dao.exceptions.LlaveDuplicadaException;
 import co.edu.udea.edatos.laboratorio1.modelo.Propietario;
 import co.edu.udea.edatos.laboratorio1.modelo.Taxi;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.PropietarioDAO;
@@ -72,7 +71,7 @@ public class IngresoTaxiController {
     }
 
     @FXML
-    void doIngresar(ActionEvent event) throws LlaveDuplicadaException {
+    void doIngresar(ActionEvent event) {
         String placa = txtPlaca.getText();
         String numTaxi = txtNumTaxi.getText();
         String marca = txtMarca.getText();

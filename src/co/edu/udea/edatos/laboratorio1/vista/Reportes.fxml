@@ -9,8 +9,12 @@
    <children>
       <TabPane layoutX="8.0" layoutY="6.0" prefHeight="400.0" prefWidth="601.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
-          <Tab fx:id="tabPropietario" text="Propietario" />
-          <Tab fx:id="tabCondunctor" text="Conductor" />
+          <Tab closable = "false" text="Propietario" >
+              <content>
+                  <fx:include fx:id= "tabPropietario" source ="tabPropietarios.fxml"/>
+              </content>
+          </Tab>
+          <Tab  closable = "false" text="Conductor" />
         </tabs>
       </TabPane>
    </children>

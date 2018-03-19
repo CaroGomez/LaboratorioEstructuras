@@ -5,19 +5,24 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1" fx:controller="co.edu.udea.edatos.laboratorio1.controller.IngresoTurnoController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.udea.edatos.laboratorio1.controller.IngresoTurnoController">
    <children>
-      <Label layoutX="77.0" layoutY="97.0" text="Código" />
-      <TextField fx:id="txtCod" layoutX="162.0" layoutY="93.0" />
-      <Label layoutX="77.0" layoutY="146.0" text="Horario" />
-      <TextField fx:id="txtHorario" layoutX="162.0" layoutY="142.0" />
-      <Label layoutX="77.0" layoutY="192.0" text="Horas" />
-      <TextField fx:id="txtHoras" layoutX="162.0" layoutY="188.0" />
-      <Label layoutX="77.0" layoutY="255.0" text="Placa Taxi" />
-      <ChoiceBox fx:id="chePlaca" layoutX="162.0" layoutY="251.0" prefWidth="150.0" />
-      <Button fx:id="btnIngresar" layoutX="374.0" layoutY="329.0" mnemonicParsing="false" onAction="#DoIngresar" text="Ingresar" />
-      <Button fx:id="btnCancelar" layoutX="462.0" layoutY="329.0" mnemonicParsing="false" onAction="#DoCancelar" text="Cancelar" />
+      <Label layoutX="173.0" layoutY="106.0" text="Código:" />
+      <TextField fx:id="txtCod" layoutX="300.0" layoutY="102.0" />
+      <Label layoutX="173.0" layoutY="159.0" text="Horario:" />
+      <TextField fx:id="txtHorario" layoutX="300.0" layoutY="155.0" />
+      <Label layoutX="173.0" layoutY="213.0" text="Horas:" />
+      <TextField fx:id="txtHoras" layoutX="300.0" layoutY="209.0" />
+      <Label layoutX="167.0" layoutY="268.0" text="Placa Taxi:" />
+      <ChoiceBox fx:id="chePlaca" layoutX="299.0" layoutY="264.0" prefWidth="150.0" />
+      <Button fx:id="btnIngresar" layoutX="171.0" layoutY="336.0" mnemonicParsing="false" onAction="#DoIngresar" prefHeight="25.0" prefWidth="102.0" text="Ingresar" />
+      <Button fx:id="btnCancelar" layoutX="333.0" layoutY="336.0" mnemonicParsing="false" onAction="#DoCancelar" prefHeight="25.0" prefWidth="102.0" text="Cancelar" />
+      <Label layoutX="173.0" layoutY="39.0" text="Ingrese los datos del turno">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

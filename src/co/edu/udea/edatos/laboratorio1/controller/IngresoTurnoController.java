@@ -3,7 +3,6 @@
  */
 package co.edu.udea.edatos.laboratorio1.controller;
 
-import co.edu.udea.edatos.laboratorio1.modelo.Propietario;
 import co.edu.udea.edatos.laboratorio1.modelo.Taxi;
 import co.edu.udea.edatos.laboratorio1.modelo.Turno;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.TaxiDAO;

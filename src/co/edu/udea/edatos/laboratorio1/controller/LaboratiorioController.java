@@ -7,8 +7,11 @@ import co.edu.udea.edatos.laboratorio1.modelo.Propietario;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.PropietarioDAO;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.TaxiDAO;
 import co.edu.udea.edatos.laboratorio1.modelo.Taxi;
+import co.edu.udea.edatos.laboratorio1.modelo.Turno;
+import co.edu.udea.edatos.laboratorio1.modelo.dao.TurnoDAO;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.impl.FilePropietarioDAO;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.impl.FileTaxiDAO;
+import co.edu.udea.edatos.laboratorio1.modelo.dao.impl.FileTurnoDAO;
 import co.edu.udea.edatos.laboratorio1.vista.Main;
 import java.net.URL;
 import java.util.List;
@@ -28,6 +31,7 @@ public class LaboratiorioController {
     private Main ProgramaPrincipal;
     PropietarioDAO propietarioDAO = new FilePropietarioDAO();
     TaxiDAO taxiDAO = new FileTaxiDAO();
+    TurnoDAO turnoDAO = new FileTurnoDAO();
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -126,8 +130,29 @@ public class LaboratiorioController {
 
     @FXML
     void doIngresarCond(ActionEvent event) {
+        List<Turno> turnos = turnoDAO.listarTurnos();
 
-        ProgramaPrincipal.mostrarIngresoConductor();
+        if (turnos.isEmpty()) {
+            txtResult.appendText("No existen Turnos\n");
+
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("No existen Turnos");
+            alert.setHeaderText("Aún no existen Turnos");
+            alert.setContentText("¿Desea agregar un Turno?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+
+                ProgramaPrincipal.mostrarIngresoTurno();
+
+            }
+        } else {
+
+            ProgramaPrincipal.mostrarIngresoConductor();
+
+        }
+
+        
     }
     
     @FXML

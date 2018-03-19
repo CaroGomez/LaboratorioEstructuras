@@ -63,6 +63,7 @@ public class TabConductorController {
         columEdad.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEdad()));
         columTel.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTelefono()));
         columCodTurn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCodTurno()));
+        columGen.setCellValueFactory(cellData -> new SimpleStringProperty(Character.toString(cellData.getValue().getGenero())));
         assert table != null : "fx:id=\"table\" was not injected: check your FXML file 'tabConductor.fxml'.";
         assert columId != null : "fx:id=\"columId\" was not injected: check your FXML file 'tabConductor.fxml'.";
         assert columNom != null : "fx:id=\"columNom\" was not injected: check your FXML file 'tabConductor.fxml'.";

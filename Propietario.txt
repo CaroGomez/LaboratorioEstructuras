@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-8293819   Jeferson            Ortiz               M34 5623859   1029384   Carolina            Gomez               F25 5192309   1837290   Julian              Lopez               M37 2369201   
-=======
-123       qwewq               eqwe                M34 asdsad    
->>>>>>> f49fd82bed7c1db5824189d663b3692e19ea923e
+8293819   Jeferson            Ortiz               M34 5623859   1029384   Carolina            Gomez               F25 5192309   1837290   Julian              Lopez               M37 2369201

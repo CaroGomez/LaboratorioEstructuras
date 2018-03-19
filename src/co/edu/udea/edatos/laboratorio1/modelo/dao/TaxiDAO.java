@@ -16,6 +16,7 @@ public interface TaxiDAO {
     
     public List<Taxi> listarTaxis();
     public Taxi consultarTaxi(String numero_Taxi);
+    public Taxi consultarTaxixPlaca(String placa_taxi);
     public boolean guardarTaxi(Taxi taxi);
     
 }

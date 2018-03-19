@@ -96,7 +96,7 @@ public class IngresoTaxiController {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Error");
                 alert.setHeaderText(null);
-                alert.setContentText("La placa que intenta ingresar ya existe");
+                alert.setContentText("La placa o el número de taxi que intenta ingresar ya existe");
 
                 alert.showAndWait();
 

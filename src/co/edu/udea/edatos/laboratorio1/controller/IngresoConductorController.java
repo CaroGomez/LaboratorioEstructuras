@@ -5,6 +5,9 @@
  */
 package co.edu.udea.edatos.laboratorio1.controller;
 
+import ArbolB.ArbolB;
+import ArbolB.LlaveEntero;
+import ArbolB.VerArbol;
 import co.edu.udea.edatos.laboratorio1.modelo.Conductor;
 import co.edu.udea.edatos.laboratorio1.modelo.Turno;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.ConductorDAO;
@@ -30,22 +33,26 @@ import javafx.stage.Stage;
  * @author Carolina
  */
 public class IngresoConductorController {
-    
-    Conductor conductor; 
-    
+
+    Conductor conductor;
+
     ConductorDAO conductorDAO = new FileConductorDAO();
     TurnoDAO turnoDAO = new FileTurnoDAO();
-    
+
     List<Turno> turnos = turnoDAO.listarTurnos();
+
     ObservableList<Turno> turnoList = FXCollections.observableList(turnos);
     ObservableList<String> generoList = FXCollections.observableArrayList("Masculino", "Femenino");
-    
-    private Stage stagePrincipal; 
+
+    private Stage stagePrincipal;
+
+    private ArbolB arbol = conductorDAO.CrearArbol();
+    private VerArbol ver = new VerArbol();
 
     public void setStagePrincipal(Stage stagePrincipal) {
         this.stagePrincipal = stagePrincipal;
     }
-    
+
     private ResourceBundle resources;
 
     @FXML // URL location of the FXML file that was given to the FXMLLoader
@@ -88,12 +95,12 @@ public class IngresoConductorController {
         String telefono = txtTel.getText();
         char genero = ' ';
         Turno turno = choTurno.getValue();
-        
+
         if (choGenero.getValue() != null) {
             genero = choGenero.getValue().toString().charAt(0);
         }
 
-        if ((id.equals("")) || (nombre.equals("")) || (apellido.equals("")) || (edad.equals("")) || (telefono.equals("")) || (genero == ' ') || (turno==null)) {
+        if ((id.equals("")) || (nombre.equals("")) || (apellido.equals("")) || (edad.equals("")) || (telefono.equals("")) || (genero == ' ') || (turno == null)) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Error");
             alert.setHeaderText(null);
@@ -103,10 +110,10 @@ public class IngresoConductorController {
         } else {
 
             conductor = new Conductor(id, nombre, apellido, genero, edad, telefono, turno.getCodigo());
-            if(conductorDAO.guardarConductor(conductor)){
+            if (conductorDAO.guardarConductor(conductor)) {
+                arbol.insert(new LlaveEntero(Integer.parseInt(conductor.getId())), " dirección en disco");
                 stagePrincipal.close();
-            }
-            else{
+            } else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Error");
                 alert.setHeaderText(null);
@@ -128,7 +135,7 @@ public class IngresoConductorController {
     void initialize() {
         choGenero.setItems(generoList);
         choTurno.setItems(turnoList);
-        
+
         assert txtNombre != null : "fx:id=\"txtNombre\" was not injected: check your FXML file 'IngresoConductor.fxml'.";
         assert txtApellido != null : "fx:id=\"txtApellidos\" was not injected: check your FXML file 'IngresoConductor.fxml'.";
         assert txtId != null : "fx:id=\"txtId\" was not injected: check your FXML file 'IngresoConductor.fxml'.";
@@ -139,6 +146,6 @@ public class IngresoConductorController {
         assert btnAgregar != null : "fx:id=\"btnAgregar\" was not injected: check your FXML file 'IngresoConductor.fxml'.";
         assert btnCancelar != null : "fx:id=\"btnCancelar\" was not injected: check your FXML file 'IngresoConductor.fxml'.";
 
-    } 
-    
+    }
+
 }

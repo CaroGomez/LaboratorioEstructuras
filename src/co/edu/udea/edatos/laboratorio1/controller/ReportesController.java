@@ -7,7 +7,6 @@ package co.edu.udea.edatos.laboratorio1.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.scene.control.Tab;
 import javafx.stage.Stage;
 
 public class ReportesController {

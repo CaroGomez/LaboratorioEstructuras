@@ -3,6 +3,9 @@
  */
 package co.edu.udea.edatos.laboratorio1.controller;
 
+import ArbolB.ArbolB;
+import ArbolB.LlaveEntero;
+import ArbolB.VerArbol;
 import co.edu.udea.edatos.laboratorio1.modelo.Taxi;
 import co.edu.udea.edatos.laboratorio1.modelo.Turno;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.TaxiDAO;
@@ -32,6 +35,10 @@ public class IngresoTurnoController {
 
     List<Taxi> taxis = taxiDAO.listarTaxis();
     ObservableList<Taxi> taxiList = FXCollections.observableList(taxis);
+    
+    private ArbolB arbol = turnoDAO.CrearArbol();
+    private VerArbol ver = new VerArbol();
+
 
     public void setStagePrincipal(Stage stagePrincipal) {
         this.stagePrincipal = stagePrincipal;
@@ -84,6 +91,7 @@ public class IngresoTurnoController {
         } else {
             Turno turno = new Turno(cod, horario, horas, taxi.getPlaca());
             if (turnoDAO.guardarTurno(turno)) {
+                arbol.insert(new LlaveEntero(Integer.parseInt(turno.getCodigo())), " dirección en disco");
                 stagePrincipal.close();
             } else {
 

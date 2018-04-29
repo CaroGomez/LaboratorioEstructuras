@@ -29,7 +29,7 @@ public class Main extends Application {
     public void start(Stage stagePrincipal) throws Exception {
         this.stagePrincipal = stagePrincipal;
         mostrarVentanaPrincipal();
-
+           
     }
 
     /*

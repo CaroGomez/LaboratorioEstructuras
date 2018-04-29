@@ -1,9 +1,10 @@
 /**
  * Sample Skeleton for 'tabTurnos.fxml' Controller Class
  */
-
 package co.edu.udea.edatos.laboratorio1.controller;
 
+import ArbolB.ArbolB;
+import ArbolB.VerArbol;
 import co.edu.udea.edatos.laboratorio1.modelo.Turno;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.TurnoDAO;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.impl.FileTurnoDAO;
@@ -13,16 +14,21 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 public class TabTurnosController {
-    
+
     TurnoDAO turnoDAO = new FileTurnoDAO();
-    
+
     List<Turno> turnos = turnoDAO.listarTurnos();
     ObservableList<Turno> turnosList = FXCollections.observableList(turnos);
+
+    private ArbolB arbol = turnoDAO.CrearArbol();
+    private VerArbol ver = new VerArbol();
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -45,6 +51,24 @@ public class TabTurnosController {
     @FXML // fx:id="columPlacaTaxi"
     private TableColumn<Turno, String> columPlacaTaxi; // Value injected by FXMLLoader
 
+    @FXML // fx:id="btnBuscar"
+    private Button btnBuscar; // Value injected by FXMLLoader
+
+    @FXML // fx:id="btnMostrar"
+    private Button btnMostrar; // Value injected by FXMLLoader
+
+    @FXML
+    void DoBuscar(ActionEvent event) {
+
+    }
+
+    @FXML
+    void DoMostrar(ActionEvent event) {
+
+        ver.mostrarArbol(arbol);
+
+    }
+
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         table.setItems(turnosList);
@@ -57,6 +81,8 @@ public class TabTurnosController {
         assert columHorario != null : "fx:id=\"columHorario\" was not injected: check your FXML file 'tabTurnos.fxml'.";
         assert columHoras != null : "fx:id=\"columHoras\" was not injected: check your FXML file 'tabTurnos.fxml'.";
         assert columPlacaTaxi != null : "fx:id=\"columPlacaTaxi\" was not injected: check your FXML file 'tabTurnos.fxml'.";
+        assert btnBuscar != null : "fx:id=\"btnBuscar\" was not injected: check your FXML file 'tabConductor.fxml'.";
+        assert btnMostrar != null : "fx:id=\"btnMostrar\" was not injected: check your FXML file 'tabConductor.fxml'.";
 
     }
 }

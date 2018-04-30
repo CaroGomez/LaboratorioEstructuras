@@ -5,6 +5,8 @@
  */
 package co.edu.udea.edatos.laboratorio1.modelo.dao.impl;
 
+import ArbolB.ArbolB;
+import ArbolB.LlaveEntero;
 import co.edu.udea.edatos.laboratorio1.modelo.Turno;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.TurnoDAO;
 import java.io.IOException;
@@ -58,6 +60,24 @@ public class FileTurnoDAO implements TurnoDAO {
             ioe.printStackTrace();
         }
         return turnos;
+    }
+    
+    @Override
+    public ArbolB CrearArbol() {
+        ArbolB arbol = new ArbolB(2);
+        try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
+            ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
+            while (sbc.read(buf) > 0) {
+                buf.rewind();
+                CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
+                Turno turno = parseTurno(registro);
+                arbol.insert(new LlaveEntero(Integer.parseInt(turno.getCodigo())), "Dirección");
+                buf.flip();
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return arbol;
     }
 
     @Override

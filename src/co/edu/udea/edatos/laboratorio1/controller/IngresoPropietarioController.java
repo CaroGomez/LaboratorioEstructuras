@@ -3,6 +3,9 @@
  */
 package co.edu.udea.edatos.laboratorio1.controller;
 
+import ArbolB.ArbolB;
+import ArbolB.LlaveEntero;
+import ArbolB.VerArbol;
 import co.edu.udea.edatos.laboratorio1.modelo.Propietario;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.PropietarioDAO;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.impl.FilePropietarioDAO;
@@ -23,6 +26,9 @@ public class IngresoPropietarioController {
     ObservableList<String> generoList = FXCollections.observableArrayList("Masculino", "Femenino");
     Propietario propietario;
     PropietarioDAO propietarioDAO = new FilePropietarioDAO();
+    
+    private ArbolB arbol = propietarioDAO.CrearArbol();
+    private VerArbol ver = new VerArbol();
 
     private Stage stagePrincipal;
 
@@ -84,6 +90,7 @@ public class IngresoPropietarioController {
             propietario = new Propietario(id, nombre, apellido, genero, edad, telefono);
 
             if (propietarioDAO.guardarPropietario(propietario)) {
+              arbol.insert(new LlaveEntero(Integer.parseInt(propietario.getId())), " dirección en disco");
                 stagePrincipal.close();
             }
             else{

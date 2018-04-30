@@ -3,6 +3,9 @@
  */
 package co.edu.udea.edatos.laboratorio1.controller;
 
+import ArbolB.ArbolB;
+import ArbolB.LlaveEntero;
+import ArbolB.VerArbol;
 import co.edu.udea.edatos.laboratorio1.modelo.Taller;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.TallerDAO;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.impl.FileTallerDAO;
@@ -20,6 +23,9 @@ public class IngresoTallerController {
     private LaboratiorioController controllerLab;
     TallerDAO tallerDAO = new FileTallerDAO();
 
+    private ArbolB arbol = tallerDAO.CrearArbol();
+    private VerArbol ver = new VerArbol();
+    
     public void setStagePrincipal(Stage stagePrincipal) {
         this.stagePrincipal = stagePrincipal;
     }
@@ -66,7 +72,8 @@ public class IngresoTallerController {
             Taller taller = new Taller(codigo, nombre, telefono, direccion);
 
             if (tallerDAO.guardarTaller(taller)) {
-                stagePrincipal.close();
+               arbol.insert(new LlaveEntero(Integer.parseInt(taller.getCodigo())), " dirección en disco");
+               stagePrincipal.close();
             } else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Error");

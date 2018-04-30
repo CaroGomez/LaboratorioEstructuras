@@ -5,6 +5,8 @@
  */
 package co.edu.udea.edatos.laboratorio1.modelo.dao.impl;
 
+import ArbolB.ArbolB;
+import ArbolB.LlaveEntero;
 import co.edu.udea.edatos.laboratorio1.modelo.Taller;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.TallerDAO;
 import java.io.IOException;
@@ -57,6 +59,25 @@ public class FileTallerDAO implements TallerDAO {
         }
         return talleres;
     }
+    
+    @Override
+    public ArbolB CrearArbol() {
+       ArbolB arbol = new ArbolB(2);
+        try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
+            ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
+            while (sbc.read(buf) > 0) {
+                buf.rewind();
+                CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
+                Taller taller = parseTaller(registro);
+                 arbol.insert(new LlaveEntero(Integer.parseInt(taller.getCodigo())), "Dirección");
+                buf.flip();
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return arbol;
+    }
+
 
     @Override
     public Taller consultarTaller(String codigo) {

@@ -5,6 +5,7 @@
  */
 package co.edu.udea.edatos.laboratorio1.modelo.dao;
 
+import ArbolB.ArbolB;
 import co.edu.udea.edatos.laboratorio1.modelo.Conductor;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
 public interface ConductorDAO {
 
     public List<Conductor> listarConductores();
+    public ArbolB CrearArbol();
 
     public Conductor consultarConductorxId(String identificacion);
 

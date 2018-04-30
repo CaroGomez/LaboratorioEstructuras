@@ -1,5 +1,7 @@
 package co.edu.udea.edatos.laboratorio1.modelo.dao.impl;
 
+import ArbolB.ArbolB;
+import ArbolB.LlaveEntero;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.PropietarioDAO;
 import co.edu.udea.edatos.laboratorio1.modelo.Propietario;
 import java.io.IOException;
@@ -17,64 +19,83 @@ import java.util.List;
 import java.util.Map;
 
 import static java.nio.file.StandardOpenOption.APPEND;
+
 /**
  *
  * @author Andres
  */
 public class FilePropietarioDAO implements PropietarioDAO {
 
-    private static final String NOMBRE_ARCHIVO="Propietario.txt";
-    private static final int LONGITUD_REGISTRO=64;
-    private static final int IDENTIFICACION_LONGITUD=10;
-    private static final int NOMBRES_LONGITUD=20;
-    private static final int APELLIDOS_LONGITUD=20;
-    private static final int GENERO_LONGITUD=1;
-    private static final int EDAD_LONGITUD=3;
-    private static final int TELEFONO_LONGITUD=10;
+    private static final String NOMBRE_ARCHIVO = "Propietario.txt";
+    private static final int LONGITUD_REGISTRO = 64;
+    private static final int IDENTIFICACION_LONGITUD = 10;
+    private static final int NOMBRES_LONGITUD = 20;
+    private static final int APELLIDOS_LONGITUD = 20;
+    private static final int GENERO_LONGITUD = 1;
+    private static final int EDAD_LONGITUD = 3;
+    private static final int TELEFONO_LONGITUD = 10;
 
     private static final Path archivo = Paths.get(NOMBRE_ARCHIVO);
     public static final String ENCODING_WINDOWS = "Cp1252";
 
     private static final Map<String, Propietario> CACHE_PROPIETARIO = new HashMap<>();
 
-        @Override
+    @Override
     public List<Propietario> listarPropietarios() {
-        List<Propietario> propietarios=new ArrayList<>();
-        try (SeekableByteChannel sbc = Files.newByteChannel(archivo)){
+        List<Propietario> propietarios = new ArrayList<>();
+        try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
             ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
-            while(sbc.read(buf)>0){
+            while (sbc.read(buf) > 0) {
                 buf.rewind();
-                CharBuffer registro= Charset.forName(ENCODING_WINDOWS).decode(buf);
+                CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
                 Propietario propietario = parsePropietario(registro);
                 propietarios.add(propietario);
                 buf.flip();
             }
-        }catch (IOException ioe){
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
         return propietarios;
     }
-    
+
+    @Override
+    public ArbolB CrearArbol() {
+        ArbolB arbol = new ArbolB(2);
+        try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
+            ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
+            while (sbc.read(buf) > 0) {
+                buf.rewind();
+                CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
+                Propietario propietario = parsePropietario(registro);
+                arbol.insert(new LlaveEntero(Integer.parseInt(propietario.getId())), "Dirección");
+                buf.flip();
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return arbol;
+    }
+
     @Override
     public Propietario consultarPropietario(String identificacion) {
-        Propietario propietario=CACHE_PROPIETARIO.get(identificacion);
-        if(propietario!=null){
+        Propietario propietario = CACHE_PROPIETARIO.get(identificacion);
+        if (propietario != null) {
             return propietario;
         }
-        try (SeekableByteChannel sbc = Files.newByteChannel(archivo)){
+        try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
             ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
-            while(sbc.read(buf)>0){
+            while (sbc.read(buf) > 0) {
                 buf.rewind();
-                CharBuffer registro= Charset.forName(ENCODING_WINDOWS).decode(buf);
+                CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
                 String id = registro.subSequence(0, IDENTIFICACION_LONGITUD).toString().trim();
-                if(id.equals(identificacion)){
+                if (id.equals(identificacion)) {
                     propietario = parsePropietario(registro);
                     CACHE_PROPIETARIO.put(identificacion, propietario);
                     return propietario;
                 }
                 buf.flip();
             }
-        }catch (IOException ioe){
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
         return null;
@@ -82,21 +103,21 @@ public class FilePropietarioDAO implements PropietarioDAO {
 
     @Override
     public boolean guardarPropietario(Propietario propietario) {
-        if(consultarPropietario(propietario.getId())!=null){
+        if (consultarPropietario(propietario.getId()) != null) {
             return false;
         }
-        String registro= parsePropietarioString(propietario);
+        String registro = parsePropietarioString(propietario);
         byte[] datos = registro.getBytes();
-        ByteBuffer buffer=ByteBuffer.wrap(datos);
-        try(FileChannel fc=(FileChannel.open(archivo, APPEND))){
+        ByteBuffer buffer = ByteBuffer.wrap(datos);
+        try (FileChannel fc = (FileChannel.open(archivo, APPEND))) {
             fc.write(buffer);
-        }catch (IOException ioe){
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
         return true;
     }
-    
-        private String parsePropietarioString(Propietario propietario) {
+
+    private String parsePropietarioString(Propietario propietario) {
         StringBuilder registro = new StringBuilder();
         registro.append(rellenarCampo(propietario.getId(), IDENTIFICACION_LONGITUD));
         registro.append(rellenarCampo(propietario.getNombres(), NOMBRES_LONGITUD));
@@ -106,35 +127,35 @@ public class FilePropietarioDAO implements PropietarioDAO {
         registro.append(rellenarCampo(propietario.getTelefono(), TELEFONO_LONGITUD));
         return registro.toString();
     }
-        
-    private String rellenarCampo(String campo, int tamanio){
-        if(campo.length()>tamanio){
+
+    private String rellenarCampo(String campo, int tamanio) {
+        if (campo.length() > tamanio) {
             return campo.substring(0, tamanio);
         }
-        return String.format("%1$-"+tamanio+"s", campo);
+        return String.format("%1$-" + tamanio + "s", campo);
     }
-    
+
     /**
      * Convierte un registro almacenado en un CharBuffer a un Objeto de Persona
      *
      * @param registro
      * @return
      */
-    private Propietario parsePropietario(CharBuffer registro){
+    private Propietario parsePropietario(CharBuffer registro) {
         Propietario p = new Propietario();
         String identificacion = registro.subSequence(0, IDENTIFICACION_LONGITUD).toString().trim();
         registro.position(IDENTIFICACION_LONGITUD);
-        registro=registro.slice();
+        registro = registro.slice();
         p.setId(identificacion);
 
         String nombres = registro.subSequence(0, NOMBRES_LONGITUD).toString().trim();
         registro.position(NOMBRES_LONGITUD);
-        registro=registro.slice();
+        registro = registro.slice();
         p.setNombres(nombres);
 
         String apellidos = registro.subSequence(0, APELLIDOS_LONGITUD).toString().trim();
         registro.position(APELLIDOS_LONGITUD);
-        registro=registro.slice();
+        registro = registro.slice();
         p.setApellidos(apellidos);
 
         char genero = registro.subSequence(0, GENERO_LONGITUD).toString().trim().charAt(0);
@@ -154,6 +175,5 @@ public class FilePropietarioDAO implements PropietarioDAO {
 
         return p;
     }
-    
-        
+
 }

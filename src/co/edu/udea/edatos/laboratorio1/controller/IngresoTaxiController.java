@@ -3,6 +3,10 @@
  */
 package co.edu.udea.edatos.laboratorio1.controller;
 
+import ArbolB.ArbolB;
+import ArbolB.LlaveCadena;
+import ArbolB.LlaveEntero;
+import ArbolB.VerArbol;
 import co.edu.udea.edatos.laboratorio1.modelo.Propietario;
 import co.edu.udea.edatos.laboratorio1.modelo.Taxi;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.PropietarioDAO;
@@ -37,6 +41,9 @@ public class IngresoTaxiController {
 
     List<Propietario> propietarios = propietarioDAO.listarPropietarios();
     ObservableList<Propietario> generoList = FXCollections.observableList(propietarios);
+    
+     private ArbolB arbol = taxiDAO.CrearArbol();
+    private VerArbol ver = new VerArbol();
     
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -90,6 +97,7 @@ public class IngresoTaxiController {
             Taxi taxi = new Taxi(placa, numTaxi, marca, modelo, pro.getId());
 
             if (taxiDAO.guardarTaxi(taxi)) {
+                arbol.insert(new LlaveCadena(taxi.getPlaca()), " dirección en disco");
                 stagePrincipal.close();
             }
             else{

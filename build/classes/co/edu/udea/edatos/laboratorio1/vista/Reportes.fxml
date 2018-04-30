@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.udea.edatos.laboratorio1.controller.ReportesController">
+    <children>
+        <TabPane layoutX="8.0" layoutY="6.0" prefHeight="400.0" prefWidth="601.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <tabs>
+                <Tab closable="false" text="Propietario">
+                    <content>
+                        <fx:include fx:id="tabPropietario" source="tabPropietarios.fxml" />
+                    </content>
+                </Tab>
+                <Tab closable="false" text="Conductor">
+                    <content>
+                        <fx:include fx:id="tabConductor" source="tabConductor.fxml" />
+                    </content>
+                </Tab>
+            <Tab closable="false" text="Taxis" >
+                  <content>
+                        <fx:include fx:id="tabtaxi" source="tabTaxis.fxml" />
+                    </content>
+                </Tab>
+            <Tab closable="false" text="Turnos" >
+            <content>
+                        <fx:include fx:id="tabturno" source="tabTurnos.fxml" />
+                    </content>
+                </Tab>
+            <Tab closable="false" text="Talleres" >
+                <content>
+                        <fx:include fx:id="tabtaller" source="tabTalleres.fxml" />
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>

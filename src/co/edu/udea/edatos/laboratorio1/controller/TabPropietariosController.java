@@ -3,6 +3,8 @@
  */
 package co.edu.udea.edatos.laboratorio1.controller;
 
+import ArbolB.ArbolB;
+import ArbolB.VerArbol;
 import co.edu.udea.edatos.laboratorio1.modelo.Propietario;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.PropietarioDAO;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.impl.FilePropietarioDAO;
@@ -12,17 +14,22 @@ import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 public class TabPropietariosController {
-    
+
     PropietarioDAO propietarioDAO = new FilePropietarioDAO();
-    
+
     List<Propietario> propietarios = propietarioDAO.listarPropietarios();
     ObservableList<Propietario> PropietariosList = FXCollections.observableList(propietarios);
-    
+
+    private ArbolB arbol = propietarioDAO.CrearArbol();
+    private VerArbol ver = new VerArbol();
+
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
 
@@ -34,14 +41,14 @@ public class TabPropietariosController {
 
     @FXML // fx:id="columNom"
     private TableColumn<Propietario, String> columNom; // Value injected by FXMLLoader
-    
+
     @FXML // fx:id="columApe"
     private TableColumn<Propietario, String> columApe; // Value injected by FXMLLoader
 
     @FXML // fx:id="columId"
     private TableColumn<Propietario, String> columId; // Value injected by FXMLLoader
-    
-     @FXML // fx:id="columGen"
+
+    @FXML // fx:id="columGen"
     private TableColumn<Propietario, String> columGen; // Value injected by FXMLLoader
 
     @FXML // fx:id="columEdad"
@@ -49,6 +56,24 @@ public class TabPropietariosController {
 
     @FXML // fx:id="columTel"
     private TableColumn<Propietario, String> columTel; // Value injected by FXMLLoader
+
+    @FXML // fx:id="btnBuscar"
+    private Button btnBuscar; // Value injected by FXMLLoader
+
+    @FXML // fx:id="btnMostrar"
+    private Button btnMostrar; // Value injected by FXMLLoader
+
+    @FXML
+    void DoBuscar(ActionEvent event) {
+
+    }
+
+    @FXML
+    void DoMostrar(ActionEvent event) {
+
+        ver.mostrarArbol(arbol);
+
+    }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
@@ -66,5 +91,7 @@ public class TabPropietariosController {
         assert columGen != null : "fx:id=\"columGen\" was not injected: check your FXML file 'tabPropietarios.fxml'.";
         assert columEdad != null : "fx:id=\"columEdad\" was not injected: check your FXML file 'tabPropietarios.fxml'.";
         assert columTel != null : "fx:id=\"columTel\" was not injected: check your FXML file 'tabPropietarios.fxml'.";
+        assert btnBuscar != null : "fx:id=\"btnBuscar\" was not injected: check your FXML file 'tabConductor.fxml'.";
+        assert btnMostrar != null : "fx:id=\"btnMostrar\" was not injected: check your FXML file 'tabConductor.fxml'.";
     }
 }

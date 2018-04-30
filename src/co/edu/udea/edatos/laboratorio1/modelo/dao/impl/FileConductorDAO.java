@@ -1,5 +1,7 @@
 package co.edu.udea.edatos.laboratorio1.modelo.dao.impl;
 
+import ArbolB.ArbolB;
+import ArbolB.LlaveEntero;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.ConductorDAO;
 import co.edu.udea.edatos.laboratorio1.modelo.Conductor;
 import java.io.IOException;
@@ -52,7 +54,25 @@ public class FileConductorDAO implements ConductorDAO {
         }
         return conductores;
     }
-    
+
+    @Override
+    public ArbolB CrearArbol() {
+        ArbolB arbol = new ArbolB(2);
+        try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
+            ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
+            while (sbc.read(buf) > 0) {
+                buf.rewind();
+                CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
+                Conductor conductor = parseConductor(registro);
+                arbol.insert(new LlaveEntero(Integer.parseInt(conductor.getId())), "Dirección");
+                buf.flip();
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return arbol;
+    }
+
     @Override
     public Conductor consultarConductorxId(String identificacion) {
         Conductor conductor = CACHE_CONDUCTORES.get(identificacion);
@@ -79,7 +99,7 @@ public class FileConductorDAO implements ConductorDAO {
     }
 
     @Override
-    public boolean guardarConductor(Conductor conductor){
+    public boolean guardarConductor(Conductor conductor) {
         if (consultarConductorxId(conductor.getId()) != null) {
             return false;
         }
@@ -93,7 +113,7 @@ public class FileConductorDAO implements ConductorDAO {
         }
         return true;
     }
-    
+
     private String parseConductorString(Conductor conductor) {
         StringBuilder registro = new StringBuilder();
         registro.append(rellenarCampo(conductor.getId(), IDENTIFICACION_LONGITUD));
@@ -103,7 +123,7 @@ public class FileConductorDAO implements ConductorDAO {
         registro.append(rellenarCampo(conductor.getEdad(), EDAD_LONGITUD));
         registro.append(rellenarCampo(conductor.getTelefono(), TELEFONO_LONGITUD));
         registro.append(rellenarCampo(conductor.getCodTurno(), CODTURNO_LONGITUD));
-       
+
         return registro.toString();
     }
 

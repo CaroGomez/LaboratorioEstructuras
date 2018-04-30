@@ -5,6 +5,8 @@
  */
 package co.edu.udea.edatos.laboratorio1.modelo.dao.impl;
 
+import ArbolB.ArbolB;
+import ArbolB.LlaveCadena;
 import co.edu.udea.edatos.laboratorio1.modelo.Taxi;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.TaxiDAO;
 import java.io.IOException;
@@ -60,6 +62,25 @@ public class FileTaxiDAO implements TaxiDAO {
     }
 
     @Override
+    public ArbolB CrearArbol() {
+        ArbolB arbol = new ArbolB(2);
+
+        try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
+            ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
+            while (sbc.read(buf) > 0) {
+                buf.rewind();
+                CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
+                Taxi taxi = parseTaxi(registro);
+                 arbol.insert(new LlaveCadena(taxi.getPlaca()), "Dirección");
+                buf.flip();
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return arbol;
+    }
+
+    @Override
     public Taxi consultarTaxi(String numero_Taxi) {
         Taxi taxi = CACHE_TAXI.get(numero_Taxi);
         if (taxi != null) {
@@ -70,7 +91,7 @@ public class FileTaxiDAO implements TaxiDAO {
             while (sbc.read(buf) > 0) {
                 buf.rewind();
                 CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
-                String id = registro.subSequence(6, (6+NUMERO_LONGITUD)).toString().trim();
+                String id = registro.subSequence(6, (6 + NUMERO_LONGITUD)).toString().trim();
                 if (id.equals(numero_Taxi)) {
                     taxi = parseTaxi(registro);
                     CACHE_TAXI.put(numero_Taxi, taxi);
@@ -83,7 +104,7 @@ public class FileTaxiDAO implements TaxiDAO {
         }
         return null;
     }
-    
+
     @Override
     public Taxi consultarTaxixPlaca(String placa_taxi) {
         Taxi taxi = CACHE_TAXI.get(placa_taxi);

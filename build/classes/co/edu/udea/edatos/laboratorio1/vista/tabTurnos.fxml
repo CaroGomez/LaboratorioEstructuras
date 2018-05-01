@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,8 +12,10 @@
                 <TableColumn fx:id="columCod" prefWidth="141.0" text="Codigo" />
                 <TableColumn fx:id="columHorario" prefWidth="146.0" text="Horario" />
                 <TableColumn fx:id="columHoras" prefWidth="146.0" text="Horas" />
-            <TableColumn fx:id="columPlacaTaxi" prefWidth="160.0" text="Placa Taxi" />
+                <TableColumn fx:id="columPlacaTaxi" prefWidth="160.0" text="Placa Taxi" />
             </columns>
         </TableView>
+        <Button fx:id="btnBuscar" layoutX="38.0" layoutY="406.0" mnemonicParsing="false" onAction="#DoBuscar" text="Buscar" />
+        <Button fx:id="btnMostrar" layoutX="119.0" layoutY="406.0" mnemonicParsing="false" onAction="#DoMostrar" prefHeight="25.0" prefWidth="117.0" text="Mostrar   Arbol" textOverrun="CLIP" />
     </children>
 </AnchorPane>

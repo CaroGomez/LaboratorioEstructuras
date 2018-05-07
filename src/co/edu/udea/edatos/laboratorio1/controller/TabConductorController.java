@@ -25,7 +25,7 @@ public class TabConductorController {
     ConductorDAO conductorDAO = new FileConductorDAO();
 
     List<Conductor> conductores = conductorDAO.listarConductores();
-    private ArbolB arbol = conductorDAO.CrearArbol();
+    private ArbolB arbol = conductorDAO.retornarArbol();
     private VerArbol ver = new VerArbol();
 
     ObservableList<Conductor> conductoresList = FXCollections.observableList(conductores);

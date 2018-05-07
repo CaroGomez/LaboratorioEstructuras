@@ -67,13 +67,31 @@ public class TabPropietariosController {
     @FXML // fx:id="txtBuscar"
     private TextField txtBuscar; // Value injected by FXMLLoader
 
+    @FXML // fx:id="btnTodos"
+    private Button btnTodos; // Value injected by FXMLLoader
+
     @FXML
     void DoBuscar(ActionEvent event) {
         Propietario pro = propietarioDAO.consultarPropietario(txtBuscar.getText());
-        if(pro != null){
-                System.out.println(pro.toString());
+        if (pro != null) {
+            System.out.println(pro.toString());
+            propietarios.clear();
+            propietarios.add(pro);
+            table.setItems(PropietariosList);
+            table.refresh();
+            txtBuscar.clear();
+
+        } else {
+            System.out.println("no se encontró ");
         }
-        System.out.println("no se encontró ");
+    }
+
+    @FXML
+    void DoTodos(ActionEvent event) {
+        propietarios = propietarioDAO.listarPropietarios();
+        PropietariosList = FXCollections.observableList(propietarios);
+        table.setItems(PropietariosList);
+        table.refresh();
     }
 
     @FXML
@@ -102,5 +120,7 @@ public class TabPropietariosController {
         assert btnBuscar != null : "fx:id=\"btnBuscar\" was not injected: check your FXML file 'tabConductor.fxml'.";
         assert btnMostrar != null : "fx:id=\"btnMostrar\" was not injected: check your FXML file 'tabConductor.fxml'.";
         assert txtBuscar != null : "fx:id=\"txtBuscar\" was not injected: check your FXML file 'tabPropietarios.fxml'.";
+        assert btnTodos != null : "fx:id=\"btnTodos\" was not injected: check your FXML file 'tabPropietarios.fxml'.";
+
     }
 }

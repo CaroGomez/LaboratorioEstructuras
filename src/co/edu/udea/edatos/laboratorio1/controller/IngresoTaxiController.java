@@ -16,6 +16,7 @@ import co.edu.udea.edatos.laboratorio1.modelo.dao.impl.FileTaxiDAO;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,7 +25,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class IngresoTaxiController {
@@ -40,7 +44,7 @@ public class IngresoTaxiController {
     TaxiDAO taxiDAO = new FileTaxiDAO();
 
     List<Propietario> propietarios = propietarioDAO.listarPropietarios();
-    ObservableList<Propietario> generoList = FXCollections.observableList(propietarios);
+    ObservableList<Propietario> PropietariosList = FXCollections.observableList(propietarios);
     
      private ArbolB arbol = taxiDAO.CrearArbol();
     private VerArbol ver = new VerArbol();
@@ -65,6 +69,33 @@ public class IngresoTaxiController {
 
     @FXML // fx:id="txtModelo"
     private TextField txtModelo; // Value injected by FXMLLoader
+    
+    @FXML // fx:id="tableResul"
+    private TableView<Propietario> tableResul; // Value injected by FXMLLoader
+
+    @FXML // fx:id="PaneResult"
+    private AnchorPane PaneResult; // Value injected by FXMLLoader
+    
+    @FXML // fx:id="columId"
+    private TableColumn<Propietario, String> columId; // Value injected by FXMLLoader
+
+    @FXML // fx:id="columNom"
+    private TableColumn<Propietario, String> columNom; // Value injected by FXMLLoader
+
+    @FXML // fx:id="columApe"
+    private TableColumn<Propietario, String> columApe; // Value injected by FXMLLoader
+
+    @FXML // fx:id="columGen"
+    private TableColumn<Propietario, String> columGen; // Value injected by FXMLLoader
+
+    @FXML // fx:id="columEdad"
+    private TableColumn<Propietario, String> columEdad; // Value injected by FXMLLoader
+
+    @FXML // fx:id="columTel"
+    private TableColumn<Propietario, String> columTel; // Value injected by FXMLLoader
+
+    @FXML // fx:id="btnBusProp"
+    private Button btnBusProp; // Value injected by FXMLLoader
 
     @FXML
     private Button btnIngresar;
@@ -113,10 +144,20 @@ public class IngresoTaxiController {
 
         // controllerLab.mostrar("Taxi agregado correctamente");
     }
+    @FXML
+    void doBuscarpro(ActionEvent event) {
+
+    }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
-        listView.setItems(generoList);
+        tableResul.setItems(PropietariosList);
+        columNom.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombres()));
+        columApe.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getApellidos()));
+        columId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
+        columEdad.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEdad()));
+        columTel.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTelefono()));
+        columGen.setCellValueFactory(cellData -> new SimpleStringProperty(Character.toString(cellData.getValue().getGenero())));
         assert txtPlaca != null : "fx:id=\"txtPlaca\" was not injected: check your FXML file 'IngresoTaxi.fxml'.";
         assert txtNumTaxi != null : "fx:id=\"txtNumTaxi\" was not injected: check your FXML file 'IngresoTaxi.fxml'.";
         assert listView != null : "fx:id=\"listView\" was not injected: check your FXML file 'IngresoTaxi.fxml'.";
@@ -124,6 +165,14 @@ public class IngresoTaxiController {
         assert txtModelo != null : "fx:id=\"txtModelo\" was not injected: check your FXML file 'IngresoTaxi.fxml'.";
         assert btnIngresar != null : "fx:id=\"btnIngresar\" was not injected: check your FXML file 'IngresoTaxi.fxml'.";
         assert btnCancelar != null : "fx:id=\"btnCancelar\" was not injected: check your FXML file 'IngresoTaxi.fxml'.";
-       
+        assert PaneResult != null : "fx:id=\"PaneResult\" was not injected: check your FXML file 'IngresoTaxi.fxml'.";
+        assert tableResul != null : "fx:id=\"table\" was not injected: check your FXML file 'IngresoTaxi.fxml'.";
+        assert columId != null : "fx:id=\"columId\" was not injected: check your FXML file 'IngresoTaxi.fxml'.";
+        assert columNom != null : "fx:id=\"columNom\" was not injected: check your FXML file 'IngresoTaxi.fxml'.";
+        assert columApe != null : "fx:id=\"columApe\" was not injected: check your FXML file 'IngresoTaxi.fxml'.";
+        assert columGen != null : "fx:id=\"columGen\" was not injected: check your FXML file 'IngresoTaxi.fxml'.";
+        assert columEdad != null : "fx:id=\"columEdad\" was not injected: check your FXML file 'IngresoTaxi.fxml'.";
+        assert columTel != null : "fx:id=\"columTel\" was not injected: check your FXML file 'IngresoTaxi.fxml'.";
+        assert btnBusProp != null : "fx:id=\"btnBusProp\" was not injected: check your FXML file 'IngresoTaxi.fxml'.";
     }
 }

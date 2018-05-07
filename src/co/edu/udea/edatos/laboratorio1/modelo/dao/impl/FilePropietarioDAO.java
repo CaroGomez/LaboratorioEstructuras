@@ -2,6 +2,7 @@ package co.edu.udea.edatos.laboratorio1.modelo.dao.impl;
 
 import ArbolB.ArbolB;
 import ArbolB.LlaveEntero;
+import ArbolB.Ordenable;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.PropietarioDAO;
 import co.edu.udea.edatos.laboratorio1.modelo.Propietario;
 import java.io.IOException;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import static java.nio.file.StandardOpenOption.APPEND;
+import java.util.Observable;
 
 /**
  *
@@ -38,7 +40,44 @@ public class FilePropietarioDAO implements PropietarioDAO {
     private static final Path archivo = Paths.get(NOMBRE_ARCHIVO);
     public static final String ENCODING_WINDOWS = "Cp1252";
 
-    private static final Map<String, Propietario> CACHE_PROPIETARIO = new HashMap<>();
+    private static final Map<String, Integer> propietarioIndice = new HashMap<>();
+    private static final ArbolB ARBOL = new ArbolB(2);
+
+    public FilePropietarioDAO() {
+        if (!Files.exists(archivo)) {
+            try {
+                Files.createFile(archivo);
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+        }
+        crearIndice();
+    }
+
+    @Override
+    public ArbolB retornarArbol(){
+        return ARBOL;
+    }
+    
+    private void crearIndice() {
+        System.out.println("Creando Indice del archivo: propietario");
+        try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
+            ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
+            int posicion = 0;
+            while (sbc.read(buf) > 0) {
+                buf.rewind();
+                CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
+                String identificacion = registro.subSequence(0, IDENTIFICACION_LONGITUD).toString().trim();
+                //INSERTA EN EL INDICE: HASH O ÁRBOL (LO QUE SEA)
+                ARBOL.insert(new LlaveEntero(Integer.parseInt(identificacion)), posicion);
+                propietarioIndice.put(identificacion, posicion);
+                posicion++;
+                buf.flip();
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
 
     @Override
     public List<Propietario> listarPropietarios() {
@@ -58,7 +97,7 @@ public class FilePropietarioDAO implements PropietarioDAO {
         return propietarios;
     }
 
-    @Override
+    /*@Override
     public ArbolB CrearArbol() {
         ArbolB arbol = new ArbolB(2);
         try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
@@ -74,27 +113,28 @@ public class FilePropietarioDAO implements PropietarioDAO {
             ioe.printStackTrace();
         }
         return arbol;
-    }
+    }*/
 
     @Override
     public Propietario consultarPropietario(String identificacion) {
-        Propietario propietario = CACHE_PROPIETARIO.get(identificacion);
-        if (propietario != null) {
-            return propietario;
+       
+        Integer dir = (Integer)ARBOL.search(new LlaveEntero(Integer.parseInt(identificacion)));
+        if (dir == null) {
+            return null;
         }
+        return consultarPropietarioxDir(dir);
+    }
+
+    private Propietario consultarPropietarioxDir(int dir) {
         try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
             ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
-            while (sbc.read(buf) > 0) {
-                buf.rewind();
-                CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
-                String id = registro.subSequence(0, IDENTIFICACION_LONGITUD).toString().trim();
-                if (id.equals(identificacion)) {
-                    propietario = parsePropietario(registro);
-                    CACHE_PROPIETARIO.put(identificacion, propietario);
-                    return propietario;
-                }
-                buf.flip();
-            }
+            sbc.position(dir * LONGITUD_REGISTRO);
+            sbc.read(buf);
+            buf.rewind();
+            CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
+            Propietario propietario = parsePropietario(registro);
+            buf.flip();
+            return propietario;
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }

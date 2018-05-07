@@ -15,7 +15,8 @@ import java.util.List;
  */
 public interface PropietarioDAO {
 
-    public ArbolB CrearArbol();
+   // public ArbolB CrearArbol();
+    public ArbolB retornarArbol();
 
     public List<Propietario> listarPropietarios();
 

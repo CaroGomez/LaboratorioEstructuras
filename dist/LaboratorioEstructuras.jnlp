@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="LaboratorioEstructuras.jnlp">
   <information>
@@ -16,3 +17,23 @@
   <jfx:javafx-desc  width="800" height="600" main-class="co.edu.udea.edatos.laboratorio1.vista.Main"  name="LaboratorioEstructuras" />
   <update check="always"/>
 </jnlp>
+=======
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="LaboratorioEstructuras.jnlp">
+  <information>
+    <title>LaboratorioEstructuras</title>
+    <vendor>Carolina</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="LaboratorioEstructuras.jar" size="79163" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="LaboratorioEstructuras" >
+    <param name="requiredFXVersion" value="8.0+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="co.edu.udea.edatos.laboratorio1.vista.Main"  name="LaboratorioEstructuras" />
+  <update check="always"/>
+</jnlp>
+>>>>>>> c1c0a49b9c8d83fdad20503aff8a42f7a2893833

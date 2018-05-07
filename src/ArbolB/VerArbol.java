@@ -17,6 +17,8 @@ public class VerArbol {
 
         System.out.println("prueba");
 
+       // String tempFolder = "C:\\Users\\Jefry\\Desktop";
+        
         String tempFolder = System.getProperty("java.io.tmpdir");
        
 

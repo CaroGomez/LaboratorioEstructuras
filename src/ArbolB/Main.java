@@ -8,7 +8,7 @@ public class Main {
 
         System.out.println("prueba");
 
-        String tempFolder = "C:\\Users\\Jefry\\Desktop\\";
+        String tempFolder = "C:\\Users\\Carolina\\Desktop\\";
 
         ArbolB tree = new ArbolB(2);
         ArbolB treeS = new ArbolB(2);

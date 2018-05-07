@@ -17,9 +17,9 @@ public class VerArbol {
 
         System.out.println("prueba");
 
-       // String tempFolder = "C:\\Users\\Jefry\\Desktop";
+        String tempFolder = System.getProperty("user.dir")+"\\"; 
         
-        String tempFolder = System.getProperty("java.io.tmpdir");
+        //String tempFolder = System.getProperty("java.io.tmpdir");
        
 
         try {
@@ -60,8 +60,9 @@ public class VerArbol {
     static void doDot(String pInput, String pOutput) {
         try {
 
-            String dotPath
-                    = "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe";
+            //String dotPath = "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe";
+            
+            String dotPath = System.getProperty("user.dir") +"\\graphviz-2.38\\release\\bin\\dot.exe";
 
             String fileInputPath = pInput;
             String fileOutputPath = pOutput;

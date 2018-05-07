@@ -19,7 +19,8 @@
             </columns>
         </TableView>
         <Button fx:id="btnBuscar" layoutX="38.0" layoutY="406.0" mnemonicParsing="false" onAction="#DoBuscar" text="Buscar" />
-      <Button fx:id="btnMostrar" layoutX="318.0" layoutY="406.0" mnemonicParsing="false" onAction="#DoMostrar" prefHeight="25.0" prefWidth="117.0" text="Mostrar   Arbol" textOverrun="CLIP" />
+      <Button fx:id="btnMostrar" layoutX="457.0" layoutY="406.0" mnemonicParsing="false" onAction="#DoMostrar" prefHeight="25.0" prefWidth="117.0" text="Mostrar   Arbol" textOverrun="CLIP" />
       <TextField fx:id="txtBuscar" layoutX="101.0" layoutY="406.0" />
+      <Button fx:id="btnTodos" layoutX="303.0" layoutY="406.0" mnemonicParsing="false" onAction="#DoTodos" text="Mostrar Todos" />
     </children>
 </AnchorPane>

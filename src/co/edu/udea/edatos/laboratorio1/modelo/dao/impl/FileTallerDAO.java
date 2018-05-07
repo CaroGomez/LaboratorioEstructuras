@@ -40,7 +40,42 @@ public class FileTallerDAO implements TallerDAO {
     private static final Path archivo = Paths.get(NOMBRE_ARCHIVO);
     public static final String ENCODING_WINDOWS = "Cp1252";
 
-    private static final Map<String, Taller> CACHE_TALLER = new HashMap<>();
+    private static final Map<String, Integer> tallerIndice = new HashMap<>();
+    private static final ArbolB ARBOL = new ArbolB(2);
+    
+    public FileTallerDAO() {
+        if (!Files.exists(archivo)) {
+            try {
+                Files.createFile(archivo);
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+        }
+        crearIndice();
+    }
+
+    @Override
+    public ArbolB retornarArbol(){
+        return ARBOL;
+    }
+    
+    private void crearIndice() {
+        try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
+            ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
+            int posicion = 0;
+            while (sbc.read(buf) > 0) {
+                buf.rewind();
+                CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
+                String identificacion = registro.subSequence(0, CODIGO_LONGITUD).toString().trim();
+                ARBOL.insert(new LlaveEntero(Integer.parseInt(identificacion)), posicion);
+                tallerIndice.put(identificacion, posicion);
+                posicion++;
+                buf.flip();
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
 
     @Override
     public List<Taller> listarTalleres() {
@@ -59,55 +94,36 @@ public class FileTallerDAO implements TallerDAO {
         }
         return talleres;
     }
-    
-    @Override
-    public ArbolB CrearArbol() {
-       ArbolB arbol = new ArbolB(2);
-        try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
-            ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
-            while (sbc.read(buf) > 0) {
-                buf.rewind();
-                CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
-                Taller taller = parseTaller(registro);
-                 arbol.insert(new LlaveEntero(Integer.parseInt(taller.getCodigo())), "Dirección");
-                buf.flip();
-            }
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-        return arbol;
-    }
-
 
     @Override
     public Taller consultarTaller(String codigo) {
-        Taller taller = CACHE_TALLER.get(codigo);
-        if (taller != null) {
-            return taller;
+        
+        Integer cod = (Integer)ARBOL.search(new LlaveEntero(Integer.parseInt(codigo)));
+        if (cod == null) {
+            return null;
         }
+        return consultarTallerxCod(cod);
+    }
+
+    private Taller consultarTallerxCod(int cod) {
         try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
             ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
-            while (sbc.read(buf) > 0) {
-                buf.rewind();
-                CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
-                String id = registro.subSequence(0, CODIGO_LONGITUD).toString().trim();
-                if (id.equals(codigo)) {
-                    taller = parseTaller(registro);
-                    CACHE_TALLER.put(codigo, taller);
-                    return taller;
-                }
-                buf.flip();
-            }
+            sbc.position(cod * LONGITUD_REGISTRO);
+            sbc.read(buf);
+            buf.rewind();
+            CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
+            Taller taller = parseTaller(registro);
+            buf.flip();
+            return taller;
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
         return null;
     }
-
+    
     @Override
-    public boolean guardarTaller(Taller taller) {//throws LlaveDuplicadaException {
+    public boolean guardarTaller(Taller taller) {
         if (consultarTaller(taller.getCodigo()) != null) {
-           // throw new LlaveDuplicadaException();
            return false;
 
         }

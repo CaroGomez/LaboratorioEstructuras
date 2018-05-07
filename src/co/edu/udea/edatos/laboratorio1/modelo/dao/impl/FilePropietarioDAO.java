@@ -145,6 +145,7 @@ public class FilePropietarioDAO implements PropietarioDAO {
     public boolean guardarPropietario(Propietario propietario) {
         if (consultarPropietario(propietario.getId()) != null) {
             return false;
+            
         }
         String registro = parsePropietarioString(propietario);
         byte[] datos = registro.getBytes();

@@ -18,7 +18,7 @@ public class Taxi {
     private String Marca;
     private String Modelo;
     private String idPropietario;
-    
+
     private List<Taxi> taxis;
 
     public Taxi() {
@@ -31,8 +31,6 @@ public class Taxi {
         this.Modelo = Modelo;
         this.idPropietario = idPropietario;
     }
-
-    
 
     public String getPlaca() {
         return Placa;
@@ -86,7 +84,5 @@ public class Taxi {
     public String toString() {
         return Placa + " " + numero_taxi + " " + Marca + " " + Modelo + " " + idPropietario;
     }
-
-      
 
 }

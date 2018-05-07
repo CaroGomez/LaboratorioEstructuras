@@ -44,10 +44,10 @@ public class IngresoConductorController {
     ObservableList<Turno> turnoList = FXCollections.observableList(turnos);
     ObservableList<String> generoList = FXCollections.observableArrayList("Masculino", "Femenino");
 
-    private Stage stagePrincipal;
-
-    private ArbolB arbol = conductorDAO.CrearArbol();
+    private ArbolB arbol = conductorDAO.retornarArbol();
     private VerArbol ver = new VerArbol();
+    
+    private Stage stagePrincipal;
 
     public void setStagePrincipal(Stage stagePrincipal) {
         this.stagePrincipal = stagePrincipal;

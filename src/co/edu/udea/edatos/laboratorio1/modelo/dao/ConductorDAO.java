@@ -14,11 +14,12 @@ import java.util.List;
  * @author Carolina
  */
 public interface ConductorDAO {
+    
+    public ArbolB retornarArbol();
 
     public List<Conductor> listarConductores();
-    public ArbolB CrearArbol();
 
-    public Conductor consultarConductorxId(String identificacion);
+    public Conductor consultarConductor(String identificacion);
 
     public boolean guardarConductor(Conductor conductor); 
 

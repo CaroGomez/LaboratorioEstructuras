@@ -27,7 +27,7 @@ public class IngresoPropietarioController {
     Propietario propietario;
     PropietarioDAO propietarioDAO = new FilePropietarioDAO();
     
-    private ArbolB arbol = propietarioDAO.CrearArbol();
+    private ArbolB arbol = propietarioDAO.retornarArbol();
     private VerArbol ver = new VerArbol();
 
     private Stage stagePrincipal;

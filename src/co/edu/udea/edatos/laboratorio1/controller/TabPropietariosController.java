@@ -19,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 public class TabPropietariosController {
 
@@ -27,7 +28,7 @@ public class TabPropietariosController {
     List<Propietario> propietarios = propietarioDAO.listarPropietarios();
     ObservableList<Propietario> PropietariosList = FXCollections.observableList(propietarios);
 
-    private ArbolB arbol = propietarioDAO.CrearArbol();
+    private ArbolB arbol = propietarioDAO.retornarArbol();
     private VerArbol ver = new VerArbol();
 
     @FXML // ResourceBundle that was given to the FXMLLoader
@@ -63,9 +64,16 @@ public class TabPropietariosController {
     @FXML // fx:id="btnMostrar"
     private Button btnMostrar; // Value injected by FXMLLoader
 
+    @FXML // fx:id="txtBuscar"
+    private TextField txtBuscar; // Value injected by FXMLLoader
+
     @FXML
     void DoBuscar(ActionEvent event) {
-
+        Propietario pro = propietarioDAO.consultarPropietario(txtBuscar.getText());
+        if(pro != null){
+                System.out.println(pro.toString());
+        }
+        System.out.println("no se encontró ");
     }
 
     @FXML
@@ -93,5 +101,6 @@ public class TabPropietariosController {
         assert columTel != null : "fx:id=\"columTel\" was not injected: check your FXML file 'tabPropietarios.fxml'.";
         assert btnBuscar != null : "fx:id=\"btnBuscar\" was not injected: check your FXML file 'tabConductor.fxml'.";
         assert btnMostrar != null : "fx:id=\"btnMostrar\" was not injected: check your FXML file 'tabConductor.fxml'.";
+        assert txtBuscar != null : "fx:id=\"txtBuscar\" was not injected: check your FXML file 'tabPropietarios.fxml'.";
     }
 }

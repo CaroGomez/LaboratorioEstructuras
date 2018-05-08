@@ -19,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 public class TabTurnosController {
 
@@ -56,10 +57,27 @@ public class TabTurnosController {
 
     @FXML // fx:id="btnMostrar"
     private Button btnMostrar; // Value injected by FXMLLoader
+    
+    @FXML // fx:id="txtBuscar"
+    private TextField txtBuscar; // Value injected by FXMLLoader
+
+    @FXML // fx:id="btnTodos"
+    private Button btnTodos; // Value injected by FXMLLoader
 
     @FXML
     void DoBuscar(ActionEvent event) {
+        Turno tur = turnoDAO.consultarTurno(txtBuscar.getText());
+        if (tur != null) {
+            System.out.println(tur.toString());
+            turnos.clear();
+            turnos.add(tur);
+            table.setItems(turnosList);
+            table.refresh();
+            txtBuscar.clear();
 
+        } else {
+            System.out.println("no se encontró ");
+        }
     }
 
     @FXML
@@ -67,6 +85,14 @@ public class TabTurnosController {
 
         ver.mostrarArbol(arbol);
 
+    }
+    
+    @FXML
+    void DoTodos(ActionEvent event) {
+        turnos = turnoDAO.listarTurnos();
+        turnosList = FXCollections.observableList(turnos);
+        table.setItems(turnosList);
+        table.refresh();
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
@@ -83,6 +109,8 @@ public class TabTurnosController {
         assert columPlacaTaxi != null : "fx:id=\"columPlacaTaxi\" was not injected: check your FXML file 'tabTurnos.fxml'.";
         assert btnBuscar != null : "fx:id=\"btnBuscar\" was not injected: check your FXML file 'tabConductor.fxml'.";
         assert btnMostrar != null : "fx:id=\"btnMostrar\" was not injected: check your FXML file 'tabConductor.fxml'.";
+        assert txtBuscar != null : "fx:id=\"txtBuscar\" was not injected: check your FXML file 'tabTurnos.fxml'.";
+        assert btnTodos != null : "fx:id=\"btnTodos\" was not injected: check your FXML file 'tabTurnos.fxml'.";
 
     }
 }

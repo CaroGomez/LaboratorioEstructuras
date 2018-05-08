@@ -19,7 +19,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 
 public class TabConductorController {
 
@@ -67,28 +66,11 @@ public class TabConductorController {
     @FXML // fx:id="btnMostrar"
     private Button btnMostrar; // Value injected by FXMLLoader
 
-    @FXML // fx:id="txtBuscar"
-    private TextField txtBuscar; // Value injected by FXMLLoader
-
-    @FXML // fx:id="btnTodos"
-    private Button btnTodos; // Value injected by FXMLLoader
     
 
     @FXML
     void DoBuscar(ActionEvent event) {
-        
-        Conductor cond = conductorDAO.consultarConductor(txtBuscar.getText());
-        if (cond != null) {
-            System.out.println(cond.toString());
-            conductores.clear();
-            conductores.add(cond);
-            table.setItems(conductoresList);
-            table.refresh();
-            txtBuscar.clear();
 
-        } else {
-            System.out.println("no se encontró ");
-        }
     }
 
     @FXML
@@ -96,15 +78,7 @@ public class TabConductorController {
 
         ver.mostrarArbol(arbol);
        
-    }
-    
-     @FXML
-    void DoTodos(ActionEvent event) {
 
-        conductores = conductorDAO.listarConductores();
-        conductoresList = FXCollections.observableList(conductores);
-        table.setItems(conductoresList);
-        table.refresh();
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
@@ -127,8 +101,6 @@ public class TabConductorController {
         assert columCodTurn != null : "fx:id=\"columCodTurn\" was not injected: check your FXML file 'tabConductor.fxml'.";
         assert btnBuscar != null : "fx:id=\"btnBuscar\" was not injected: check your FXML file 'tabConductor.fxml'.";
         assert btnMostrar != null : "fx:id=\"btnMostrar\" was not injected: check your FXML file 'tabConductor.fxml'.";
-        assert txtBuscar != null : "fx:id=\"txtBuscar\" was not injected: check your FXML file 'tabConductor.fxml'.";
-        assert btnTodos != null : "fx:id=\"btnTodos\" was not injected: check your FXML file 'tabConductor.fxml'.";
-        
+     
     }
 }

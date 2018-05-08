@@ -1,4 +1,0 @@
-digraph g { 
- node [shape=record];
-Nodo1795826849[label="<P0>|12124|<P1>"];
-}

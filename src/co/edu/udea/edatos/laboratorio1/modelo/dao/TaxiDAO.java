@@ -15,9 +15,12 @@ import java.util.List;
  */
 public interface TaxiDAO {
     
-    public ArbolB CrearArbol();
+    public ArbolB retornarArbol();
+    
     public List<Taxi> listarTaxis();
-    public Taxi consultarTaxi(String numero_Taxi);
+    
+    public Taxi consultarTaxi(String placa_Taxi);
+    
     public Taxi consultarTaxixPlaca(String placa_taxi);
     public boolean guardarTaxi(Taxi taxi);
     

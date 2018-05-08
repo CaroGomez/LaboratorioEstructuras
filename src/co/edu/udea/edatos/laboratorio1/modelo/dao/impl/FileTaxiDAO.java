@@ -62,7 +62,7 @@ public class FileTaxiDAO implements TaxiDAO {
     }
 
     @Override
-    public ArbolB CrearArbol() {
+    public ArbolB retornarArbol() {
         ArbolB arbol = new ArbolB(2);
 
         try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
@@ -71,7 +71,7 @@ public class FileTaxiDAO implements TaxiDAO {
                 buf.rewind();
                 CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
                 Taxi taxi = parseTaxi(registro);
-                 arbol.insert(new LlaveCadena(taxi.getPlaca()), "Dirección");
+                arbol.insert(new LlaveCadena(taxi.getPlaca()), "Dirección");
                 buf.flip();
             }
         } catch (IOException ioe) {

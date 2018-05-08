@@ -1,8 +1,8 @@
 digraph g { 
  node [shape=record];
-Nodo1518727732[label="<P0>|6862|<P1>"];
-Nodo885639801[label="<P0>|39|<P1>|1234|<P2>|3834|<P3>"];
-Nodo1518727732:P0 -> Nodo885639801;
-Nodo167606802[label="<P0>|7582|<P1>|8562|<P2>"];
-Nodo1518727732:P1 -> Nodo167606802;
+Nodo1451760011[label="<P0>|HSU942|<P1>"];
+Nodo751080324[label="<P0>|BKW947|<P1>|DLF923|<P2>"];
+Nodo1451760011:P0 -> Nodo751080324;
+Nodo891866615[label="<P0>|LJA018|<P1>|LSA104|<P2>"];
+Nodo1451760011:P1 -> Nodo891866615;
 }

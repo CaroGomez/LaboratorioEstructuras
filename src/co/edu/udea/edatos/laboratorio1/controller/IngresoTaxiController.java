@@ -48,7 +48,7 @@ public class IngresoTaxiController {
 
     ObservableList<Propietario> PropietariosList = FXCollections.observableList(propietarios);
 
-    private ArbolB arbol = taxiDAO.CrearArbol();
+    private ArbolB arbol = taxiDAO.retornarArbol();
     private VerArbol ver = new VerArbol();
 
     Propietario prop;

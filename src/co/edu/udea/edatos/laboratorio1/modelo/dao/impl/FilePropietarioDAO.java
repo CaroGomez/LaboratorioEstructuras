@@ -68,7 +68,6 @@ public class FilePropietarioDAO implements PropietarioDAO {
                 buf.rewind();
                 CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
                 String identificacion = registro.subSequence(0, IDENTIFICACION_LONGITUD).toString().trim();
-                //INSERTA EN EL INDICE: HASH O ÁRBOL (LO QUE SEA)
                 ARBOL.insert(new LlaveEntero(Integer.parseInt(identificacion)), posicion);
                 propietarioIndice.put(identificacion, posicion);
                 posicion++;

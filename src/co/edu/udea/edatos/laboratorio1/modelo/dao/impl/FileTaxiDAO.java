@@ -7,7 +7,6 @@ package co.edu.udea.edatos.laboratorio1.modelo.dao.impl;
 
 import ArbolB.ArbolB;
 import ArbolB.LlaveCadena;
-import ArbolB.LlaveEntero;
 import co.edu.udea.edatos.laboratorio1.modelo.Taxi;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.TaxiDAO;
 import java.io.IOException;
@@ -42,43 +41,7 @@ public class FileTaxiDAO implements TaxiDAO {
     private static final Path archivo = Paths.get(NOMBRE_ARCHIVO);
     public static final String ENCODING_WINDOWS = "Cp1252";
 
-    private static final Map<String, Integer> taxiIndice = new HashMap<>();
-    private static final ArbolB ARBOL = new ArbolB(2);
-    
-    public FileTaxiDAO() {
-        if (!Files.exists(archivo)) {
-            try {
-                Files.createFile(archivo);
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-            }
-        }
-        crearIndice();
-    }
-    
-    @Override
-    public ArbolB retornarArbol(){
-        return ARBOL;
-    }
-    
-    private void crearIndice() {
-        try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
-            ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
-            int posicion = 0;
-            while (sbc.read(buf) > 0) {
-                buf.rewind();
-                CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
-                String identificacion = registro.subSequence(0, PLACA_LONGITUD).toString().trim();
-                ARBOL.insert(new LlaveEntero(Integer.parseInt(identificacion)), posicion);
-                taxiIndice.put(identificacion, posicion);
-                posicion++;
-                buf.flip();
-            }
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-    }
-    
+    private static final Map<String, Taxi> CACHE_TAXI = new HashMap<>();
 
     @Override
     public List<Taxi> listarTaxis() {
@@ -98,28 +61,44 @@ public class FileTaxiDAO implements TaxiDAO {
         return taxis;
     }
 
-    
+    @Override
+    public ArbolB CrearArbol() {
+        ArbolB arbol = new ArbolB(2);
+
+        try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
+            ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
+            while (sbc.read(buf) > 0) {
+                buf.rewind();
+                CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
+                Taxi taxi = parseTaxi(registro);
+                 arbol.insert(new LlaveCadena(taxi.getPlaca()), "Dirección");
+                buf.flip();
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return arbol;
+    }
 
     @Override
     public Taxi consultarTaxi(String numero_Taxi) {
-        Integer placa = (Integer)ARBOL.search(new LlaveEntero(Integer.parseInt(numero_Taxi)));
-        if (placa == null) {
-            return null;
+        Taxi taxi = CACHE_TAXI.get(numero_Taxi);
+        if (taxi != null) {
+            return taxi;
         }
-        return consultarTaxixPlaca(placa);
-    }
-    
-
-    public Taxi consultarTaxixPlaca(int placa) {
         try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
             ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
-            sbc.position(placa * LONGITUD_REGISTRO);
-            sbc.read(buf);
-            buf.rewind();
-            CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
-            Taxi taxi = parseTaxi(registro);
-            buf.flip();
-            return taxi;
+            while (sbc.read(buf) > 0) {
+                buf.rewind();
+                CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
+                String id = registro.subSequence(6, (6 + NUMERO_LONGITUD)).toString().trim();
+                if (id.equals(numero_Taxi)) {
+                    taxi = parseTaxi(registro);
+                    CACHE_TAXI.put(numero_Taxi, taxi);
+                    return taxi;
+                }
+                buf.flip();
+            }
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -127,8 +106,38 @@ public class FileTaxiDAO implements TaxiDAO {
     }
 
     @Override
-    public boolean guardarTaxi(Taxi taxi) {
-        if (consultarTaxi(taxi.getPlaca()) != null) {
+    public Taxi consultarTaxixPlaca(String placa_taxi) {
+        Taxi taxi = CACHE_TAXI.get(placa_taxi);
+        if (taxi != null) {
+            return taxi;
+        }
+        try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
+            ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
+            while (sbc.read(buf) > 0) {
+                buf.rewind();
+                CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
+                String id = registro.subSequence(0, PLACA_LONGITUD).toString().trim();
+                if (id.equals(placa_taxi)) {
+                    taxi = parseTaxi(registro);
+                    CACHE_TAXI.put(placa_taxi, taxi);
+                    return taxi;
+                }
+                buf.flip();
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public boolean guardarTaxi(Taxi taxi) {//throws LlaveDuplicadaException {
+        if (consultarTaxixPlaca(taxi.getPlaca()) != null) {
+            //throw new LlaveDuplicadaException();
+            return false;
+        }
+        if (consultarTaxi(taxi.getNumero_taxi()) != null) {
+            //throw new LlaveDuplicadaException();
             return false;
         }
         String registro = parseTaxiString(taxi);

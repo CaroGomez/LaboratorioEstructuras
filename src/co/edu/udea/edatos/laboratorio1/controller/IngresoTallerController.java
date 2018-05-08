@@ -23,7 +23,7 @@ public class IngresoTallerController {
     private LaboratiorioController controllerLab;
     TallerDAO tallerDAO = new FileTallerDAO();
 
-    private ArbolB arbol = tallerDAO.CrearArbol();
+    private ArbolB arbol = tallerDAO.retornarArbol();
     private VerArbol ver = new VerArbol();
     
     public void setStagePrincipal(Stage stagePrincipal) {

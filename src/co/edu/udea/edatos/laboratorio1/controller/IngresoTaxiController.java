@@ -45,14 +45,12 @@ public class IngresoTaxiController {
     TaxiDAO taxiDAO = new FileTaxiDAO();
 
     List<Propietario> propietarios = propietarioDAO.listarPropietarios();
-   
-    
-    ObservableList<Propietario> PropietariosList = FXCollections.observableList(propietarios);
-   
 
-    private ArbolB arbol = taxiDAO.retornarArbol();
+    ObservableList<Propietario> PropietariosList = FXCollections.observableList(propietarios);
+
+    private ArbolB arbol = taxiDAO.CrearArbol();
     private VerArbol ver = new VerArbol();
-    
+
     Propietario prop;
 
     @FXML // ResourceBundle that was given to the FXMLLoader
@@ -67,7 +65,7 @@ public class IngresoTaxiController {
     @FXML // fx:id="txtNumTaxi"
     private TextField txtNumTaxi; // Value injected by FXMLLoader
 
-   @FXML // fx:id="txtProp"
+    @FXML // fx:id="txtProp"
     private TextField txtProp; // Value injected by FXMLLoader
 
     @FXML // fx:id="txtMarca"
@@ -99,8 +97,7 @@ public class IngresoTaxiController {
 
     @FXML // fx:id="columTel"
     private TableColumn<Propietario, String> columTel; // Value injected by FXMLLoader
-    
-    
+
     @FXML // fx:id="listViewProp"
     private ListView<Propietario> listViewProp; // Value injected by FXMLLoader
 
@@ -165,23 +162,21 @@ public class IngresoTaxiController {
 
     @FXML
     void DoSelect(ActionEvent event) {
-      txtProp.clear();
-      txtProp.setText(prop.toString());
-       
-       PaneResult.setVisible(false);
-       
-    }
-    
-    
-    @FXML
-    void DoSelectThis(MouseEvent event) { // arreglar esto 
-        prop = new Propietario(columId.getCellData(0), columNom.getCellData(0), columApe.getCellData(0), columGen.getCellData(0).charAt(0), columEdad.getCellData(0), columTel.getCellData(0));
-       
-        
+        prop = tableResul.getSelectionModel().getSelectedItem();
+
+        txtProp.clear();
+        txtProp.setText(prop.toString());
+
+        PaneResult.setVisible(false);
+
     }
 
-    
-    
+    @FXML
+    void DoSelectThis(MouseEvent event) { // arreglar esto 
+        //prop = new Propietario(columId.getCellData(0), columNom.getCellData(0), columApe.getCellData(0), columGen.getCellData(0).charAt(0), columEdad.getCellData(0), columTel.getCellData(0));
+
+    }
+
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         tableResul.setItems(PropietariosList);
@@ -208,6 +203,6 @@ public class IngresoTaxiController {
         assert columTel != null : "fx:id=\"columTel\" was not injected: check your FXML file 'IngresoTaxi.fxml'.";
         assert btnBusProp != null : "fx:id=\"btnBusProp\" was not injected: check your FXML file 'IngresoTaxi.fxml'.";
         assert btnSelec != null : "fx:id=\"btnSelec\" was not injected: check your FXML file 'IngresoTaxi.fxml'.";
-         assert listViewProp != null : "fx:id=\"listViewProp\" was not injected: check your FXML file 'IngresoTaxi.fxml'.";
+        assert listViewProp != null : "fx:id=\"listViewProp\" was not injected: check your FXML file 'IngresoTaxi.fxml'.";
     }
 }

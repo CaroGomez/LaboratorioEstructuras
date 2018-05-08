@@ -60,7 +60,7 @@ public class FilePropietarioDAO implements PropietarioDAO {
     }
     
     private void crearIndice() {
-        System.out.println("Creando Indice del archivo: propietario");
+        //System.out.println("Creando Indice del archivo: propietario");
         try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
             ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
             int posicion = 0;

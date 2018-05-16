@@ -118,7 +118,8 @@ public class LaboratiorioController {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
 
-                ProgramaPrincipal.mostrarIngresoTaxi();
+                IngresarTaxi(event);
+                //ProgramaPrincipal.mostrarIngresoTaxi();
 
             }
         } else {
@@ -143,7 +144,8 @@ public class LaboratiorioController {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
 
-                ProgramaPrincipal.mostrarIngresoTurno();
+                doIngresarTurno(event);
+                //ProgramaPrincipal.mostrarIngresoTurno();
 
             }
         } else {

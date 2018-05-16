@@ -113,7 +113,16 @@ public class TabPropietariosController {
     @FXML
     void DoMostrar(ActionEvent event) {
 
-        ver.mostrarArbol(arbol);
+        if (!propietarios.isEmpty()) {
+            ver.mostrarArbol(arbol);
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("El arbol está vacío");
+                alert.showAndWait();
+        }
 
     }
 

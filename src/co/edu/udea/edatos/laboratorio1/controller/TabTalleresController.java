@@ -99,7 +99,16 @@ public class TabTalleresController {
     @FXML
     void DoMostrar(ActionEvent event) {
 
-        ver.mostrarArbol(arbol);
+       if (!talleres.isEmpty()) {
+            ver.mostrarArbol(arbol);
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("El arbol está vacío");
+                alert.showAndWait();
+        }
 
     }
 

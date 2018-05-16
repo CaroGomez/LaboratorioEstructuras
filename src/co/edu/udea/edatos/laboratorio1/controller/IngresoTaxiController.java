@@ -138,7 +138,7 @@ public class IngresoTaxiController {
             Taxi taxi = new Taxi(placa, numTaxi, marca, modelo, pro.getId());
 
             if (taxiDAO.guardarTaxi(taxi)) {
-                arbol.insert(new LlaveCadena(taxi.getPlaca()), " dirección en disco");
+                arbol.insert(new LlaveCadena(taxi.getPlaca()), "");
                 stagePrincipal.close();
             } else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);

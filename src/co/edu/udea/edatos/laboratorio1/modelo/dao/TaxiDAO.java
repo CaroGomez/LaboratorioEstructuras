@@ -21,7 +21,7 @@ public interface TaxiDAO {
     
     public Taxi consultarTaxi(String placa_Taxi);
     
-    public Taxi consultarTaxixPlaca(String placa_taxi);
+    //public Taxi consultarTaxixPlaca(String placa_taxi);
     public boolean guardarTaxi(Taxi taxi);
     
 }

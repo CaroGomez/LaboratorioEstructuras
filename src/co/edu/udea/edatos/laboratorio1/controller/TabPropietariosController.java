@@ -16,6 +16,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -72,17 +73,32 @@ public class TabPropietariosController {
 
     @FXML
     void DoBuscar(ActionEvent event) {
-        Propietario pro = propietarioDAO.consultarPropietario(txtBuscar.getText());
-        if (pro != null) {
-            System.out.println(pro.toString());
-            propietarios.clear();
-            propietarios.add(pro);
-            table.setItems(PropietariosList);
-            table.refresh();
-            txtBuscar.clear();
+        if (txtBuscar.getText().matches("([0-9])+")) {
+            Propietario pro = propietarioDAO.consultarPropietario(txtBuscar.getText());
 
+            if (pro != null) {
+                System.out.println(pro.toString());
+                propietarios.clear();
+                propietarios.add(pro);
+                table.setItems(PropietariosList);
+                table.refresh();
+                txtBuscar.clear();
+
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("No enconttrado");
+                alert.setHeaderText(null);
+                alert.setContentText("El Id buscado no existe");
+                alert.showAndWait();
+                txtBuscar.clear();
+            }
         } else {
-            System.out.println("no se encontró ");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Ingrese sólo números");
+            alert.showAndWait();
+            txtBuscar.clear();
         }
     }
 

@@ -1,7 +1,6 @@
 /**
  * Sample Skeleton for 'tabTalleres.fxml' Controller Class
  */
-
 package co.edu.udea.edatos.laboratorio1.controller;
 
 import ArbolB.ArbolB;
@@ -17,18 +16,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 public class TabTalleresController {
-    
+
     TallerDAO tallerDAO = new FileTallerDAO();
-    
+
     List<Taller> talleres = tallerDAO.listarTalleres();
     ObservableList<Taller> talleresList = FXCollections.observableList(talleres);
-    
+
     private ArbolB arbol = tallerDAO.retornarArbol();
     private VerArbol ver = new VerArbol();
 
@@ -52,7 +52,7 @@ public class TabTalleresController {
 
     @FXML // fx:id="columDir"
     private TableColumn<Taller, String> columDir; // Value injected by FXMLLoader
-    
+
     @FXML // fx:id="btnBuscar"
     private Button btnBuscar; // Value injected by FXMLLoader
 
@@ -68,17 +68,31 @@ public class TabTalleresController {
     @FXML
     void DoBuscar(ActionEvent event) {
 
-        Taller tall = tallerDAO.consultarTaller(txtBuscar.getText());
-        if (tall != null) {
-            System.out.println(tall.toString());
-            talleres.clear();
-            talleres.add(tall);
-            table.setItems(talleresList);
-            table.refresh();
-            txtBuscar.clear();
+        if (txtBuscar.getText().matches("([0-9])+")) {
+            Taller tall = tallerDAO.consultarTaller(txtBuscar.getText());
+            if (tall != null) {
+                System.out.println(tall.toString());
+                talleres.clear();
+                talleres.add(tall);
+                table.setItems(talleresList);
+                table.refresh();
+                txtBuscar.clear();
 
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("No enconttrado");
+                alert.setHeaderText(null);
+                alert.setContentText("El codigo buscado no existe");
+                alert.showAndWait();
+                txtBuscar.clear();
+            }
         } else {
-            System.out.println("no se encontró ");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Ingrese sólo números");
+            alert.showAndWait();
+            txtBuscar.clear();
         }
     }
 
@@ -86,9 +100,9 @@ public class TabTalleresController {
     void DoMostrar(ActionEvent event) {
 
         ver.mostrarArbol(arbol);
-       
+
     }
-    
+
     @FXML
     void DoTodos(ActionEvent event) {
 

@@ -18,6 +18,6 @@ public interface TurnoDAO {
     public List<Turno> listarTurnos();
     public Turno consultarTurno(String codigo);
     public boolean guardarTurno(Turno turno);
-    public ArbolB CrearArbol();
+    public ArbolB retornarArbol();
     
 }

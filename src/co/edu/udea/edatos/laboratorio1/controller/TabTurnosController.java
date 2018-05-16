@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -28,7 +29,7 @@ public class TabTurnosController {
     List<Turno> turnos = turnoDAO.listarTurnos();
     ObservableList<Turno> turnosList = FXCollections.observableList(turnos);
 
-    private ArbolB arbol = turnoDAO.CrearArbol();
+    private ArbolB arbol = turnoDAO.retornarArbol();
     private VerArbol ver = new VerArbol();
 
     @FXML // ResourceBundle that was given to the FXMLLoader
@@ -57,7 +58,7 @@ public class TabTurnosController {
 
     @FXML // fx:id="btnMostrar"
     private Button btnMostrar; // Value injected by FXMLLoader
-    
+
     @FXML // fx:id="txtBuscar"
     private TextField txtBuscar; // Value injected by FXMLLoader
 
@@ -66,17 +67,33 @@ public class TabTurnosController {
 
     @FXML
     void DoBuscar(ActionEvent event) {
-        Turno tur = turnoDAO.consultarTurno(txtBuscar.getText());
-        if (tur != null) {
-            System.out.println(tur.toString());
-            turnos.clear();
-            turnos.add(tur);
-            table.setItems(turnosList);
-            table.refresh();
-            txtBuscar.clear();
+        if (txtBuscar.getText().matches("([0-9])+")) {
+            Turno tur = turnoDAO.consultarTurno(txtBuscar.getText());
+            
+            if (tur != null) {
+                System.out.println(tur.toString());
+                turnos.clear();
+                turnos.add(tur);
+                table.setItems(turnosList);
+                table.refresh();
+                txtBuscar.clear();
 
-        } else {
-            System.out.println("no se encontró ");
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("No enconttrado");
+                alert.setHeaderText(null);
+                alert.setContentText("El codigo buscado no existe");
+                alert.showAndWait();
+                txtBuscar.clear();
+            }
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Ingrese sólo números");
+            alert.showAndWait();
+            txtBuscar.clear();
         }
     }
 
@@ -86,7 +103,7 @@ public class TabTurnosController {
         ver.mostrarArbol(arbol);
 
     }
-    
+
     @FXML
     void DoTodos(ActionEvent event) {
         turnos = turnoDAO.listarTurnos();

@@ -16,6 +16,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -72,33 +73,47 @@ public class TabConductorController {
 
     @FXML // fx:id="btnTodos"
     private Button btnTodos; // Value injected by FXMLLoader
-    
 
     @FXML
     void DoBuscar(ActionEvent event) {
-        
-        Conductor cond = conductorDAO.consultarConductor(txtBuscar.getText());
-        if (cond != null) {
-            System.out.println(cond.toString());
-            conductores.clear();
-            conductores.add(cond);
-            table.setItems(conductoresList);
-            table.refresh();
-            txtBuscar.clear();
+        if (txtBuscar.getText().matches("([0-9])+")) {
+            Conductor cond = conductorDAO.consultarConductor(txtBuscar.getText());
 
+            if (cond != null) {
+                System.out.println(cond.toString());
+                conductores.clear();
+                conductores.add(cond);
+                table.setItems(conductoresList);
+                table.refresh();
+                txtBuscar.clear();
+
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("No enconttrado");
+                alert.setHeaderText(null);
+                alert.setContentText("El Id buscado no existe");
+                alert.showAndWait();
+                txtBuscar.clear();
+            }
         } else {
-            System.out.println("no se encontró ");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Ingrese sólo números");
+            alert.showAndWait();
+            txtBuscar.clear();
         }
+
     }
 
     @FXML
     void DoMostrar(ActionEvent event) {
 
         ver.mostrarArbol(arbol);
-       
+
     }
-    
-     @FXML
+
+    @FXML
     void DoTodos(ActionEvent event) {
 
         conductores = conductorDAO.listarConductores();
@@ -129,6 +144,6 @@ public class TabConductorController {
         assert btnMostrar != null : "fx:id=\"btnMostrar\" was not injected: check your FXML file 'tabConductor.fxml'.";
         assert txtBuscar != null : "fx:id=\"txtBuscar\" was not injected: check your FXML file 'tabConductor.fxml'.";
         assert btnTodos != null : "fx:id=\"btnTodos\" was not injected: check your FXML file 'tabConductor.fxml'.";
-        
+
     }
 }

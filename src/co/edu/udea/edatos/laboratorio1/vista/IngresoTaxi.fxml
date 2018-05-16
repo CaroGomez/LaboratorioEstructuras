@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" onMouseClicked="#DoSelectThis" prefHeight="400.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.udea.edatos.laboratorio1.controller.IngresoTaxiController">
+<AnchorPane id="AnchorPane" onMouseClicked="#DoSelectThis" prefHeight="400.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.udea.edatos.laboratorio1.controller.IngresoTaxiController">
    <children>
       <Label layoutX="113.0" layoutY="93.0" text="Placa:" />
       <TextField fx:id="txtPlaca" layoutX="257.0" layoutY="89.0" />
@@ -28,9 +28,9 @@
          </font>
       </Label>
       <Button fx:id="btnBusProp" layoutX="450.0" layoutY="284.0" mnemonicParsing="false" onAction="#doBuscarpro" prefHeight="25.0" prefWidth="118.0" text="Buscar Propietario" />
-      <AnchorPane fx:id="PaneResult" layoutX="14.0" layoutY="1.0" prefHeight="400.0" prefWidth="554.0" visible="false">
+      <AnchorPane fx:id="PaneResult" layoutX="14.0" layoutY="1.0" prefHeight="421.0" prefWidth="560.0" visible="false">
          <children>
-            <TableView fx:id="tableResul" layoutX="-14.0" onMouseClicked="#DoSelectThis" prefHeight="354.0" prefWidth="567.0">
+            <TableView fx:id="tableResul" layoutX="-14.0" onMouseClicked="#DoSelectThis" prefHeight="380.0" prefWidth="574.0">
             <columns>
                 <TableColumn fx:id="columId" prefWidth="89.0" text="Id" />
                 <TableColumn fx:id="columNom" prefWidth="125.0" text="Nombres" />
@@ -40,7 +40,7 @@
             <TableColumn fx:id="columTel" prefWidth="145.0" text="Teléfono " />
             </columns>
         </TableView>
-            <Button fx:id="btnSelec" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#DoSelect" prefHeight="25.0" prefWidth="79.0" text="Seleccionar" />
+            <Button fx:id="btnSelec" layoutX="14.0" layoutY="382.0" mnemonicParsing="false" onAction="#DoSelect" prefHeight="25.0" prefWidth="79.0" text="Seleccionar" />
          </children>
       </AnchorPane>
    </children>

@@ -90,7 +90,7 @@ public class IngresoPropietarioController {
             propietario = new Propietario(id, nombre, apellido, genero, edad, telefono);
 
             if (propietarioDAO.guardarPropietario(propietario)) {
-              arbol.insert(new LlaveEntero(Integer.parseInt(propietario.getId())), " dirección en disco");
+              arbol.insert(new LlaveEntero(Integer.parseInt(propietario.getId())),"");
                 stagePrincipal.close();
             }
             else{

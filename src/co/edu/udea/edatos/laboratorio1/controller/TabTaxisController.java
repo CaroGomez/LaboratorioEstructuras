@@ -16,6 +16,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -66,20 +67,34 @@ public class TabTaxisController {
 
     @FXML // fx:id="btnTodos"
     private Button btnTodos; // Value injected by FXMLLoader
-    
+
     @FXML
     void DoBuscar(ActionEvent event) {
-        Taxi tax = taxiDAO.consultarTaxi(txtBuscar.getText());
-        if (tax != null) {
-            System.out.println(tax.toString());
-            taxis.clear();
-            taxis.add(tax);
-            table.setItems(taxisList);
-            table.refresh();
-            txtBuscar.clear();
+        if (txtBuscar.getText().matches("([0-9A-Za-z])+")) {
+            Taxi tax = taxiDAO.consultarTaxi(txtBuscar.getText());
+            if (tax != null) {
+                System.out.println(tax.toString());
+                taxis.clear();
+                taxis.add(tax);
+                table.setItems(taxisList);
+                table.refresh();
+                txtBuscar.clear();
 
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("No enconttrado");
+                alert.setHeaderText(null);
+                alert.setContentText("La placa buscada no existe");
+                alert.showAndWait();
+                txtBuscar.clear();
+            }
         } else {
-            System.out.println("no se encontró ");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Ingrese solo números y letras");
+            alert.showAndWait();
+            txtBuscar.clear();
         }
     }
 
@@ -89,7 +104,7 @@ public class TabTaxisController {
         ver.mostrarArbol(arbol);
 
     }
-    
+
     @FXML
     void DoTodos(ActionEvent event) {
         taxis = taxiDAO.listarTaxis();

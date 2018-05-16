@@ -7,8 +7,10 @@ package co.edu.udea.edatos.laboratorio1.modelo.dao.impl;
 
 import ArbolB.ArbolB;
 import ArbolB.LlaveEntero;
+import co.edu.udea.edatos.laboratorio1.modelo.Propietario;
 import co.edu.udea.edatos.laboratorio1.modelo.Turno;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.TurnoDAO;
+import static co.edu.udea.edatos.laboratorio1.modelo.dao.impl.FilePropietarioDAO.ENCODING_WINDOWS;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -42,7 +44,43 @@ public class FileTurnoDAO implements TurnoDAO {
     private static final Path archivo = Paths.get(NOMBRE_ARCHIVO);
     public static final String ENCODING_WINDOWS = "Cp1252";
 
-    private static final Map<String, Turno> CACHE_TURNO = new HashMap<>();
+    private static final Map<String, Integer> turnoIndice = new HashMap<>();
+    private static final ArbolB ARBOL = new ArbolB(2);
+
+    public FileTurnoDAO() {
+        if (!Files.exists(archivo)) {
+            try {
+                Files.createFile(archivo);
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+        }
+        crearIndice();
+    }
+
+    @Override
+    public ArbolB retornarArbol(){
+        return ARBOL;
+    }
+    
+    private void crearIndice() {
+        System.out.println("Creando Indice del archivo: turno");
+        try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
+            ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
+            int posicion = 0;
+            while (sbc.read(buf) > 0) {
+                buf.rewind();
+                CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
+                String codigo = registro.subSequence(0, CODIGO_LONGITUD).toString().trim();
+                ARBOL.insert(new LlaveEntero(Integer.parseInt(codigo)), posicion);
+                turnoIndice.put(codigo, posicion);
+                posicion++;
+                buf.flip();
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
 
     @Override
     public List<Turno> listarTurnos() {
@@ -62,7 +100,7 @@ public class FileTurnoDAO implements TurnoDAO {
         return turnos;
     }
     
-    @Override
+    /*@Override
     public ArbolB CrearArbol() {
         ArbolB arbol = new ArbolB(2);
         try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
@@ -78,33 +116,34 @@ public class FileTurnoDAO implements TurnoDAO {
             ioe.printStackTrace();
         }
         return arbol;
-    }
+    }*/
 
     @Override
     public Turno consultarTurno(String codigo) {
-        Turno turno = CACHE_TURNO.get(codigo);
-        if (turno != null) {
-            return turno;
+       
+        Integer dir = (Integer)ARBOL.search(new LlaveEntero(Integer.parseInt(codigo)));
+        if (dir == null) {
+            return null;
         }
+        return consultarTurnoxDir(dir);
+    }
+
+    private Turno consultarTurnoxDir(int dir) {
         try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
             ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
-            while (sbc.read(buf) > 0) {
-                buf.rewind();
-                CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
-                String id = registro.subSequence(0, CODIGO_LONGITUD).toString().trim();
-                if (id.equals(codigo)) {
-                    turno = parseTurno(registro);
-                    CACHE_TURNO.put(codigo, turno);
-                    return turno;
-                }
-                buf.flip();
-            }
+            sbc.position(dir * LONGITUD_REGISTRO);
+            sbc.read(buf);
+            buf.rewind();
+            CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
+            Turno turno = parseTurno(registro);
+            buf.flip();
+            return turno;
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
         return null;
     }
-
+    
     @Override
     public boolean guardarTurno(Turno turno) {//throws LlaveDuplicadaException {
         if (consultarTurno(turno.getCodigo()) != null) {

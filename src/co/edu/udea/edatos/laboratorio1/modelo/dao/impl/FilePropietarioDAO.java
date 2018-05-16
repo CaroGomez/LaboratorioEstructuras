@@ -54,6 +54,7 @@ public class FilePropietarioDAO implements PropietarioDAO {
         crearIndice();
     }
 
+    
     @Override
     public ArbolB retornarArbol(){
         return ARBOL;

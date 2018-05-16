@@ -7,8 +7,11 @@ package co.edu.udea.edatos.laboratorio1.modelo.dao.impl;
 
 import ArbolB.ArbolB;
 import ArbolB.LlaveCadena;
+import ArbolB.LlaveEntero;
+import co.edu.udea.edatos.laboratorio1.modelo.Propietario;
 import co.edu.udea.edatos.laboratorio1.modelo.Taxi;
 import co.edu.udea.edatos.laboratorio1.modelo.dao.TaxiDAO;
+import static co.edu.udea.edatos.laboratorio1.modelo.dao.impl.FilePropietarioDAO.ENCODING_WINDOWS;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -41,7 +44,43 @@ public class FileTaxiDAO implements TaxiDAO {
     private static final Path archivo = Paths.get(NOMBRE_ARCHIVO);
     public static final String ENCODING_WINDOWS = "Cp1252";
 
-    private static final Map<String, Taxi> CACHE_TAXI = new HashMap<>();
+    private static final Map<String, Integer> taxiIndice = new HashMap<>();
+    private static final ArbolB ARBOL = new ArbolB(2);
+
+    public FileTaxiDAO() {
+        if (!Files.exists(archivo)) {
+            try {
+                Files.createFile(archivo);
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+        }
+        crearIndice();
+    }
+
+    @Override
+    public ArbolB retornarArbol() {
+        return ARBOL;
+    }
+
+    private void crearIndice() {
+        System.out.println("Creando Indice del archivo: Taxi");
+        try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
+            ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
+            int posicion = 0;
+            while (sbc.read(buf) > 0) {
+                buf.rewind();
+                CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
+                String placa = registro.subSequence(0, PLACA_LONGITUD).toString().trim();
+                ARBOL.insert(new LlaveCadena(placa), posicion);
+                taxiIndice.put(placa, posicion);
+                posicion++;
+                buf.flip();
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
 
     @Override
     public List<Taxi> listarTaxis() {
@@ -60,8 +99,34 @@ public class FileTaxiDAO implements TaxiDAO {
         }
         return taxis;
     }
-
+    
     @Override
+    public Taxi consultarTaxi(String placa) {
+       
+        Integer dir = (Integer)ARBOL.search(new LlaveCadena(placa));
+        if (dir == null) {
+            return null;
+        }
+        return consultarTaxixDir(dir);
+    }
+
+    private Taxi consultarTaxixDir(int dir) {
+        try (SeekableByteChannel sbc = Files.newByteChannel(archivo)) {
+            ByteBuffer buf = ByteBuffer.allocate(LONGITUD_REGISTRO);
+            sbc.position(dir * LONGITUD_REGISTRO);
+            sbc.read(buf);
+            buf.rewind();
+            CharBuffer registro = Charset.forName(ENCODING_WINDOWS).decode(buf);
+            Taxi taxi = parseTaxi(registro);
+            buf.flip();
+            return taxi;
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return null;
+    }
+
+    /*@Override
     public ArbolB retornarArbol() {
         ArbolB arbol = new ArbolB(2);
 
@@ -78,9 +143,9 @@ public class FileTaxiDAO implements TaxiDAO {
             ioe.printStackTrace();
         }
         return arbol;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public Taxi consultarTaxi(String numero_Taxi) {
         Taxi taxi = CACHE_TAXI.get(numero_Taxi);
         if (taxi != null) {
@@ -128,18 +193,15 @@ public class FileTaxiDAO implements TaxiDAO {
             ioe.printStackTrace();
         }
         return null;
-    }
+    }*/
 
     @Override
     public boolean guardarTaxi(Taxi taxi) {//throws LlaveDuplicadaException {
-        if (consultarTaxixPlaca(taxi.getPlaca()) != null) {
+        if (consultarTaxi(taxi.getPlaca()) != null) {
             //throw new LlaveDuplicadaException();
             return false;
         }
-        if (consultarTaxi(taxi.getNumero_taxi()) != null) {
-            //throw new LlaveDuplicadaException();
-            return false;
-        }
+        
         String registro = parseTaxiString(taxi);
         byte[] datos = registro.getBytes();
         ByteBuffer buffer = ByteBuffer.wrap(datos);

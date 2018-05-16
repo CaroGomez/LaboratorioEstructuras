@@ -36,7 +36,7 @@ public class IngresoTurnoController {
     List<Taxi> taxis = taxiDAO.listarTaxis();
     ObservableList<Taxi> taxiList = FXCollections.observableList(taxis);
     
-    private ArbolB arbol = turnoDAO.CrearArbol();
+    private ArbolB arbol = turnoDAO.retornarArbol();
     private VerArbol ver = new VerArbol();
 
 
@@ -91,7 +91,7 @@ public class IngresoTurnoController {
         } else {
             Turno turno = new Turno(cod, horario, horas, taxi.getPlaca());
             if (turnoDAO.guardarTurno(turno)) {
-                arbol.insert(new LlaveEntero(Integer.parseInt(turno.getCodigo())), " dirección en disco");
+                arbol.insert(new LlaveEntero(Integer.parseInt(turno.getCodigo())), "");
                 stagePrincipal.close();
             } else {
 

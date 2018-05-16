@@ -29,7 +29,7 @@ public class Main extends Application {
     public void start(Stage stagePrincipal) throws Exception {
         this.stagePrincipal = stagePrincipal;
         mostrarVentanaPrincipal();
-           
+
     }
 
     /*
@@ -46,8 +46,8 @@ public class Main extends Application {
             controller.setProgramaPrincipal(this);
             stagePrincipal.show();
         } catch (IOException e) {
+        }
     }
-}
 
     public void mostrarIngresoTaxi() {
         try {
@@ -63,9 +63,9 @@ public class Main extends Application {
             ventana.show();
 
         } catch (Exception e) {
+        }
     }
-}
-    
+
     public void mostrarIngresoPropietario() {
         try {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("IngresoPropietario.fxml"));
@@ -80,9 +80,9 @@ public class Main extends Application {
             ventana.show();
 
         } catch (Exception e) {
+        }
     }
-}
-    
+
     public void mostrarIngresoTaller() {
         try {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("IngresoTaller.fxml"));
@@ -97,9 +97,9 @@ public class Main extends Application {
             ventana.show();
 
         } catch (Exception e) {
+        }
     }
-}
-    
+
     public void mostrarIngresoTurno() {
         try {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("IngresoTurno.fxml"));
@@ -114,8 +114,8 @@ public class Main extends Application {
             ventana.show();
 
         } catch (Exception e) {
+        }
     }
-}
     public void mostrarIngresoConductor() {
         try {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("IngresoConductor.fxml"));
@@ -130,9 +130,9 @@ public class Main extends Application {
             ventana.show();
 
         } catch (Exception e) {
+        }
     }
-}
-    
+
     public void mostrarReportes() {
         try {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("Reportes.fxml"));
@@ -147,8 +147,8 @@ public class Main extends Application {
             ventana.show();
 
         } catch (Exception e) {
+        }
     }
-}
 
     public static void main(String[] args) {
         launch(args);

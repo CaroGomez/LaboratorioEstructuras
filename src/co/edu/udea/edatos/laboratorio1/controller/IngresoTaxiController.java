@@ -162,13 +162,15 @@ public class IngresoTaxiController {
 
     @FXML
     void DoSelect(ActionEvent event) {
-        prop = tableResul.getSelectionModel().getSelectedItem();
+        if (tableResul.getSelectionModel().getSelectedItem() != null) {
+            prop = tableResul.getSelectionModel().getSelectedItem();
 
-        txtProp.clear();
-        txtProp.setText(prop.toString());
+            txtProp.clear();
+            txtProp.setText(prop.toString());
 
-        PaneResult.setVisible(false);
+            PaneResult.setVisible(false);
 
+        }
     }
 
     @FXML

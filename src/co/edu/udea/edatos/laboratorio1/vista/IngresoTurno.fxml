@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.udea.edatos.laboratorio1.controller.IngresoTurnoController">
+<AnchorPane id="AnchorPane" prefHeight="436.0" prefWidth="617.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.udea.edatos.laboratorio1.controller.IngresoTurnoController">
    <children>
       <Label layoutX="173.0" layoutY="106.0" text="Código:" />
       <TextField fx:id="txtCod" layoutX="300.0" layoutY="102.0" />
@@ -16,7 +17,8 @@
       <Label layoutX="173.0" layoutY="213.0" text="Horas:" />
       <TextField fx:id="txtHoras" layoutX="300.0" layoutY="209.0" />
       <Label layoutX="167.0" layoutY="268.0" text="Placa Taxi:" />
-      <ChoiceBox fx:id="chePlaca" layoutX="299.0" layoutY="264.0" prefWidth="150.0" />
+      <TextField fx:id="txtPlaca" editable="false" layoutX="300.0" layoutY="264.0" />
+      <Button fx:id="btnBusTaxi" layoutX="463.0" layoutY="264.0" mnemonicParsing="false" onAction="#doBuscarTaxi" prefHeight="25.0" prefWidth="87.0" text="Buscar Taxi" />
       <Button fx:id="btnIngresar" layoutX="171.0" layoutY="336.0" mnemonicParsing="false" onAction="#DoIngresar" prefHeight="25.0" prefWidth="102.0" text="Ingresar" />
       <Button fx:id="btnCancelar" layoutX="333.0" layoutY="336.0" mnemonicParsing="false" onAction="#DoCancelar" prefHeight="25.0" prefWidth="102.0" text="Cancelar" />
       <Label layoutX="173.0" layoutY="39.0" text="Ingrese los datos del turno">
@@ -24,5 +26,19 @@
             <Font name="System Bold" size="22.0" />
          </font>
       </Label>
+      <AnchorPane fx:id="PaneResult" layoutX="12.0" layoutY="14.0" prefHeight="370.0" prefWidth="605.0" visible="false">
+         <children>
+            <TableView fx:id="tableResult" prefHeight="378.0" prefWidth="594.0">
+               <columns>
+                  <TableColumn fx:id="columPlaca" prefWidth="100.0" text="Placa" />
+                  <TableColumn fx:id="columNumTaxi" prefWidth="148.0" text="Número Taxi" />
+                  <TableColumn fx:id="columMarca" prefWidth="93.0" text="Marca" />
+                  <TableColumn fx:id="columModel" prefWidth="104.0" text="Modelo" />
+                  <TableColumn fx:id="columIdProp" prefWidth="148.0" text="Id Propietario" />
+               </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <Button fx:id="btnSelec" layoutX="31.0" layoutY="400.0" mnemonicParsing="false" onAction="#DoSelect" prefHeight="25.0" prefWidth="79.0" text="Seleccionar" />
    </children>
 </AnchorPane>

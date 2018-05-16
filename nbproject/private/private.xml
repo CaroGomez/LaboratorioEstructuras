@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Carolina/Documents/NetBeansProjects/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/controller/TabPropietariosController.java</file>
-            <file>file:/C:/Users/Carolina/Documents/NetBeansProjects/LaboratorioEstructuras/Taller.txt</file>
-            <file>file:/C:/Users/Carolina/Documents/NetBeansProjects/LaboratorioEstructuras/Propietario.txt</file>
-            <file>file:/C:/Users/Carolina/Documents/NetBeansProjects/LaboratorioEstructuras/Taxi.txt</file>
+            <file>file:/C:/Users/Telecentro/Desktop/Estructuras/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/vista/Laboratiorio.fxml</file>
+            <file>file:/C:/Users/Telecentro/Desktop/Estructuras/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/controller/LaboratiorioController.java</file>
+            <file>file:/C:/Users/Telecentro/Desktop/Estructuras/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/modelo/dao/impl/FileTaxiDAO.java</file>
+            <file>file:/C:/Users/Telecentro/Desktop/Estructuras/LaboratorioEstructuras/src/co/edu/udea/edatos/laboratorio1/vista/Main.java</file>
         </group>
     </open-files>
 </project-private>
